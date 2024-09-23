@@ -12,6 +12,9 @@ const FloatingLabelInput = ({ id, label, type = 'text', value, onChange, name, c
         value={value}
         onChange={onChange}
         disabled={disabled}
+        autoComplete="off"
+        data-lpignore="true"
+        data-form-type="other"
       />
       <label
         htmlFor={id}
