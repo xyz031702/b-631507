@@ -13,7 +13,7 @@ const InvoiceTemplate = ({ data }) => {
   };
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-lg">
+    <div className="bg-white p-8 rounded-lg shadow-lg" style={{ width: '210mm', height: '297mm', margin: '0 auto' }}>
       <div className="flex justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold">INVOICE</h1>

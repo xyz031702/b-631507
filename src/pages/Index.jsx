@@ -5,6 +5,8 @@ import ShipToSection from '../components/ShipToSection';
 import ItemDetails from '../components/ItemDetails';
 import InvoiceTemplate from '../components/InvoiceTemplate';
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { generatePDF } from '../utils/pdfGenerator';
 
 const Index = () => {
   const [billTo, setBillTo] = useState({ name: '', address: '', phone: '' });
@@ -45,6 +47,11 @@ const Index = () => {
 
   const handleTemplateClick = () => {
     setIsModalOpen(true);
+  };
+
+  const handleDownloadPDF = () => {
+    const invoiceData = { billTo, shipTo, invoice, from, items, tax, notes };
+    generatePDF(invoiceData);
   };
 
   return (
@@ -167,8 +174,11 @@ const Index = () => {
                     <p className="text-center font-medium">Template {index}</p>
                   </div>
                 </DialogTrigger>
-                <DialogContent className="max-w-4xl">
+                <DialogContent className="max-w-4xl max-h-screen overflow-y-auto">
                   <InvoiceTemplate data={{ billTo, shipTo, invoice, from, items, tax, notes }} />
+                  <div className="mt-4 flex justify-end">
+                    <Button onClick={handleDownloadPDF}>Download PDF</Button>
+                  </div>
                 </DialogContent>
               </Dialog>
             ))}
