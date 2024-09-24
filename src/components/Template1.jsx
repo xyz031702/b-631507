@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Template2 = ({ data }) => {
+const Template1 = ({ data }) => {
   const { billTo, shipTo, invoice, from, items, tax, notes } = data;
 
   const calculateSubTotal = () => {
@@ -15,27 +15,27 @@ const Template2 = ({ data }) => {
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
       <div className="flex justify-between mb-8">
-        <div className="w-1/2">
-          <h1 className="text-3xl font-bold text-blue-600 mb-2">{from.name}</h1>
+        <div>
+          <h1 className="text-2xl font-bold">{from.name}</h1>
           <p>{from.address}</p>
           <p>{from.phone}</p>
         </div>
-        <div className="w-1/2 text-right">
-          <h2 className="text-2xl font-semibold mb-2">TAX INVOICE</h2>
-          <p>Invoice #: {invoice.date}</p>
+        <div>
+          <h2 className="text-xl font-semibold">Invoice</h2>
+          <p>Date: {invoice.date}</p>
           <p>Due Date: {invoice.paymentDate}</p>
         </div>
       </div>
 
       <div className="flex justify-between mb-8">
-        <div className="w-1/2">
-          <h3 className="font-semibold text-lg mb-2">Bill To:</h3>
+        <div>
+          <h3 className="font-semibold">Bill To:</h3>
           <p>{billTo.name}</p>
           <p>{billTo.address}</p>
           <p>{billTo.phone}</p>
         </div>
-        <div className="w-1/2">
-          <h3 className="font-semibold text-lg mb-2">Ship To:</h3>
+        <div>
+          <h3 className="font-semibold">Ship To:</h3>
           <p>{shipTo.name}</p>
           <p>{shipTo.address}</p>
           <p>{shipTo.phone}</p>
@@ -44,7 +44,7 @@ const Template2 = ({ data }) => {
 
       <table className="w-full mb-8">
         <thead>
-          <tr className="bg-gray-200">
+          <tr className="bg-gray-100">
             <th className="p-2 text-left">Item</th>
             <th className="p-2 text-left">Description</th>
             <th className="p-2 text-right">Quantity</th>
@@ -68,14 +68,14 @@ const Template2 = ({ data }) => {
       <div className="flex justify-end">
         <div className="w-1/3">
           <div className="flex justify-between mb-2">
-            <span className="font-semibold">Subtotal:</span>
+            <span>Subtotal:</span>
             <span>${calculateSubTotal()}</span>
           </div>
           <div className="flex justify-between mb-2">
-            <span className="font-semibold">Tax:</span>
+            <span>Tax:</span>
             <span>${tax}</span>
           </div>
-          <div className="flex justify-between font-bold text-lg">
+          <div className="flex justify-between font-bold">
             <span>Total:</span>
             <span>${calculateGrandTotal()}</span>
           </div>
@@ -92,4 +92,4 @@ const Template2 = ({ data }) => {
   );
 };
 
-export default Template2;
+export default Template1;
