@@ -11,7 +11,7 @@ const Template3 = ({ data }) => {
         <div className="flex justify-between items-start mb-8">
           <div>
             <div className="bg-white text-blue-500 p-2 inline-block rounded">
-              <h1 className="text-2xl font-bold">FOOBAR LABS</h1>
+              <h1 className="text-2xl font-bold">{from.name || 'FOOBAR LABS'}</h1>
             </div>
             <p className="mt-2">{from.address}</p>
             <p>GSTIN: {from.gstin || '29VGCED1234K2Z6'}</p>
@@ -68,7 +68,7 @@ const Template3 = ({ data }) => {
           <div className="w-1/2">
             <h3 className="font-semibold mb-2">BANK AND UPI DETAILS</h3>
             <p>Bank Name: HDFC Bank</p>
-            <p>Account Holder Name: Foobar Labs</p>
+            <p>Account Holder Name: {from.name || 'Foobar Labs'}</p>
             <p>Account Number: 45366287987</p>
             <p>IFSC: HDFC0018159</p>
             <p>Account Type: Savings</p>
@@ -87,19 +87,19 @@ const Template3 = ({ data }) => {
             </div>
             <div className="flex justify-between mb-2">
               <span>Discount(10%):</span>
-              <span>₹ 40,000</span>
+              <span>₹ {(parseFloat(calculateSubTotal(items)) * 0.1).toFixed(2)}</span>
             </div>
             <div className="flex justify-between mb-2">
               <span>Taxable Amount:</span>
-              <span>₹ 36,000</span>
+              <span>₹ {(parseFloat(calculateSubTotal(items)) * 0.9).toFixed(2)}</span>
             </div>
             <div className="flex justify-between mb-2">
               <span>CGST:</span>
-              <span>₹ 3240</span>
+              <span>₹ {(parseFloat(calculateSubTotal(items)) * 0.09).toFixed(2)}</span>
             </div>
             <div className="flex justify-between mb-2">
               <span>SGST:</span>
-              <span>₹ 3240</span>
+              <span>₹ {(parseFloat(calculateSubTotal(items)) * 0.09).toFixed(2)}</span>
             </div>
             <div className="flex justify-between font-bold bg-blue-500 text-white p-2 mt-4">
               <span>Total Due Amount</span>
@@ -111,10 +111,6 @@ const Template3 = ({ data }) => {
           <h3 className="font-semibold mb-2">TERMS AND CONDITIONS</h3>
           <p>Please pay within 15 days from the date of invoice, overdue interest @ 14% will be charged on delayed payments.</p>
           <p>Please quote invoice number when remitting funds.</p>
-        </div>
-        <div className="mt-4">
-          <h3 className="font-semibold mb-2">ADDITIONAL NOTES</h3>
-          <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here.</p>
         </div>
       </div>
     </BaseTemplate>
