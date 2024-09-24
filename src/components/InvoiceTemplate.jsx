@@ -1,12 +1,9 @@
 import React from 'react';
-import Template1 from './Template1';
-import Template2 from './Template2';
+import { getTemplate } from '../utils/templateRegistry';
 
 const InvoiceTemplate = ({ data, templateNumber }) => {
-  if (templateNumber === 2) {
-    return <Template2 data={data} />;
-  }
-  return <Template1 data={data} />;
+  const Template = getTemplate(templateNumber);
+  return <Template data={data} />;
 };
 
 export default InvoiceTemplate;
