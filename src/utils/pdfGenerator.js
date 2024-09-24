@@ -8,7 +8,10 @@ export const generatePDF = async (invoiceData) => {
   // Render the InvoiceTemplate component to a string
   const InvoiceTemplate = (await import('../components/InvoiceTemplate')).default;
   const ReactDOMServer = (await import('react-dom/server')).default;
-  const invoiceHTML = ReactDOMServer.renderToString(<InvoiceTemplate data={invoiceData} />);
+  const React = (await import('react')).default;
+  
+  const invoiceElement = React.createElement(InvoiceTemplate, { data: invoiceData });
+  const invoiceHTML = ReactDOMServer.renderToString(invoiceElement);
   
   invoice.innerHTML = invoiceHTML;
   invoice.style.width = '210mm';
