@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import FloatingLabelInput from '../components/FloatingLabelInput';
+import BillToSection from '../components/BillToSection';
+import ShipToSection from '../components/ShipToSection';
+import ItemDetails from '../components/ItemDetails';
 
 const Index = () => {
   const [billTo, setBillTo] = useState({ name: '', address: '', phone: '' });
@@ -35,8 +38,7 @@ const Index = () => {
 
   const calculateGrandTotal = () => {
     const subTotal = parseFloat(calculateSubTotal());
-    const taxAmount = subTotal * (tax / 100);
-    return (subTotal + taxAmount).toFixed(2);
+    return (subTotal + parseFloat(tax)).toFixed(2);
   };
 
   const handleCopyBillToShip = (e) => {
@@ -46,15 +48,6 @@ const Index = () => {
     }
   };
 
-  const templates = [
-    { name: 'Template 1', imageUrl: 'https://via.placeholder.com/200x300?text=Template+1' },
-    { name: 'Template 2', imageUrl: 'https://via.placeholder.com/200x300?text=Template+2' },
-    { name: 'Template 3', imageUrl: 'https://via.placeholder.com/200x300?text=Template+3' },
-    { name: 'Template 4', imageUrl: 'https://via.placeholder.com/200x300?text=Template+4' },
-    { name: 'Template 5', imageUrl: 'https://via.placeholder.com/200x300?text=Template+5' },
-    { name: 'Template 6', imageUrl: 'https://via.placeholder.com/200x300?text=Template+6' },
-  ];
-
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8 text-center">Bill Generator</h1>
@@ -62,76 +55,13 @@ const Index = () => {
         {/* Left Section - Input Form */}
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <form>
-            {/* Bill To */}
-            <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4">Bill To</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <FloatingLabelInput
-                  id="billToName"
-                  label="Name"
-                  value={billTo.name}
-                  onChange={handleInputChange(setBillTo)}
-                  name="name"
-                />
-                <FloatingLabelInput
-                  id="billToPhone"
-                  label="Phone"
-                  value={billTo.phone}
-                  onChange={handleInputChange(setBillTo)}
-                  name="phone"
-                />
-              </div>
-              <FloatingLabelInput
-                id="billToAddress"
-                label="Address"
-                value={billTo.address}
-                onChange={handleInputChange(setBillTo)}
-                name="address"
-                className="mt-4"
-              />
-            </div>
-
-            {/* Ship To */}
-            <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4">Ship To</h2>
-              <div className="flex items-center mb-4">
-                <input
-                  type="checkbox"
-                  id="copyBillToShip"
-                  checked={copyBillToShip}
-                  onChange={handleCopyBillToShip}
-                  className="mr-2"
-                />
-                <label htmlFor="copyBillToShip">Same as Bill To</label>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <FloatingLabelInput
-                  id="shipToName"
-                  label="Name"
-                  value={shipTo.name}
-                  onChange={handleInputChange(setShipTo)}
-                  name="name"
-                  disabled={copyBillToShip}
-                />
-                <FloatingLabelInput
-                  id="shipToPhone"
-                  label="Phone"
-                  value={shipTo.phone}
-                  onChange={handleInputChange(setShipTo)}
-                  name="phone"
-                  disabled={copyBillToShip}
-                />
-              </div>
-              <FloatingLabelInput
-                id="shipToAddress"
-                label="Address"
-                value={shipTo.address}
-                onChange={handleInputChange(setShipTo)}
-                name="address"
-                className="mt-4"
-                disabled={copyBillToShip}
-              />
-            </div>
+            <BillToSection billTo={billTo} handleInputChange={handleInputChange(setBillTo)} />
+            <ShipToSection
+              shipTo={shipTo}
+              handleInputChange={handleInputChange(setShipTo)}
+              copyBillToShip={copyBillToShip}
+              handleCopyBillToShip={handleCopyBillToShip}
+            />
 
             {/* Invoice Information */}
             <div className="mb-6">
@@ -185,48 +115,7 @@ const Index = () => {
               />
             </div>
 
-            {/* Item Details */}
-            <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4">Item Details</h2>
-              {items.map((item, index) => (
-                <div key={index} className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-4">
-                  <FloatingLabelInput
-                    id={`itemName${index}`}
-                    label="Name"
-                    value={item.name}
-                    onChange={(e) => handleItemChange(index, 'name', e.target.value)}
-                  />
-                  <FloatingLabelInput
-                    id={`itemDescription${index}`}
-                    label="Description"
-                    value={item.description}
-                    onChange={(e) => handleItemChange(index, 'description', e.target.value)}
-                  />
-                  <FloatingLabelInput
-                    id={`itemQuantity${index}`}
-                    label="Quantity"
-                    type="number"
-                    value={item.quantity}
-                    onChange={(e) => handleItemChange(index, 'quantity', parseFloat(e.target.value))}
-                  />
-                  <FloatingLabelInput
-                    id={`itemAmount${index}`}
-                    label="Amount"
-                    type="number"
-                    value={item.amount}
-                    onChange={(e) => handleItemChange(index, 'amount', parseFloat(e.target.value))}
-                  />
-                  <FloatingLabelInput
-                    id={`itemTotal${index}`}
-                    label="Total"
-                    type="number"
-                    value={item.total}
-                    disabled
-                  />
-                </div>
-              ))}
-              <button type="button" onClick={addItem} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Item</button>
-            </div>
+            <ItemDetails items={items} handleItemChange={handleItemChange} addItem={addItem} />
 
             {/* Totals */}
             <div className="mb-6">
@@ -236,7 +125,7 @@ const Index = () => {
                 <span>{calculateSubTotal()}</span>
               </div>
               <div className="flex justify-between mb-2">
-                <span>Tax (%):</span>
+                <span>Tax (Amount):</span>
                 <input
                   type="number"
                   value={tax}
@@ -272,10 +161,10 @@ const Index = () => {
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md overflow-y-auto" style={{ maxHeight: 'calc(100vh - 2rem)' }}>
           <h2 className="text-2xl font-semibold mb-4">Template Gallery</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {templates.map((template, index) => (
+            {[1, 2, 3, 4, 5, 6].map((index) => (
               <div key={index} className="template-card bg-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-300">
-                <img src={template.imageUrl} alt={`Template ${index + 1}`} className="w-full h-40 object-cover rounded mb-2" />
-                <p className="text-center font-medium">{template.name}</p>
+                <img src={`https://via.placeholder.com/200x300?text=Template+${index}`} alt={`Template ${index}`} className="w-full h-40 object-cover rounded mb-2" />
+                <p className="text-center font-medium">Template {index}</p>
               </div>
             ))}
           </div>
