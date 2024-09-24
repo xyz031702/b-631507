@@ -1,7 +1,7 @@
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-export const generatePDF = async (invoiceData) => {
+export const generatePDF = async (invoiceData, templateNumber) => {
   const invoice = document.createElement('div');
   document.body.appendChild(invoice);
   
@@ -10,7 +10,7 @@ export const generatePDF = async (invoiceData) => {
   const ReactDOMServer = (await import('react-dom/server')).default;
   const React = (await import('react')).default;
   
-  const invoiceElement = React.createElement(InvoiceTemplate, { data: invoiceData });
+  const invoiceElement = React.createElement(InvoiceTemplate, { data: invoiceData, templateNumber });
   const invoiceHTML = ReactDOMServer.renderToString(invoiceElement);
   
   invoice.innerHTML = invoiceHTML;
@@ -27,7 +27,7 @@ export const generatePDF = async (invoiceData) => {
   const pdf = new jsPDF('p', 'mm', 'a4');
   
   pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
-  pdf.save('invoice.pdf');
+  pdf.save(`invoice_template_${templateNumber}.pdf`);
   
   document.body.removeChild(invoice);
 };

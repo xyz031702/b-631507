@@ -17,6 +17,7 @@ const Index = () => {
   const [tax, setTax] = useState(0);
   const [notes, setNotes] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState(1);
 
   const handleInputChange = (setter) => (e) => {
     const { name, value } = e.target;
@@ -45,13 +46,14 @@ const Index = () => {
     return (subTotal + parseFloat(tax)).toFixed(2);
   };
 
-  const handleTemplateClick = () => {
+  const handleTemplateClick = (templateNumber) => {
+    setSelectedTemplate(templateNumber);
     setIsModalOpen(true);
   };
 
   const handleDownloadPDF = () => {
     const invoiceData = { billTo, shipTo, invoice, from, items, tax, notes };
-    generatePDF(invoiceData);
+    generatePDF(invoiceData, selectedTemplate);
   };
 
   return (
@@ -166,16 +168,16 @@ const Index = () => {
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md overflow-y-auto" style={{ maxHeight: 'calc(100vh - 2rem)' }}>
           <h2 className="text-2xl font-semibold mb-4">Template Gallery</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[1, 2, 3, 4, 5, 6].map((index) => (
+            {[1, 2].map((index) => (
               <Dialog key={index} open={isModalOpen} onOpenChange={setIsModalOpen}>
                 <DialogTrigger asChild>
-                  <div className="template-card bg-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-300" onClick={handleTemplateClick}>
+                  <div className="template-card bg-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-300" onClick={() => handleTemplateClick(index)}>
                     <img src={`https://via.placeholder.com/200x300?text=Template+${index}`} alt={`Template ${index}`} className="w-full h-40 object-cover rounded mb-2" />
                     <p className="text-center font-medium">Template {index}</p>
                   </div>
                 </DialogTrigger>
                 <DialogContent className="max-w-4xl max-h-screen overflow-y-auto">
-                  <InvoiceTemplate data={{ billTo, shipTo, invoice, from, items, tax, notes }} />
+                  <InvoiceTemplate data={{ billTo, shipTo, invoice, from, items, tax, notes }} templateNumber={selectedTemplate} />
                   <div className="mt-4 flex justify-end">
                     <Button onClick={handleDownloadPDF}>Download PDF</Button>
                   </div>
