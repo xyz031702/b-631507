@@ -11,18 +11,16 @@ const Template3 = ({ data }) => {
         <div className="flex justify-between items-start mb-8">
           <div>
             <div className="bg-white text-blue-500 p-2 inline-block rounded">
-              <h1 className="text-2xl font-bold">{from.name || 'FOOBAR LABS'}</h1>
+              <h1 className="text-2xl font-bold">{from.name}</h1>
             </div>
             <p className="mt-2">{from.address}</p>
-            <p>GSTIN: {from.gstin || '29VGCED1234K2Z6'}</p>
-            <p>PAN: {from.pan || 'VGCED1234K'}</p>
+            <p>{from.phone}</p>
           </div>
           <div className="text-right">
             <h2 className="text-xl font-semibold">BILLED TO</h2>
             <p>{billTo.name}</p>
             <p>{billTo.address}</p>
-            <p>GSTIN: {billTo.gstin || '29VGCED1234K2Z6'}</p>
-            <p>PAN: {billTo.pan || 'VGCED1234K'}</p>
+            <p>{billTo.phone}</p>
           </div>
         </div>
         <div className="flex justify-between mb-8">
@@ -41,10 +39,7 @@ const Template3 = ({ data }) => {
           <thead>
             <tr className="bg-gray-100">
               <th className="p-2 text-left">ITEM NAME/ITEM DESCRIPTION</th>
-              <th className="p-2 text-right">HSN</th>
               <th className="p-2 text-right">QTY.</th>
-              <th className="p-2 text-right">GST RATE</th>
-              <th className="p-2 text-right">IGST</th>
               <th className="p-2 text-right">AMOUNT</th>
             </tr>
           </thead>
@@ -55,10 +50,7 @@ const Template3 = ({ data }) => {
                   <p className="font-semibold">{item.name}</p>
                   <p className="text-sm text-gray-600">{item.description}</p>
                 </td>
-                <td className="p-2 text-right">{item.hsn || '0056'}</td>
                 <td className="p-2 text-right">{item.quantity}</td>
-                <td className="p-2 text-right">9%</td>
-                <td className="p-2 text-right">₹{(item.amount * 0.09).toFixed(2)}</td>
                 <td className="p-2 text-right">₹{(item.quantity * item.amount).toFixed(2)}</td>
               </tr>
             ))}
@@ -68,7 +60,7 @@ const Template3 = ({ data }) => {
           <div className="w-1/2">
             <h3 className="font-semibold mb-2">BANK AND UPI DETAILS</h3>
             <p>Bank Name: HDFC Bank</p>
-            <p>Account Holder Name: {from.name || 'Foobar Labs'}</p>
+            <p>Account Holder Name: {from.name}</p>
             <p>Account Number: 45366287987</p>
             <p>IFSC: HDFC0018159</p>
             <p>Account Type: Savings</p>
@@ -94,12 +86,8 @@ const Template3 = ({ data }) => {
               <span>₹ {(parseFloat(calculateSubTotal(items)) * 0.9).toFixed(2)}</span>
             </div>
             <div className="flex justify-between mb-2">
-              <span>CGST:</span>
-              <span>₹ {(parseFloat(calculateSubTotal(items)) * 0.09).toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between mb-2">
-              <span>SGST:</span>
-              <span>₹ {(parseFloat(calculateSubTotal(items)) * 0.09).toFixed(2)}</span>
+              <span>Tax:</span>
+              <span>₹ {tax}</span>
             </div>
             <div className="flex justify-between font-bold bg-blue-500 text-white p-2 mt-4">
               <span>Total Due Amount</span>
