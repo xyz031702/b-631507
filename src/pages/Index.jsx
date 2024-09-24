@@ -12,7 +12,6 @@ const Index = () => {
   const [items, setItems] = useState([{ name: '', description: '', quantity: 0, amount: 0, total: 0 }]);
   const [tax, setTax] = useState(0);
   const [notes, setNotes] = useState('');
-  const [copyBillToShip, setCopyBillToShip] = useState(false);
 
   const handleInputChange = (setter) => (e) => {
     const { name, value } = e.target;
@@ -41,13 +40,6 @@ const Index = () => {
     return (subTotal + parseFloat(tax)).toFixed(2);
   };
 
-  const handleCopyBillToShip = (e) => {
-    setCopyBillToShip(e.target.checked);
-    if (e.target.checked) {
-      setShipTo({ ...billTo });
-    }
-  };
-
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8 text-center">Bill Generator</h1>
@@ -59,8 +51,7 @@ const Index = () => {
             <ShipToSection
               shipTo={shipTo}
               handleInputChange={handleInputChange(setShipTo)}
-              copyBillToShip={copyBillToShip}
-              handleCopyBillToShip={handleCopyBillToShip}
+              billTo={billTo}
             />
 
             {/* Invoice Information */}
