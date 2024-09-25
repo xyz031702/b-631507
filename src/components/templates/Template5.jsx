@@ -37,8 +37,8 @@ const Template5 = ({ data = {} }) => {
               <p>{billTo.address || "Client Address"}</p>
               <p>{billTo.phone || "Client Phone"}</p>
             </div>
-            <div className="text-right">
-              <h3 className="text-lg font-semibold text-green-600 mb-2">
+            <div className="text-right w-1/2">
+              <h3 className="text-lg font-semibold text-green-600 mb-2 text-left">
                 Invoice Details
               </h3>
               <p className="flex justify-between">
