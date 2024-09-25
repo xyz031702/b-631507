@@ -4,7 +4,7 @@ import BaseTemplate from './BaseTemplate';
 import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
 
 const Template6 = ({ data }) => {
-  const { billTo = {}, invoice = {}, from = {}, items = [], tax = 0, notes = '' } = data || {};
+  const { billTo = {}, invoice = {}, yourCompany = {}, items = [], tax = 0, notes = '' } = data || {};
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
@@ -18,8 +18,9 @@ const Template6 = ({ data }) => {
       <div className="bg-white p-8 max-w-4xl mx-auto">
         <div className="flex justify-between items-start mb-8">
           <div>
-            <h2 className="text-2xl font-bold text-blue-600">{from.name || 'Company Name'}</h2>
-            <p>{from.address || 'Company Address'}</p>
+            <h2 className="text-2xl font-bold text-blue-600">{yourCompany.name || 'Company Name'}</h2>
+            <p>{yourCompany.address || 'Company Address'}</p>
+            <p>{yourCompany.phone || 'Company Phone'}</p>
           </div>
           <div className="text-right">
             <h1 className="text-3xl font-bold mb-4">Tax Invoice</h1>
