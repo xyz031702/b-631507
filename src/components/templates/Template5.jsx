@@ -3,8 +3,8 @@ import { format } from 'date-fns';
 import BaseTemplate from './BaseTemplate';
 import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
 
-const Template5 = ({ data }) => {
-  const { billTo, invoice, from, items, tax, notes } = data;
+const Template5 = ({ data = {} }) => {
+  const { billTo = {}, invoice = {}, from = {}, items = [], tax = 0, notes = '' } = data;
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
@@ -21,23 +21,23 @@ const Template5 = ({ data }) => {
             <h1 className="text-4xl font-bold text-green-600">Invoice</h1>
           </div>
           <div className="text-right">
-            <h2 className="text-xl font-bold">{from.name}</h2>
-            <p>{from.address}</p>
+            <h2 className="text-xl font-bold">{from.name || 'Company Name'}</h2>
+            <p>{from.address || 'Company Address'}</p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-8 mb-8">
           <div>
             <h3 className="text-lg font-semibold text-green-600 mb-2">Billed to</h3>
-            <p className="font-bold">{billTo.name}</p>
-            <p>{billTo.address}</p>
+            <p className="font-bold">{billTo.name || 'Client Name'}</p>
+            <p>{billTo.address || 'Client Address'}</p>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <h3 className="text-lg font-semibold text-green-600 mb-2">Invoice Details</h3>
-              <p><span className="font-semibold">Invoice #:</span> {invoice.number}</p>
-              <p><span className="font-semibold">Invoice Date:</span> {format(new Date(invoice.date), 'MMM dd, yyyy')}</p>
-              <p><span className="font-semibold">Due Date:</span> {format(new Date(invoice.paymentDate), 'MMM dd, yyyy')}</p>
+              <p><span className="font-semibold">Invoice #:</span> {invoice.number || 'N/A'}</p>
+              <p><span className="font-semibold">Invoice Date:</span> {invoice.date ? format(new Date(invoice.date), 'MMM dd, yyyy') : 'N/A'}</p>
+              <p><span className="font-semibold">Due Date:</span> {invoice.paymentDate ? format(new Date(invoice.paymentDate), 'MMM dd, yyyy') : 'N/A'}</p>
             </div>
             <div>
               <h3 className="text-lg font-semibold text-green-600 mb-2">Payment Record</h3>
@@ -59,10 +59,10 @@ const Template5 = ({ data }) => {
           <tbody>
             {items.map((item, index) => (
               <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
-                <td className="p-2">{item.name}</td>
-                <td className="p-2 text-right">{item.quantity}</td>
-                <td className="p-2 text-right">{formatCurrency(item.amount)}</td>
-                <td className="p-2 text-right">{formatCurrency(item.quantity * item.amount)}</td>
+                <td className="p-2">{item.name || 'Item Name'}</td>
+                <td className="p-2 text-right">{item.quantity || 0}</td>
+                <td className="p-2 text-right">{formatCurrency(item.amount || 0)}</td>
+                <td className="p-2 text-right">{formatCurrency((item.quantity || 0) * (item.amount || 0))}</td>
               </tr>
             ))}
           </tbody>
