@@ -7,7 +7,7 @@ const Template3 = ({ data }) => {
 
   return (
     <BaseTemplate data={data}>
-      <div className="bg-blue-500 text-white p-8">
+      <div className="bg-blue-500 text-white p-12">
         <div className="flex justify-between items-start mb-8">
           <div>
             <div className="bg-white text-blue-500 p-2 inline-block rounded">
