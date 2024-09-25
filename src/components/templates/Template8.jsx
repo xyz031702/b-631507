@@ -13,16 +13,6 @@ const Template8 = ({ data }) => {
   return (
     <BaseTemplate data={data}>
       <div className="bg-gray-100 w-full h-full flex flex-col" style={{ margin: '0', padding: '16px' }}>
-        <div className="flex justify-between items-start mb-8">
-          <div>
-            <h1 className="text-4xl font-bold" style={{ color: '#3C8BF6' }}>Invoice</h1>
-          </div>
-          <div className="text-right">
-            <h2 className="text-xl font-bold">{yourCompany.name}</h2>
-            <p>{yourCompany.address}</p>
-            <p>{yourCompany.phone}</p>
-          </div>
-        </div>
 
         <div className="grid grid-cols-2 gap-8 mb-8">
           <div>
@@ -85,6 +75,16 @@ const Template8 = ({ data }) => {
             <p>{notes}</p>
           </div>
         )}
+        <footer className="mt-auto">
+          <div className="flex justify-between items-center">
+            <h1 className="text-4xl font-bold" style={{ color: '#3C8BF6' }}>Invoice</h1>
+            <div className="text-right">
+              <h2 className="text-xl font-bold">{yourCompany.name}</h2>
+              <p>{yourCompany.address}</p>
+              <p>{yourCompany.phone}</p>
+            </div>
+          </div>
+        </footer>
       </div>
     </BaseTemplate>
   );
