@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -8,8 +8,14 @@ import { generatePDF } from '../utils/pdfGenerator';
 const TemplatePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { formData, selectedTemplate } = location.state;
-  const [currentTemplate, setCurrentTemplate] = useState(selectedTemplate);
+  const [formData, setFormData] = useState(null);
+  const [currentTemplate, setCurrentTemplate] = useState(1);
+
+  useEffect(() => {
+    if (location.state && location.state.formData) {
+      setFormData(location.state.formData);
+    }
+  }, [location.state]);
 
   const templates = [
     { name: 'Template 1' },
@@ -22,8 +28,14 @@ const TemplatePage = () => {
   };
 
   const handleDownloadPDF = () => {
-    generatePDF(formData, currentTemplate);
+    if (formData) {
+      generatePDF(formData, currentTemplate);
+    }
   };
+
+  if (!formData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">

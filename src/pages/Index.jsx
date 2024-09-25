@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import FloatingLabelInput from '../components/FloatingLabelInput';
 import BillToSection from '../components/BillToSection';
 import ShipToSection from '../components/ShipToSection';
 import ItemDetails from '../components/ItemDetails';
-import InvoiceTemplate from '../components/InvoiceTemplate';
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { generatePDF } from '../utils/pdfGenerator';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [billTo, setBillTo] = useState({ name: '', address: '', phone: '' });
   const [shipTo, setShipTo] = useState({ name: '', address: '', phone: '' });
   const [invoice, setInvoice] = useState({ date: '', paymentDate: '' });
@@ -16,8 +15,6 @@ const Index = () => {
   const [items, setItems] = useState([{ name: '', description: '', quantity: 0, amount: 0, total: 0 }]);
   const [tax, setTax] = useState(0);
   const [notes, setNotes] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTemplate, setSelectedTemplate] = useState(1);
 
   const handleInputChange = (setter) => (e) => {
     const { name, value } = e.target;
@@ -47,13 +44,8 @@ const Index = () => {
   };
 
   const handleTemplateClick = (templateNumber) => {
-    setSelectedTemplate(templateNumber);
-    setIsModalOpen(true);
-  };
-
-  const handleDownloadPDF = () => {
-    const invoiceData = { billTo, shipTo, invoice, from, items, tax, notes };
-    generatePDF(invoiceData, selectedTemplate);
+    const formData = { billTo, shipTo, invoice, from, items, tax, notes };
+    navigate('/template', { state: { formData, selectedTemplate: templateNumber } });
   };
 
   return (
@@ -169,24 +161,18 @@ const Index = () => {
           <h2 className="text-2xl font-semibold mb-4">Template Gallery</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[1, 2, 3].map((index) => (
-              <Dialog key={index} open={isModalOpen} onOpenChange={setIsModalOpen}>
-                <DialogTrigger asChild>
-                  <div className="template-card bg-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-300" onClick={() => handleTemplateClick(index)}>
-                    <img 
-                      src={index === 3 ? "/template3-preview.png" : `https://via.placeholder.com/200x300?text=Template+${index}`} 
-                      alt={`Template ${index}`} 
-                      className="w-full h-40 object-cover rounded mb-2" 
-                    />
-                    <p className="text-center font-medium">Template {index}</p>
-                  </div>
-                </DialogTrigger>
-                <DialogContent className="max-w-4xl max-h-screen overflow-y-auto">
-                  <InvoiceTemplate data={{ billTo, shipTo, invoice, from, items, tax, notes }} templateNumber={selectedTemplate} />
-                  <div className="mt-4 flex justify-end">
-                    <Button onClick={handleDownloadPDF}>Download PDF</Button>
-                  </div>
-                </DialogContent>
-              </Dialog>
+              <div
+                key={index}
+                className="template-card bg-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                onClick={() => handleTemplateClick(index)}
+              >
+                <img 
+                  src={index === 3 ? "/template3-preview.png" : `https://via.placeholder.com/200x300?text=Template+${index}`} 
+                  alt={`Template ${index}`} 
+                  className="w-full h-40 object-cover rounded mb-2" 
+                />
+                <p className="text-center font-medium">Template {index}</p>
+              </div>
             ))}
           </div>
         </div>
