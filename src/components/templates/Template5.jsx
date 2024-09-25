@@ -28,7 +28,7 @@ const Template5 = ({ data = {} }) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 mb-8">
+          <div className="flex justify-between mb-8">
             <div>
               <h3 className="text-lg font-semibold text-green-600 mb-2">
                 Billed to
@@ -37,25 +37,29 @@ const Template5 = ({ data = {} }) => {
               <p>{billTo.address || "Client Address"}</p>
               <p>{billTo.phone || "Client Phone"}</p>
             </div>
-            <div>
+            <div className="text-right">
               <h3 className="text-lg font-semibold text-green-600 mb-2">
                 Invoice Details
               </h3>
-              <p>
-                <span className="font-semibold">Invoice #:</span>{" "}
-                {invoice.number || "N/A"}
+              <p className="flex justify-between">
+                <span className="font-semibold">Invoice #:</span>
+                <span>{invoice.number || "N/A"}</span>
               </p>
-              <p>
-                <span className="font-semibold">Invoice Date:</span>{" "}
-                {invoice.date
-                  ? format(new Date(invoice.date), "MMM dd, yyyy")
-                  : "N/A"}
+              <p className="flex justify-between">
+                <span className="font-semibold">Invoice Date:</span>
+                <span>
+                  {invoice.date
+                    ? format(new Date(invoice.date), "MMM dd, yyyy")
+                    : "N/A"}
+                </span>
               </p>
-              <p>
-                <span className="font-semibold">Due Date:</span>{" "}
-                {invoice.paymentDate
-                  ? format(new Date(invoice.paymentDate), "MMM dd, yyyy")
-                  : "N/A"}
+              <p className="flex justify-between">
+                <span className="font-semibold">Due Date:</span>
+                <span>
+                  {invoice.paymentDate
+                    ? format(new Date(invoice.paymentDate), "MMM dd, yyyy")
+                    : "N/A"}
+                </span>
               </p>
             </div>
           </div>
