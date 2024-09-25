@@ -55,27 +55,22 @@ const Template2 = ({ data }) => {
                   <td className="p-2 text-right border border-gray-300">{formatCurrency(item.quantity * item.amount)}</td>
                 </tr>
               ))}
+              <tr>
+                <td colSpan="4" className="p-2 text-right border border-gray-300">Sub total:</td>
+                <td colSpan="2" className="p-2 text-right border border-gray-300">{formatCurrency(calculateSubTotal(items || []))}</td>
+              </tr>
+              {tax > 0 && (
+                <tr>
+                  <td colSpan="4" className="p-2 text-right border border-gray-300">Tax:</td>
+                  <td colSpan="2" className="p-2 text-right border border-gray-300">{formatCurrency(tax || 0)}</td>
+                </tr>
+              )}
+              <tr className="font-bold bg-cyan-700 text-white">
+                <td colSpan="4" className="p-2 text-right border border-gray-300">Total:</td>
+                <td colSpan="2" className="p-2 text-right border border-gray-300">{formatCurrency(calculateGrandTotal(items || [], tax || 0))}</td>
+              </tr>
             </tbody>
           </table>
-        </div>
-
-        <div className="flex justify-end mt-4">
-          <div className="w-1/3">
-            <div className="flex justify-between mb-2">
-              <span>Sub total:</span>
-              <span>{formatCurrency(calculateSubTotal(items || []))}</span>
-            </div>
-            {tax > 0 && (
-              <div className="flex justify-between mb-2">
-                <span>Tax:</span>
-                <span>{formatCurrency(tax || 0)}</span>
-              </div>
-            )}
-            <div className="flex justify-between font-bold bg-cyan-700 text-white p-2">
-              <span>Total:</span>
-              <span>{formatCurrency(calculateGrandTotal(items || [], tax || 0))}</span>
-            </div>
-          </div>
         </div>
 
         {notes && (
