@@ -42,7 +42,7 @@ const Template9 = ({ data }) => {
         </div>
 
         <table className="w-full mb-8">
-          <thead className="bg-orange-100 text-orange-600">
+          <thead className="bg-orange-700 text-white">
             <tr>
               <th className="p-2 text-left">Item #/Item description</th>
               <th className="p-2 text-right">Qty.</th>
@@ -52,7 +52,7 @@ const Template9 = ({ data }) => {
           </thead>
           <tbody>
             {items.map((item, index) => (
-              <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
+              <tr key={index} className={index % 2 === 0 ? 'bg-orange-50' : ''}>
                 <td className="p-2">{item.name || 'Item Name'}</td>
                 <td className="p-2 text-right">{item.quantity || 0}</td>
                 <td className="p-2 text-right">{formatCurrency(item.amount || 0)}</td>
