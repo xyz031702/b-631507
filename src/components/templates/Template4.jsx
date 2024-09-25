@@ -15,7 +15,6 @@ const Template4 = ({ data }) => {
 
   return (
     <BaseTemplate data={data}>
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
         <div className="flex justify-between items-start mb-8">
           <div>
             <h1 className="text-4xl font-bold text-purple-600 mb-4">Invoice</h1>
@@ -82,7 +81,6 @@ const Template4 = ({ data }) => {
             <p>{notes}</p>
           </div>
         )}
-      </div>
     </BaseTemplate>
   );
 };
