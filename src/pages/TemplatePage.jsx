@@ -26,6 +26,7 @@ const TemplatePage = () => {
     { name: 'Template 4' },
     { name: 'Template 5' },
     { name: 'Template 6' },
+    { name: 'Template 7' },
   ];
 
   const handleTemplateChange = (templateNumber) => {
