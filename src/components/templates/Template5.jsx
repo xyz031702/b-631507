@@ -13,7 +13,7 @@ const Template5 = ({ data = {} }) => {
 
   return (
     <BaseTemplate data={data}>
-      <div className="bg-white p-8 max-w-4xl mx-auto">
+      <div className="bg-white p-8 max-w-4xl mx-auto flex flex-col min-h-screen">
         <div className="flex justify-between items-start mb-8">
           <div>
             <h1 className="text-4xl font-bold text-green-600">Invoice</h1>
@@ -78,12 +78,14 @@ const Template5 = ({ data = {} }) => {
           </div>
         </div>
 
-        {notes && (
-          <div className="mb-8 bg-green-50 p-4">
-            <h3 className="text-lg font-semibold text-green-600 mb-2">Additional Notes</h3>
-            <p>{notes}</p>
-          </div>
-        )}
+        <div className="flex-grow">
+          {notes && (
+            <div className="bg-green-50 p-4 h-full">
+              <h3 className="text-lg font-semibold text-green-600 mb-2">Additional Notes</h3>
+              <p>{notes}</p>
+            </div>
+          )}
+        </div>
       </div>
     </BaseTemplate>
   );
