@@ -37,7 +37,7 @@ const Template3 = ({ data }) => {
       <div className="p-8 rounded-lg border border-gray-300">
         <table className="w-full mb-8 border-t border-b">
           <thead>
-            <tr>
+            <tr className="border-t border-b">
               <th className="p-2 text-left">ITEM NAME/ITEM DESCRIPTION</th>
               <th className="p-2 text-right">QTY.</th>
               <th className="p-2 text-right">AMOUNT</th>
@@ -45,7 +45,7 @@ const Template3 = ({ data }) => {
           </thead>
           <tbody>
             {(items || []).map((item, index) => (
-              <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
+              <tr key={index} className="border-t border-b">
                 <td className="p-2">
                   <p className="font-semibold">{item.name || 'Item Name'}</p>
                   <p className="text-sm text-gray-600">{item.description || 'Item Description'}</p>
