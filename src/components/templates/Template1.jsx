@@ -25,7 +25,7 @@ const Template1 = ({ data }) => {
         </div>
         <div>
           <h2 className="text-xl font-semibold">Invoice</h2>
-          <p>Date: {invoice.date}</p>
+          <p>Invoice Date: {invoice.date}</p>
           <p>Due Date: {invoice.paymentDate}</p>
         </div>
       </div>
@@ -89,8 +89,8 @@ const Template1 = ({ data }) => {
       </div>
 
       <div className="mt-8">
-        <h3 className="font-semibold mb-2">Thank you!</h3>
-        <p>We appreciate your business.</p>
+        <h3 className="font-semibold mb-2">Notes:</h3>
+        <p>{notes}</p>
       </div>
 
     </BaseTemplate>
