@@ -8,15 +8,21 @@ import { generatePDF } from '../utils/pdfGenerator';
 const TemplatePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { formData } = location.state;
-  const [selectedTemplate, setSelectedTemplate] = useState(1);
+  const { formData, selectedTemplate } = location.state;
+  const [currentTemplate, setCurrentTemplate] = useState(selectedTemplate);
+
+  const templates = [
+    { name: 'Template 1' },
+    { name: 'Template 2' },
+    { name: 'Template 3' },
+  ];
 
   const handleTemplateChange = (templateNumber) => {
-    setSelectedTemplate(templateNumber);
+    setCurrentTemplate(templateNumber);
   };
 
   const handleDownloadPDF = () => {
-    generatePDF(formData, selectedTemplate);
+    generatePDF(formData, currentTemplate);
   };
 
   return (
@@ -30,22 +36,22 @@ const TemplatePage = () => {
 
       <div className="mb-8 overflow-x-auto">
         <div className="flex space-x-4">
-          {[1, 2, 3].map((index) => (
+          {templates.map((template, index) => (
             <div
               key={index}
               className={`cursor-pointer p-4 border rounded ${
-                selectedTemplate === index ? 'border-blue-500' : 'border-gray-300'
+                currentTemplate === index + 1 ? 'border-blue-500' : 'border-gray-300'
               }`}
-              onClick={() => handleTemplateChange(index)}
+              onClick={() => handleTemplateChange(index + 1)}
             >
-              Template {index}
+              {template.name}
             </div>
           ))}
         </div>
       </div>
 
       <div className="w-[210mm] h-[297mm] mx-auto border shadow-lg">
-        <InvoiceTemplate data={formData} templateNumber={selectedTemplate} />
+        <InvoiceTemplate data={formData} templateNumber={currentTemplate} />
       </div>
     </div>
   );

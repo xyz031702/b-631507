@@ -15,6 +15,13 @@ const Index = () => {
   const [items, setItems] = useState([{ name: '', description: '', quantity: 0, amount: 0, total: 0 }]);
   const [tax, setTax] = useState(0);
   const [notes, setNotes] = useState('');
+  const [selectedTemplate, setSelectedTemplate] = useState(1);
+
+  const templates = [
+    { name: 'Template 1', imageUrl: 'https://via.placeholder.com/200x300?text=Template+1' },
+    { name: 'Template 2', imageUrl: 'https://via.placeholder.com/200x300?text=Template+2' },
+    { name: 'Template 3', imageUrl: 'https://via.placeholder.com/200x300?text=Template+3' },
+  ];
 
   const handleInputChange = (setter) => (e) => {
     const { name, value } = e.target;
@@ -45,7 +52,7 @@ const Index = () => {
 
   const handleGenerateBill = () => {
     const formData = { billTo, shipTo, invoice, from, items, tax, notes };
-    navigate('/template', { state: { formData } });
+    navigate('/template', { state: { formData, selectedTemplate } });
   };
 
   const handleClearForm = () => {
@@ -155,6 +162,25 @@ const Index = () => {
               className="w-full p-2 border rounded"
               rows="4"
             ></textarea>
+          </div>
+
+          {/* Template Gallery */}
+          <div className="mb-6">
+            <h3 className="text-lg font-medium mb-2">Select Template</h3>
+            <div className="grid grid-cols-3 gap-4">
+              {templates.map((template, index) => (
+                <div
+                  key={index}
+                  className={`cursor-pointer p-4 border rounded ${
+                    selectedTemplate === index + 1 ? 'border-blue-500' : 'border-gray-300'
+                  }`}
+                  onClick={() => setSelectedTemplate(index + 1)}
+                >
+                  <img src={template.imageUrl} alt={template.name} className="w-full h-auto" />
+                  <p className="text-center mt-2">{template.name}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="flex justify-between">
