@@ -33,24 +33,26 @@ const Template2 = ({ data }) => {
         </div>
 
         <div className="mb-8">
-          <table className="w-full border-collapse">
+          <table className="w-full border border-gray-300">
             <thead>
-              <tr className="bg-gray-200">
-                <th className="p-2 text-left border-b">ID</th>
-                <th className="p-2 text-left border-b">Description</th>
-                <th className="p-2 text-right border-b">Quantity</th>
-                <th className="p-2 text-right border-b">Rate</th>
-                <th className="p-2 text-right border-b">Amount</th>
+              <tr>
+                <th className="p-2 text-left border border-gray-300">ID</th>
+                <th className="p-2 text-left border border-gray-300">Description</th>
+                <th className="p-2 text-left border border-gray-300">HSN code</th>
+                <th className="p-2 text-right border border-gray-300">Quantity</th>
+                <th className="p-2 text-right border border-gray-300">Rate</th>
+                <th className="p-2 text-right border border-gray-300">Amount</th>
               </tr>
             </thead>
             <tbody>
               {items?.map((item, index) => (
-                <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                  <td className="p-2">{index + 1}</td>
-                  <td className="p-2">{item.name}</td>
-                  <td className="p-2 text-right">{item.quantity}</td>
-                  <td className="p-2 text-right">{formatCurrency(item.amount)}</td>
-                  <td className="p-2 text-right">{formatCurrency(item.quantity * item.amount)}</td>
+                <tr key={index}>
+                  <td className="p-2 border border-gray-300">{index + 1}</td>
+                  <td className="p-2 border border-gray-300">{item.name}</td>
+                  <td className="p-2 border border-gray-300">{item.hsn || 'N/A'}</td>
+                  <td className="p-2 text-right border border-gray-300">{item.quantity}</td>
+                  <td className="p-2 text-right border border-gray-300">{formatCurrency(item.amount)}</td>
+                  <td className="p-2 text-right border border-gray-300">{formatCurrency(item.quantity * item.amount)}</td>
                 </tr>
               ))}
             </tbody>
