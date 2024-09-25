@@ -65,25 +65,25 @@ const Template4 = ({ data }) => {
         <table className="w-full mb-8 border border-gray-300">
           <thead className="bg-purple-600 text-white">
             <tr>
-              <th className="p-2 text-left">Item #/Item Description</th>
-              <th className="p-2 text-right">Qty.</th>
-              <th className="p-2 text-right">Rate</th>
-              <th className="p-2 text-right">Amount</th>
+              <th className="p-2 text-left border border-gray-300">Item #/Item Description</th>
+              <th className="p-2 text-right border border-gray-300">Qty.</th>
+              <th className="p-2 text-right border border-gray-300">Rate</th>
+              <th className="p-2 text-right border border-gray-300">Amount</th>
             </tr>
           </thead>
           <tbody>
             {items.map((item, index) => (
               <tr key={index} className="bg-gray-100">
-                <td className="p-2">
+                <td className="p-2 border border-gray-300">
                   {`${index + 1}. ${item.name || "Item Name"}`}
                   <br />
                   <span className="text-sm text-gray-600">{item.description || "Item Description"}</span>
                 </td>
-                <td className="p-2 text-right">{item.quantity || 0}</td>
-                <td className="p-2 text-right">
+                <td className="p-2 text-right border border-gray-300">{item.quantity || 0}</td>
+                <td className="p-2 text-right border border-gray-300">
                   {formatCurrency(item.amount || 0)}
                 </td>
-                <td className="p-2 text-right">
+                <td className="p-2 text-right border border-gray-300">
                   {formatCurrency((item.quantity || 0) * (item.amount || 0))}
                 </td>
               </tr>
