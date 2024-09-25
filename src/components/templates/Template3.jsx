@@ -78,8 +78,8 @@ const Template3 = ({ data }) => {
                 <span>₹ {tax || 0}</span>
               </div>
             )}
-            <div className="flex justify-between font-bold bg-blue-500 text-white p-2 mt-4 p-2">
-              <span>Total Due Amount</span>
+            <div className="flex justify-between font-bold bg-blue-500 text-white p-2 mt-4">
+              <span className="text-left">Total</span>
               <span>₹{calculateGrandTotal(items || [], tax || 0)}</span>
             </div>
           </div>
