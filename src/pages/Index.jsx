@@ -52,6 +52,11 @@ const Index = () => {
     setItems([...items, { name: '', description: '', quantity: 0, amount: 0, total: 0 }]);
   };
 
+  const removeItem = (index) => {
+    const newItems = items.filter((_, i) => i !== index);
+    setItems(newItems);
+  };
+
   const calculateSubTotal = () => {
     return items.reduce((sum, item) => sum + item.total, 0).toFixed(2);
   };
@@ -154,13 +159,18 @@ const Index = () => {
               />
             </div>
 
-            <ItemDetails items={items} handleItemChange={handleItemChange} addItem={addItem} />
+            <ItemDetails
+              items={items}
+              handleItemChange={handleItemChange}
+              addItem={addItem}
+              removeItem={removeItem}
+            />
 
             <div className="mb-6">
               <h3 className="text-lg font-medium mb-2">Totals</h3>
               <div className="flex justify-between mb-2">
                 <span>Sub Total:</span>
-                <span>{calculateSubTotal()}</span>
+                <span>₹ {calculateSubTotal()}</span>
               </div>
               <div className="flex justify-between mb-2">
                 <span>Tax (Amount):</span>
@@ -173,7 +183,7 @@ const Index = () => {
               </div>
               <div className="flex justify-between font-bold">
                 <span>Grand Total:</span>
-                <span>{calculateGrandTotal()}</span>
+                <span>₹ {calculateGrandTotal()}</span>
               </div>
             </div>
 

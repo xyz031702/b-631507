@@ -6,6 +6,10 @@ const Template2 = ({ data }) => {
   const { billTo, invoice, items, tax, notes } = data;
   const yourCompany = data.yourCompany || {}; // Use an empty object as fallback
 
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 2 }).format(amount);
+  };
+
   return (
     <BaseTemplate data={data}>
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
@@ -46,8 +50,8 @@ const Template2 = ({ data }) => {
                   <td className="p-2">{index + 1}</td>
                   <td className="p-2">{item.name}</td>
                   <td className="p-2 text-right">{item.quantity}</td>
-                  <td className="p-2 text-right">₹ {item.amount.toFixed(2)}</td>
-                  <td className="p-2 text-right">₹ {(item.quantity * item.amount).toFixed(2)}</td>
+                  <td className="p-2 text-right">{formatCurrency(item.amount)}</td>
+                  <td className="p-2 text-right">{formatCurrency(item.quantity * item.amount)}</td>
                 </tr>
               ))}
             </tbody>
@@ -62,15 +66,15 @@ const Template2 = ({ data }) => {
           <div className="w-1/3">
             <div className="flex justify-between mb-2">
               <span>Sub total:</span>
-              <span>₹ {calculateSubTotal(items || [])}</span>
+              <span>{formatCurrency(calculateSubTotal(items || []))}</span>
             </div>
             <div className="flex justify-between mb-2">
               <span>Tax:</span>
-              <span>₹ {tax || 0}</span>
+              <span>{formatCurrency(tax || 0)}</span>
             </div>
             <div className="flex justify-between font-bold bg-cyan-500 text-white p-2">
               <span>Total:</span>
-              <span>₹ {calculateGrandTotal(items || [], tax || 0)}</span>
+              <span>{formatCurrency(calculateGrandTotal(items || [], tax || 0))}</span>
             </div>
           </div>
         </div>

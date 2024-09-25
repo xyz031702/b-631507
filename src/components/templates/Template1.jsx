@@ -5,13 +5,17 @@ import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalcu
 const Template1 = ({ data }) => {
   const { billTo, shipTo, invoice, yourCompany, items, tax, notes } = data;
 
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 2 }).format(amount);
+  };
+
   return (
     <BaseTemplate data={data}>
       <div className="flex justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold">{yourCompany.name || 'Company Name'}</h1>
-          <p>{yourCompany.address || 'Company Address'}</p>
-          <p>{yourCompany.phone || 'Company Phone'}</p>
+          <h1 className="text-2xl font-bold">{yourCompany.name}</h1>
+          <p>{yourCompany.address}</p>
+          <p>{yourCompany.phone}</p>
         </div>
         <div>
           <h2 className="text-xl font-semibold">Invoice</h2>
@@ -51,8 +55,8 @@ const Template1 = ({ data }) => {
               <td className="p-2">{item.name}</td>
               <td className="p-2">{item.description}</td>
               <td className="p-2 text-right">{item.quantity}</td>
-              <td className="p-2 text-right">${item.amount.toFixed(2)}</td>
-              <td className="p-2 text-right">${(item.quantity * item.amount).toFixed(2)}</td>
+              <td className="p-2 text-right">{formatCurrency(item.amount)}</td>
+              <td className="p-2 text-right">{formatCurrency(item.quantity * item.amount)}</td>
             </tr>
           ))}
         </tbody>
@@ -62,15 +66,15 @@ const Template1 = ({ data }) => {
         <div className="w-1/3">
           <div className="flex justify-between mb-2">
             <span>Subtotal:</span>
-            <span>${calculateSubTotal(items)}</span>
+            <span>{formatCurrency(calculateSubTotal(items))}</span>
           </div>
           <div className="flex justify-between mb-2">
             <span>Tax:</span>
-            <span>${tax}</span>
+            <span>{formatCurrency(tax)}</span>
           </div>
           <div className="flex justify-between font-bold">
             <span>Total:</span>
-            <span>${calculateGrandTotal(items, tax)}</span>
+            <span>{formatCurrency(calculateGrandTotal(items, tax))}</span>
           </div>
         </div>
       </div>
