@@ -16,7 +16,7 @@ const Template6 = ({ data }) => {
       <div className="bg-white p-8 max-w-4xl mx-auto">
         <div className="flex justify-between items-start mb-8">
           <div>
-            <h2 className="text-2xl font-bold" style={{ color: '#14A8DE' }}>
+            <h2 className="text-2xl font-bold" style={{ color: "#14A8DE" }}>
               {yourCompany.name || "Company Name"}
             </h2>
             <p>{yourCompany.address || "Company Address"}</p>
@@ -52,12 +52,18 @@ const Template6 = ({ data }) => {
         </div>
 
         <table className="w-full mb-8 border border-gray-300">
-          <thead style={{ backgroundColor: '#E0F4FB' }}>
+          <thead style={{ backgroundColor: "#E0F4FB" }}>
             <tr>
-              <th className="p-2 text-left border-b border-gray-300">Item #/Item description</th>
-              <th className="p-2 text-right border-b border-gray-300">Quantity</th>
+              <th className="p-2 text-left border-b border-gray-300">
+                Item #/Item description
+              </th>
+              <th className="p-2 text-right border-b border-gray-300">
+                Quantity
+              </th>
               <th className="p-2 text-right border-b border-gray-300">Rate</th>
-              <th className="p-2 text-right border-b border-gray-300">Amount</th>
+              <th className="p-2 text-right border-b border-gray-300">
+                Amount
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -69,7 +75,9 @@ const Template6 = ({ data }) => {
                     {item.description || "Item Description"}
                   </p>
                 </td>
-                <td className="p-2 text-right border-b border-gray-300">{item.quantity || 0}</td>
+                <td className="p-2 text-right border-b border-gray-300">
+                  {item.quantity || 0}
+                </td>
                 <td className="p-2 text-right border-b border-gray-300">
                   {formatCurrency(item.amount || 0)}
                 </td>
@@ -81,7 +89,7 @@ const Template6 = ({ data }) => {
           </tbody>
         </table>
 
-        <table className="w-full mb-8 border border-gray-300">
+        <table className="w-1/2 mb-8 border border-gray-300">
           <tbody>
             <tr>
               <td className="p-2 text-right font-semibold">Sub Total</td>
@@ -90,12 +98,16 @@ const Template6 = ({ data }) => {
             {tax > 0 && (
               <tr>
                 <td className="p-2 text-right font-semibold">Tax</td>
-                <td className="p-2 text-right">{formatCurrency(tax.toFixed(2))}</td>
+                <td className="p-2 text-right">
+                  {formatCurrency(tax.toFixed(2))}
+                </td>
               </tr>
             )}
-            <tr className="text-white" style={{ backgroundColor: '#14A8DE' }}>
+            <tr className="text-white" style={{ backgroundColor: "#14A8DE" }}>
               <td className="p-2 text-right font-semibold">Total Due Amount</td>
-              <td className="p-2 text-right">{formatCurrency(totalDueAmount)}</td>
+              <td className="p-2 text-right">
+                {formatCurrency(totalDueAmount)}
+              </td>
             </tr>
           </tbody>
         </table>
