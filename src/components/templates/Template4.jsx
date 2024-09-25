@@ -48,7 +48,7 @@ const Template4 = ({ data }) => {
             <h3 className="text-lg font-semibold text-purple-600 mb-2">
               Billed by
             </h3>
-            <p>{yourCompany.name || "Company Name"}</p>
+            <p><strong>{yourCompany.name || "Company Name"}</strong></p>
             <p>{yourCompany.address || "Company Address"}</p>
             <p>{yourCompany.phone || "Company Phone"}</p>
           </div>
@@ -56,7 +56,7 @@ const Template4 = ({ data }) => {
             <h3 className="text-lg font-semibold text-purple-600 mb-2">
               Billed to
             </h3>
-            <p>{billTo.name || "Client Name"}</p>
+            <p><strong>{billTo.name || "Client Name"}</strong></p>
             <p>{billTo.address || "Client Address"}</p>
             <p>{billTo.phone || "Client Phone"}</p>
           </div>
