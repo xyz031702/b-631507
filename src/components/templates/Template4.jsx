@@ -4,7 +4,7 @@ import BaseTemplate from './BaseTemplate';
 import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
 
 const Template4 = ({ data }) => {
-  const { billTo, invoice, from, items, tax, notes } = data;
+  const { billTo = {}, invoice = {}, from = {}, items = [], tax = 0, notes = '' } = data || {};
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
@@ -19,25 +19,25 @@ const Template4 = ({ data }) => {
         <div className="flex justify-between items-start mb-8">
           <div>
             <h1 className="text-4xl font-bold text-purple-600 mb-4">Invoice</h1>
-            <p><span className="font-semibold">Invoice#:</span> {invoice.number}</p>
-            <p><span className="font-semibold">Invoice Date:</span> {format(new Date(invoice.date), 'MMM dd, yyyy')}</p>
-            <p><span className="font-semibold">Due Date:</span> {format(new Date(invoice.paymentDate), 'MMM dd, yyyy')}</p>
+            <p><span className="font-semibold">Invoice#:</span> {invoice.number || 'N/A'}</p>
+            <p><span className="font-semibold">Invoice Date:</span> {invoice.date ? format(new Date(invoice.date), 'MMM dd, yyyy') : 'N/A'}</p>
+            <p><span className="font-semibold">Due Date:</span> {invoice.paymentDate ? format(new Date(invoice.paymentDate), 'MMM dd, yyyy') : 'N/A'}</p>
           </div>
           <div className="text-right">
-            <h2 className="text-2xl font-bold">{from.name}</h2>
+            <h2 className="text-2xl font-bold">{from.name || 'Company Name'}</h2>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-8 mb-8">
           <div className="bg-gray-100 p-4 rounded">
             <h3 className="text-lg font-semibold text-purple-600 mb-2">Billed by</h3>
-            <p>{from.name}</p>
-            <p>{from.address}</p>
+            <p>{from.name || 'Company Name'}</p>
+            <p>{from.address || 'Company Address'}</p>
           </div>
           <div className="bg-gray-100 p-4 rounded">
             <h3 className="text-lg font-semibold text-purple-600 mb-2">Billed to</h3>
-            <p>{billTo.name}</p>
-            <p>{billTo.address}</p>
+            <p>{billTo.name || 'Client Name'}</p>
+            <p>{billTo.address || 'Client Address'}</p>
           </div>
         </div>
 
@@ -53,10 +53,10 @@ const Template4 = ({ data }) => {
           <tbody>
             {items.map((item, index) => (
               <tr key={index} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
-                <td className="p-2">{item.name}</td>
-                <td className="p-2 text-right">{item.quantity}</td>
-                <td className="p-2 text-right">{formatCurrency(item.amount)}</td>
-                <td className="p-2 text-right">{formatCurrency(item.quantity * item.amount)}</td>
+                <td className="p-2">{item.name || 'Item Name'}</td>
+                <td className="p-2 text-right">{item.quantity || 0}</td>
+                <td className="p-2 text-right">{formatCurrency(item.amount || 0)}</td>
+                <td className="p-2 text-right">{formatCurrency((item.quantity || 0) * (item.amount || 0))}</td>
               </tr>
             ))}
           </tbody>
