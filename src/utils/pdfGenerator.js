@@ -29,7 +29,45 @@ export const generatePDF = async (invoiceData, templateNumber) => {
       const pdf = new jsPDF('p', 'mm', 'a4');
       
       pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
-      pdf.save(`invoice_template_${templateNumber}.pdf`);
+      const { number, date, paymentDate } = invoiceData.invoice;
+      const { name: companyName } = invoiceData.yourCompany;
+      const { name: billToName } = invoiceData.billTo;
+      const timestamp = new Date().getTime();
+
+      let fileName;
+      switch (templateNumber) {
+        case 1:
+          fileName = `Template1 - ${number}.pdf`;
+          break;
+        case 2:
+          fileName = `Template2- ${companyName}_${number}.pdf`;
+          break;
+        case 3:
+          fileName = `Template3- ${companyName}.pdf`;
+          break;
+        case 4:
+          fileName = `Template4 - ${date}.pdf`;
+          break;
+        case 5:
+          fileName = `Template5 - ${number}-${date}.pdf`;
+          break;
+        case 6:
+          fileName = `Template6 - invoice_${timestamp}.pdf`;
+          break;
+        case 7:
+          fileName = `Template7 - Invoice_${number}.pdf`;
+          break;
+        case 8:
+          fileName = `Template8 - Invoice_${billToName}.pdf`;
+          break;
+        case 9:
+          fileName = `Template9 - IN-${date}.pdf`;
+          break;
+        default:
+          fileName = `invoice_template_${templateNumber}.pdf`;
+      }
+
+      pdf.save(fileName);
       
       document.body.removeChild(invoice);
       resolve();
