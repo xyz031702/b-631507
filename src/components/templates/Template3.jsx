@@ -35,7 +35,7 @@ const Template3 = ({ data }) => {
           </div>
           <div className="text-right">
             <p>Due Date: {invoice?.paymentDate || "N/A"}</p>
-            <p>Due Amount: ₹{calculateGrandTotal(items || [], tax || 0)}</p>
+            <p>Due Amount: {formatCurrency(calculateGrandTotal(items || [], tax || 0))}</p>
           </div>
         </div>
       </div>
@@ -62,7 +62,7 @@ const Template3 = ({ data }) => {
               </div>
               <div className="p-2 w-24 text-right">{item.quantity || 0}</div>
               <div className="p-2 flex-1 text-right">
-                ₹{((item.quantity || 0) * (item.amount || 0)).toFixed(2)}
+                {formatCurrency((item.quantity || 0) * (item.amount || 0))}
               </div>
             </div>
           ))}
@@ -78,17 +78,17 @@ const Template3 = ({ data }) => {
           <div className="w-1/3">
             <div className="flex justify-between mb-2 p-2">
               <span>Sub Total:</span>
-              <span>₹ {calculateSubTotal(items || [])}</span>
+              <span>{formatCurrency(calculateSubTotal(items || []))}</span>
             </div>
             {tax > 0 && (
               <div className="flex justify-between mb-2 p-2">
                 <span>Tax:</span>
-                <span>₹ {(tax || 0).toFixed(2)}</span>
+                <span>{formatCurrency(tax || 0)}</span>
               </div>
             )}
             <div className="flex justify-between font-bold bg-blue-500 text-white p-2 mt-4">
               <span className="text-left">Total</span>
-              <span>₹{calculateGrandTotal(items || [], tax || 0)}</span>
+              <span>{formatCurrency(calculateGrandTotal(items || [], tax || 0))}</span>
             </div>
           </div>
         </div>
