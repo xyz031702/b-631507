@@ -18,7 +18,6 @@ const Template8 = ({ data }) => {
         <div className="flex justify-between items-start mb-8">
           <div>
             <h1 className="text-4xl font-bold text-blue-600">Invoice</h1>
-            <span className="bg-red-500 text-white px-2 py-1 rounded-full text-sm inline-block mt-2">Unpaid</span>
           </div>
           <div className="text-right">
             <h2 className="text-xl font-bold">{yourCompany.name}</h2>
