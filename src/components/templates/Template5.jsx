@@ -48,7 +48,7 @@ const Template5 = ({ data = {} }) => {
         </div>
 
         <table className="w-full mb-8">
-          <thead className="bg-green-100">
+          <thead className="bg-green-600 text-white">
             <tr>
               <th className="p-2 text-left">Item #/Item description</th>
               <th className="p-2 text-right">Qty.</th>
