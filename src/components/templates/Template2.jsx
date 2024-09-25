@@ -12,7 +12,7 @@ const Template2 = ({ data }) => {
 
   return (
     <BaseTemplate data={data}>
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+      <div className="bg-white p-8 rounded-lg shadow-lg mx-auto" style={{ width: '794px', height: '1123px' }}>
         <div className="flex justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-cyan-500">{yourCompany.name || 'Your Company Name'}</h1>
