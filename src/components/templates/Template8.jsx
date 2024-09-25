@@ -14,7 +14,7 @@ const Template8 = ({ data }) => {
 
   return (
     <BaseTemplate data={data}>
-      <div className="bg-gray-100 w-full h-full" style={{ margin: '0', padding: '0' }}>
+      <div className="bg-gray-100 w-full h-full" style={{ margin: '0', padding: '16px' }}>
         <div className="flex justify-between items-start mb-8">
           <div>
             <h1 className="text-4xl font-bold text-blue-600">Invoice</h1>
