@@ -93,20 +93,20 @@ const Template6 = ({ data }) => {
           <table className="w-1/2 mb-8 border border-gray-300">
             <tbody>
               <tr>
-                <td className="p-2 text-right font-semibold">Sub Total</td>
-                <td className="p-2 text-right">{formatCurrency(subTotal)}</td>
+                <td className="p-2 text-right font-semibold border border-gray-300">Sub Total</td>
+                <td className="p-2 text-right border border-gray-300">{formatCurrency(subTotal)}</td>
               </tr>
               {tax > 0 && (
                 <tr>
-                  <td className="p-2 text-right font-semibold">Tax</td>
-                  <td className="p-2 text-right">
+                  <td className="p-2 text-right font-semibold border border-gray-300">Tax</td>
+                  <td className="p-2 text-right border border-gray-300">
                     {formatCurrency(tax.toFixed(2))}
                   </td>
                 </tr>
               )}
               <tr className="text-white" style={{ backgroundColor: "#14A8DE" }}>
-                <td className="p-2 text-right font-semibold">Total Due Amount</td>
-                <td className="p-2 text-right">
+                <td className="p-2 text-right font-semibold border border-gray-300">Total Due Amount</td>
+                <td className="p-2 text-right border border-gray-300">
                   {formatCurrency(totalDueAmount)}
                 </td>
               </tr>
