@@ -16,7 +16,7 @@ const Template9 = ({ data }) => {
       <div className="bg-white p-8 max-w-4xl mx-auto">
         <div className="flex justify-between items-start mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-green-600 mb-2">Invoice</h1>
+            <h1 className="text-3xl font-bold text-blue-600 mb-2">Invoice</h1>
             <h2 className="text-xl font-bold">{yourCompany.name || 'Your Company Name'}</h2>
             <p>{yourCompany.address || 'Company Address'}</p>
             <p>{yourCompany.phone || 'Company Phone'}</p>
@@ -29,20 +29,20 @@ const Template9 = ({ data }) => {
         </div>
 
         <div className="grid grid-cols-2 gap-8 mb-8">
-          <div className="bg-green-50 p-4 rounded">
-            <h3 className="text-lg font-semibold text-green-600 mb-2">Billed by</h3>
+          <div className="bg-blue-50 p-4 rounded">
+            <h3 className="text-lg font-semibold text-blue-600 mb-2">Billed by</h3>
             <p>{yourCompany.name || 'Your Company Name'}</p>
             <p>{yourCompany.address || 'Your Company Address'}</p>
           </div>
-          <div className="bg-green-50 p-4 rounded">
-            <h3 className="text-lg font-semibold text-green-600 mb-2">Billed to</h3>
+          <div className="bg-blue-50 p-4 rounded">
+            <h3 className="text-lg font-semibold text-blue-600 mb-2">Billed to</h3>
             <p>{billTo.name || 'Client Name'}</p>
             <p>{billTo.address || 'Client Address'}</p>
           </div>
         </div>
 
         <table className="w-full mb-8">
-          <thead className="bg-green-100 text-green-600">
+          <thead className="bg-blue-100 text-blue-600">
             <tr>
               <th className="p-2 text-left">Item #/Item description</th>
               <th className="p-2 text-right">Qty.</th>
@@ -74,7 +74,7 @@ const Template9 = ({ data }) => {
                 <span>{formatCurrency(tax)}</span>
               </div>
             )}
-            <div className="flex justify-between font-bold text-lg mt-2">
+            <div className="flex justify-between font-bold text-lg mt-2 text-blue-600">
               <span>Total:</span>
               <span className="text-green-600">{formatCurrency(total)}</span>
             </div>
@@ -83,7 +83,7 @@ const Template9 = ({ data }) => {
 
         {notes && (
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-green-600 mb-2">Additional Notes</h3>
+            <h3 className="text-lg font-semibold text-blue-600 mb-2">Additional Notes</h3>
             <p>{notes}</p>
           </div>
         )}
