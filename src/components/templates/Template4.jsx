@@ -73,7 +73,7 @@ const Template4 = ({ data }) => {
           </thead>
           <tbody>
             {items.map((item, index) => (
-              <tr key={index} className={index % 2 === 0 ? "bg-gray-100" : ""}>
+              <tr key={index} className="bg-gray-100">
                 <td className="p-2">{item.name || "Item Name"}</td>
                 <td className="p-2 text-right">{item.quantity || 0}</td>
                 <td className="p-2 text-right">
