@@ -89,7 +89,8 @@ const Template6 = ({ data }) => {
           </tbody>
         </table>
 
-        <table className="w-1/2 mb-8 border border-gray-300">
+        <div className="flex justify-end">
+          <table className="w-1/2 mb-8 border border-gray-300">
           <tbody>
             <tr>
               <td className="p-2 text-right font-semibold">Sub Total</td>
@@ -112,7 +113,8 @@ const Template6 = ({ data }) => {
           </tbody>
         </table>
 
-        {notes && (
+          </table>
+        </div>
           <div className="text-center text-sm border-t pt-4">
             <p>{notes}</p>
           </div>
