@@ -12,9 +12,6 @@ const Template1 = ({ data }) => {
   return (
     <BaseTemplate data={data}>
       <div className="flex justify-between items-center mb-8">
-        <div>
-          <img src="/assets/logo.png" alt="Logo" className="h-12" />
-        </div>
         <div className="text-right">
           <h2 className="text-3xl font-semibold">INVOICE</h2>
         </div>
@@ -94,13 +91,6 @@ const Template1 = ({ data }) => {
         <p>We appreciate your business.</p>
       </div>
 
-      <div className="mt-8 border-t pt-4">
-        <h3 className="font-semibold mb-2">Payment Information:</h3>
-        <p>Briard Bank</p>
-        <p>Account Name: Samira Hadid</p>
-        <p>Account No.: 123-456-7890</p>
-        <p>Pay by: 5 July 2025</p>
-      </div>
     </BaseTemplate>
   );
 };
