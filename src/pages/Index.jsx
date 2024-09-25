@@ -222,7 +222,7 @@ const Index = () => {
                 <input
                   type="number"
                   value={tax}
-                  onChange={(e) => setTax(parseFloat(e.target.value) || 0)}
+                  onChange={(e) => setTax((parseFloat(e.target.value) || 0).toFixed(2))}
                   className="w-24 p-2 border rounded"
                 />
               </div>
