@@ -9,9 +9,9 @@ const Template1 = ({ data }) => {
     <BaseTemplate data={data}>
       <div className="flex justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold">{yourCompany.name}</h1>
-          <p>{yourCompany.address}</p>
-          <p>{yourCompany.phone}</p>
+          <h1 className="text-2xl font-bold">{yourCompany.name || 'Company Name'}</h1>
+          <p>{yourCompany.address || 'Company Address'}</p>
+          <p>{yourCompany.phone || 'Company Phone'}</p>
         </div>
         <div>
           <h2 className="text-xl font-semibold">Invoice</h2>

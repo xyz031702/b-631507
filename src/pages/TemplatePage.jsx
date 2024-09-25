@@ -15,6 +15,7 @@ const TemplatePage = () => {
   useEffect(() => {
     if (location.state && location.state.formData) {
       setFormData(location.state.formData);
+      setCurrentTemplate(location.state.selectedTemplate || 1);
     }
   }, [location.state]);
 
