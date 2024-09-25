@@ -87,9 +87,9 @@ const Template3 = ({ data }) => {
               <span>₹ {calculateSubTotal(items || [])}</span>
             </div>
             {tax > 0 && (
-              <div className="flex justify-between mb-2">
+              <div className="flex justify-between mb-2 p-2">
                 <span>Tax:</span>
-                <span>₹ {tax || 0}</span>
+                <span>₹ {(tax || 0).toFixed(2)}</span>
               </div>
             )}
             <div className="flex justify-between font-bold bg-blue-500 text-white p-2 mt-4">
