@@ -4,7 +4,7 @@ import BaseTemplate from './BaseTemplate';
 import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
 
 const Template5 = ({ data = {} }) => {
-  const { billTo = {}, invoice = {}, from = {}, items = [], tax = 0, notes = '' } = data;
+  const { billTo = {}, invoice = {}, yourCompany = {}, items = [], tax = 0, notes = '' } = data;
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
@@ -21,8 +21,9 @@ const Template5 = ({ data = {} }) => {
             <h1 className="text-4xl font-bold text-green-600">Invoice</h1>
           </div>
           <div className="text-right">
-            <h2 className="text-xl font-bold">{from.name || 'Company Name'}</h2>
-            <p>{from.address || 'Company Address'}</p>
+            <h2 className="text-xl font-bold">{yourCompany.name || 'Company Name'}</h2>
+            <p>{yourCompany.address || 'Company Address'}</p>
+            <p>{yourCompany.phone || 'Company Phone'}</p>
           </div>
         </div>
 
@@ -31,6 +32,7 @@ const Template5 = ({ data = {} }) => {
             <h3 className="text-lg font-semibold text-green-600 mb-2">Billed to</h3>
             <p className="font-bold">{billTo.name || 'Client Name'}</p>
             <p>{billTo.address || 'Client Address'}</p>
+            <p>{billTo.phone || 'Client Phone'}</p>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>

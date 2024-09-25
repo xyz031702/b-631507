@@ -4,7 +4,7 @@ import BaseTemplate from './BaseTemplate';
 import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
 
 const Template4 = ({ data }) => {
-  const { billTo = {}, invoice = {}, from = {}, items = [], tax = 0, notes = '' } = data || {};
+  const { billTo = {}, invoice = {}, yourCompany = {}, items = [], tax = 0, notes = '' } = data || {};
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
@@ -24,20 +24,24 @@ const Template4 = ({ data }) => {
             <p><span className="font-semibold">Due Date:</span> {invoice.paymentDate ? format(new Date(invoice.paymentDate), 'MMM dd, yyyy') : 'N/A'}</p>
           </div>
           <div className="text-right">
-            <h2 className="text-2xl font-bold">{from.name || 'Company Name'}</h2>
+            <h2 className="text-2xl font-bold">{yourCompany.name || 'Company Name'}</h2>
+            <p>{yourCompany.address || 'Company Address'}</p>
+            <p>{yourCompany.phone || 'Company Phone'}</p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-8 mb-8">
           <div className="bg-gray-100 p-4 rounded">
             <h3 className="text-lg font-semibold text-purple-600 mb-2">Billed by</h3>
-            <p>{from.name || 'Company Name'}</p>
-            <p>{from.address || 'Company Address'}</p>
+            <p>{yourCompany.name || 'Company Name'}</p>
+            <p>{yourCompany.address || 'Company Address'}</p>
+            <p>{yourCompany.phone || 'Company Phone'}</p>
           </div>
           <div className="bg-gray-100 p-4 rounded">
             <h3 className="text-lg font-semibold text-purple-600 mb-2">Billed to</h3>
             <p>{billTo.name || 'Client Name'}</p>
             <p>{billTo.address || 'Client Address'}</p>
+            <p>{billTo.phone || 'Client Phone'}</p>
           </div>
         </div>
 
