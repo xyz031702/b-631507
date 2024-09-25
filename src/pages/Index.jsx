@@ -68,9 +68,27 @@ const Index = () => {
     navigate('/template', { state: { formData, selectedTemplate: templateNumber } });
   };
 
+  const fillDummyData = () => {
+    setBillTo({ name: 'John Doe', address: '123 Main St, Anytown, USA', phone: '(555) 123-4567' });
+    setShipTo({ name: 'Jane Smith', address: '456 Elm St, Othertown, USA', phone: '(555) 987-6543' });
+    setInvoice({ 
+      date: new Date().toISOString().split('T')[0], 
+      paymentDate: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0],
+      number: generateRandomInvoiceNumber()
+    });
+    setFrom({ name: 'Your Company', address: '789 Oak St, Businessville, USA', phone: '(555) 555-5555' });
+    setItems([
+      { name: 'Product A', description: 'High-quality item', quantity: 2, amount: 50, total: 100 },
+      { name: 'Service B', description: 'Professional service', quantity: 1, amount: 200, total: 200 }
+    ]);
+    setTax(30);
+    setNotes('Thank you for your business!');
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8 text-center">Bill Generator</h1>
+      <Button onClick={fillDummyData} className="mb-4">Fill with Dummy Data</Button>
       <div className="flex flex-col md:flex-row gap-8">
         {/* Left Section - Input Form */}
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
