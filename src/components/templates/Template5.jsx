@@ -116,7 +116,7 @@ const Template5 = ({ data = {} }) => {
             </div>
           )}
         </div>
-        <div className="p-4 text-center text-sm text-gray-600">
+        <div className="p-4 text-center text-sm text-gray-600 bg-green-50">
           This is a computer-generated invoice and doesn't require a signature.
         </div>
       </div>
