@@ -81,38 +81,24 @@ const Template6 = ({ data }) => {
           </tbody>
         </table>
 
-        <div className="flex justify-end mb-8">
-          <div className="w-1/2">
-            <table className="w-full text-right">
-              <tbody>
-                <tr>
-                  <td className="p-2">Sub Total</td>
-                  <td className="p-2 font-semibold">
-                    {formatCurrency(subTotal)}
-                  </td>
-                </tr>
-                {tax > 0 && (
-                  <tr>
-                    <td className="p-2">Tax</td>
-                    <td className="p-2 font-semibold">
-                      {formatCurrency(tax.toFixed(2))}
-                    </td>
-                  </tr>
-                )}
-                <tr
-                  className="text-white"
-                  style={{ backgroundColor: '#14A8DE' }}
-                  style={{ paddingLeft: "1rem" }}
-                >
-                  <td className="p-2">Total Due Amount</td>
-                  <td className="p-2 font-semibold">
-                    {formatCurrency(totalDueAmount)}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <table className="w-full mb-8 border border-gray-300">
+          <tbody>
+            <tr>
+              <td className="p-2 text-right font-semibold">Sub Total</td>
+              <td className="p-2 text-right">{formatCurrency(subTotal)}</td>
+            </tr>
+            {tax > 0 && (
+              <tr>
+                <td className="p-2 text-right font-semibold">Tax</td>
+                <td className="p-2 text-right">{formatCurrency(tax.toFixed(2))}</td>
+              </tr>
+            )}
+            <tr className="text-white" style={{ backgroundColor: '#14A8DE' }}>
+              <td className="p-2 text-right font-semibold">Total Due Amount</td>
+              <td className="p-2 text-right">{formatCurrency(totalDueAmount)}</td>
+            </tr>
+          </tbody>
+        </table>
 
         {notes && (
           <div className="text-center text-sm border-t pt-4">
