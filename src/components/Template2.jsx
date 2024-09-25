@@ -1,4 +1,5 @@
 import React from 'react';
+import BaseTemplate from './templates/BaseTemplate';
 
 const Template2 = ({ data }) => {
   const { from, billTo, invoice, items, tax, notes } = data;
@@ -13,7 +14,7 @@ const Template2 = ({ data }) => {
   };
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+    <BaseTemplate data={data}>
       <div className="flex justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold text-cyan-500">{from.name}</h1>
@@ -107,7 +108,7 @@ const Template2 = ({ data }) => {
           <p>Thank you for your business!</p>
         </div>
       )}
-    </div>
+    </BaseTemplate>
   );
 };
 
