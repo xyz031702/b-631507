@@ -3,15 +3,15 @@ import BaseTemplate from './BaseTemplate';
 import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
 
 const Template1 = ({ data }) => {
-  const { billTo, shipTo, invoice, from, items, tax, notes } = data;
+  const { billTo, shipTo, invoice, yourCompany, items, tax, notes } = data;
 
   return (
     <BaseTemplate data={data}>
       <div className="flex justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold">{from.name}</h1>
-          <p>{from.address}</p>
-          <p>{from.phone}</p>
+          <h1 className="text-2xl font-bold">{yourCompany.name}</h1>
+          <p>{yourCompany.address}</p>
+          <p>{yourCompany.phone}</p>
         </div>
         <div>
           <h2 className="text-xl font-semibold">Invoice</h2>

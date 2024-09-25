@@ -7,18 +7,16 @@ import ItemDetails from '../components/ItemDetails';
 import { Button } from "@/components/ui/button";
 
 const generateRandomInvoiceNumber = () => {
-  const length = Math.floor(Math.random() * 6) + 3; // 3 to 8 characters
-  const alphabetCount = Math.min(Math.floor(Math.random() * 4), length); // 0 to 3 alphabets, but not more than length
+  const length = Math.floor(Math.random() * 6) + 3;
+  const alphabetCount = Math.min(Math.floor(Math.random() * 4), length);
   let result = '';
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   const numbers = '0123456789';
 
-  // Add alphabets
   for (let i = 0; i < alphabetCount; i++) {
     result += alphabet[Math.floor(Math.random() * alphabet.length)];
   }
 
-  // Add numbers
   for (let i = alphabetCount; i < length; i++) {
     result += numbers[Math.floor(Math.random() * numbers.length)];
   }
@@ -31,7 +29,7 @@ const Index = () => {
   const [billTo, setBillTo] = useState({ name: '', address: '', phone: '' });
   const [shipTo, setShipTo] = useState({ name: '', address: '', phone: '' });
   const [invoice, setInvoice] = useState({ date: '', paymentDate: '', number: generateRandomInvoiceNumber() });
-  const [from, setFrom] = useState({ name: '', address: '', phone: '' });
+  const [yourCompany, setYourCompany] = useState({ name: '', address: '', phone: '' });
   const [items, setItems] = useState([{ name: '', description: '', quantity: 0, amount: 0, total: 0 }]);
   const [tax, setTax] = useState(0);
   const [notes, setNotes] = useState('');
@@ -64,7 +62,7 @@ const Index = () => {
   };
 
   const handleTemplateClick = (templateNumber) => {
-    const formData = { billTo, shipTo, invoice, from, items, tax, notes };
+    const formData = { billTo, shipTo, invoice, yourCompany, items, tax, notes };
     navigate('/template', { state: { formData, selectedTemplate: templateNumber } });
   };
 
@@ -76,7 +74,7 @@ const Index = () => {
       paymentDate: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0],
       number: generateRandomInvoiceNumber()
     });
-    setFrom({ name: 'Your Company', address: '789 Oak St, Businessville, USA', phone: '(555) 555-5555' });
+    setYourCompany({ name: 'Your Company', address: '789 Oak St, Businessville, USA', phone: '(555) 555-5555' });
     setItems([
       { name: 'Product A', description: 'High-quality item', quantity: 2, amount: 50, total: 100 },
       { name: 'Service B', description: 'Professional service', quantity: 1, amount: 200, total: 200 }
@@ -90,7 +88,6 @@ const Index = () => {
       <h1 className="text-3xl font-bold mb-8 text-center">Bill Generator</h1>
       <Button onClick={fillDummyData} className="mb-4">Fill with Dummy Data</Button>
       <div className="flex flex-col md:flex-row gap-8">
-        {/* Left Section - Input Form */}
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <form>
             <BillToSection billTo={billTo} handleInputChange={handleInputChange(setBillTo)} />
@@ -100,7 +97,6 @@ const Index = () => {
               billTo={billTo}
             />
 
-            {/* Invoice Information */}
             <div className="mb-6">
               <h2 className="text-2xl font-semibold mb-4">Invoice Information</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -130,30 +126,29 @@ const Index = () => {
               </div>
             </div>
 
-            {/* From */}
             <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4">From</h2>
+              <h2 className="text-2xl font-semibold mb-4">Your Company</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FloatingLabelInput
-                  id="fromName"
+                  id="yourCompanyName"
                   label="Name"
-                  value={from.name}
-                  onChange={handleInputChange(setFrom)}
+                  value={yourCompany.name}
+                  onChange={handleInputChange(setYourCompany)}
                   name="name"
                 />
                 <FloatingLabelInput
-                  id="fromPhone"
+                  id="yourCompanyPhone"
                   label="Phone"
-                  value={from.phone}
-                  onChange={handleInputChange(setFrom)}
+                  value={yourCompany.phone}
+                  onChange={handleInputChange(setYourCompany)}
                   name="phone"
                 />
               </div>
               <FloatingLabelInput
-                id="fromAddress"
+                id="yourCompanyAddress"
                 label="Address"
-                value={from.address}
-                onChange={handleInputChange(setFrom)}
+                value={yourCompany.address}
+                onChange={handleInputChange(setYourCompany)}
                 name="address"
                 className="mt-4"
               />
@@ -161,7 +156,6 @@ const Index = () => {
 
             <ItemDetails items={items} handleItemChange={handleItemChange} addItem={addItem} />
 
-            {/* Totals */}
             <div className="mb-6">
               <h3 className="text-lg font-medium mb-2">Totals</h3>
               <div className="flex justify-between mb-2">
@@ -183,7 +177,6 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Notes */}
             <div className="mb-6">
               <h3 className="text-lg font-medium mb-2">Notes</h3>
               <textarea
@@ -201,7 +194,6 @@ const Index = () => {
           </form>
         </div>
 
-        {/* Right Section - Template Gallery */}
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md overflow-y-auto" style={{ maxHeight: 'calc(100vh - 2rem)' }}>
           <h2 className="text-2xl font-semibold mb-4">Template Gallery</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -212,7 +204,7 @@ const Index = () => {
                 onClick={() => handleTemplateClick(index)}
               >
                 <img 
-                  src={index === 3 ? "/template3-preview.png" : index === 4 ? "/template4-preview.png" : index === 5 ? "/template5-preview.png" : index === 6 ? "/template6-preview.png" : `https://via.placeholder.com/200x300?text=Template+${index}`} 
+                  src={`/template${index}-preview.png`}
                   alt={`Template ${index}`} 
                   className="w-full h-40 object-cover rounded mb-2" 
                 />
