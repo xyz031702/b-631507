@@ -46,7 +46,7 @@ const Template6 = ({ data }) => {
         <div className="grid grid-cols-2 gap-8 mb-8">
           <div>
             <h3 className="text-lg font-semibold mb-2">Billed to</h3>
-            <p className="font-bold">{billTo.name || "Client Name"}</p>
+            <p>{billTo.name || "Client Name"}</p>
             <p>{billTo.address || "Client Address"}</p>
           </div>
         </div>
