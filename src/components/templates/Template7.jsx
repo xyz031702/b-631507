@@ -3,8 +3,8 @@ import { format } from 'date-fns';
 import BaseTemplate from './BaseTemplate';
 import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
 
-const Template7 = ({ data = {} }) => {
-  const { billTo = {}, invoice = {}, yourCompany = {}, items = [], tax = 0 } = data;
+const Template7 = ({ data }) => {
+  const { billTo = {}, invoice = {}, yourCompany = {}, items = [], tax = 0, notes = '' } = data || {};
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 2 }).format(amount);
@@ -18,34 +18,33 @@ const Template7 = ({ data = {} }) => {
       <div className="bg-white p-8 max-w-4xl mx-auto">
         <div className="flex justify-between items-start mb-8">
           <div>
-            <h1 className="text-4xl font-bold text-blue-600">Invoice</h1>
+            <h1 className="text-3xl font-bold mb-4">Invoice</h1>
+            <p><span className="font-semibold">Invoice#:</span> {invoice.number || 'N/A'}</p>
+            <p><span className="font-semibold">Invoice Date:</span> {invoice.date ? format(new Date(invoice.date), 'MMM dd, yyyy') : 'N/A'}</p>
+            <p><span className="font-semibold">Due Date:</span> {invoice.paymentDate ? format(new Date(invoice.paymentDate), 'MMM dd, yyyy') : 'N/A'}</p>
           </div>
           <div className="text-right">
-            <h2 className="text-xl font-bold">{yourCompany.name || 'Company Name'}</h2>
-            <p>{yourCompany.address || 'Company Address'}</p>
-            <p>{yourCompany.phone || 'Company Phone'}</p>
+            <h2 className="text-2xl font-bold">{yourCompany.name || 'Your Company Name'}</h2>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-2 gap-8 mb-8 bg-gray-100 p-4">
           <div>
-            <h3 className="text-lg font-semibold text-blue-600 mb-2">Billed to</h3>
-            <p className="font-bold">{billTo.name || 'Client Name'}</p>
+            <h3 className="text-lg font-semibold mb-2">Billed by</h3>
+            <p>{yourCompany.name || 'Your Company Name'}</p>
+            <p>{yourCompany.address || 'Your Company Address'}</p>
+            <p>{yourCompany.phone || 'Your Company Phone'}</p>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-2">Billed to</h3>
+            <p>{billTo.name || 'Client Name'}</p>
             <p>{billTo.address || 'Client Address'}</p>
             <p>{billTo.phone || 'Client Phone'}</p>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <h3 className="text-lg font-semibold text-blue-600 mb-2">Invoice Details</h3>
-              <p><span className="font-semibold">Invoice #:</span> {invoice.number || 'N/A'}</p>
-              <p><span className="font-semibold">Invoice Date:</span> {invoice.date ? format(new Date(invoice.date), 'MMM dd, yyyy') : 'N/A'}</p>
-              <p><span className="font-semibold">Due Date:</span> {invoice.paymentDate ? format(new Date(invoice.paymentDate), 'MMM dd, yyyy') : 'N/A'}</p>
-            </div>
           </div>
         </div>
 
         <table className="w-full mb-8">
-          <thead className="bg-blue-100">
+          <thead className="bg-gray-200">
             <tr>
               <th className="p-2 text-left">Item #/Item description</th>
               <th className="p-2 text-right">Qty.</th>
@@ -65,13 +64,34 @@ const Template7 = ({ data = {} }) => {
           </tbody>
         </table>
 
-        <div className="flex justify-end">
+        <div className="flex justify-between mb-8">
+          <div className="w-1/2">
+            <h3 className="text-lg font-semibold mb-2">Bank & Payment Details</h3>
+            <p><span className="font-semibold">Account Holder Name:</span> {yourCompany.name}</p>
+            <p><span className="font-semibold">Account Number:</span> [Your Account Number]</p>
+            <p><span className="font-semibold">Bank:</span> [Your Bank Name]</p>
+          </div>
           <div className="w-1/3">
             <p className="flex justify-between"><span>Sub Total:</span> <span>{formatCurrency(subTotal)}</span></p>
             <p className="flex justify-between"><span>Tax:</span> <span>{formatCurrency(tax)}</span></p>
-            <p className="flex justify-between font-bold text-lg mt-2"><span>Total:</span> <span className="text-blue-600">{formatCurrency(total)}</span></p>
+            <p className="flex justify-between font-bold text-lg mt-2"><span>Total:</span> <span>{formatCurrency(total)}</span></p>
           </div>
         </div>
+
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">Terms and Conditions</h3>
+          <ol className="list-decimal list-inside">
+            <li>Please pay within 15 days from the date of invoice, overdue interest @ 14% will be charged on delayed payments.</li>
+            <li>Please quote invoice number when remitting funds.</li>
+          </ol>
+        </div>
+
+        {notes && (
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold mb-2">Additional Notes</h3>
+            <p>{notes}</p>
+          </div>
+        )}
       </div>
     </BaseTemplate>
   );

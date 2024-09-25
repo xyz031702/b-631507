@@ -207,7 +207,7 @@ const Index = () => {
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md overflow-y-auto" style={{ maxHeight: 'calc(100vh - 2rem)' }}>
           <h2 className="text-2xl font-semibold mb-4">Template Gallery</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[1, 2, 3, 4, 5, 6, 7].map((index) => (
+            {[1, 2, 3, 4, 5, 6].map((index) => (
               <div
                 key={index}
                 className="template-card bg-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-300"
