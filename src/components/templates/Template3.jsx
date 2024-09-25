@@ -73,7 +73,14 @@ const Template3 = ({ data }) => {
             </div>
           ))}
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <div className="w-2/3 p-4">
+            <h3 className="text-lg font-semibold">Additional Notes</h3>
+            <p className="text-sm text-gray-600">
+              {data.notes ||
+                "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."}
+            </p>
+          </div>
           <div className="w-1/3">
             <div className="flex justify-between mb-2 p-2">
               <span>Sub Total:</span>
