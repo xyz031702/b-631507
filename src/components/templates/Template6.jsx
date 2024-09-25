@@ -18,23 +18,38 @@ const Template6 = ({ data }) => {
       <div className="bg-white p-8 max-w-4xl mx-auto">
         <div className="flex justify-between items-start mb-8">
           <div>
-            <h2 className="text-2xl font-bold text-blue-600">{yourCompany.name || 'Company Name'}</h2>
-            <p>{yourCompany.address || 'Company Address'}</p>
-            <p>{yourCompany.phone || 'Company Phone'}</p>
+            <h2 className="text-2xl font-bold text-blue-600">
+              {yourCompany.name || "Company Name"}
+            </h2>
+            <p>{yourCompany.address || "Company Address"}</p>
+            <p>{yourCompany.phone || "Company Phone"}</p>
           </div>
           <div className="text-right">
             <h1 className="text-3xl font-bold mb-4">Tax Invoice</h1>
-            <p><span className="font-semibold">Invoice No:</span> {invoice.number || 'N/A'}</p>
-            <p><span className="font-semibold">Invoice Date:</span> {invoice.date ? format(new Date(invoice.date), 'MMM dd, yyyy') : 'N/A'}</p>
-            <p><span className="font-semibold">Due Date:</span> {invoice.paymentDate ? format(new Date(invoice.paymentDate), 'MMM dd, yyyy') : 'N/A'}</p>
+            <p>
+              <span className="font-semibold">Invoice No:</span>{" "}
+              {invoice.number || "N/A"}
+            </p>
+            <p>
+              <span className="font-semibold">Invoice Date:</span>{" "}
+              {invoice.date
+                ? format(new Date(invoice.date), "MMM dd, yyyy")
+                : "N/A"}
+            </p>
+            <p>
+              <span className="font-semibold">Due Date:</span>{" "}
+              {invoice.paymentDate
+                ? format(new Date(invoice.paymentDate), "MMM dd, yyyy")
+                : "N/A"}
+            </p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-8 mb-8">
           <div>
             <h3 className="text-lg font-semibold mb-2">Billed to</h3>
-            <p className="font-bold">{billTo.name || 'Client Name'}</p>
-            <p>{billTo.address || 'Client Address'}</p>
+            <p className="font-bold">{billTo.name || "Client Name"}</p>
+            <p>{billTo.address || "Client Address"}</p>
           </div>
         </div>
 
@@ -49,36 +64,51 @@ const Template6 = ({ data }) => {
           </thead>
           <tbody>
             {items.map((item, index) => (
-              <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
+              <tr key={index} className={index % 2 === 0 ? "bg-gray-50" : ""}>
                 <td className="p-2">
-                  <p className="font-semibold">{item.name || 'Item Name'}</p>
-                  <p className="text-sm text-gray-600">{item.description || 'Item Description'}</p>
+                  <p className="font-semibold">{item.name || "Item Name"}</p>
+                  <p className="text-sm text-gray-600">
+                    {item.description || "Item Description"}
+                  </p>
                 </td>
                 <td className="p-2 text-right">{item.quantity || 0}</td>
-                <td className="p-2 text-right">{formatCurrency(item.amount || 0)}</td>
-                <td className="p-2 text-right">{formatCurrency((item.amount || 0) * (item.quantity || 0))}</td>
+                <td className="p-2 text-right">
+                  {formatCurrency(item.amount || 0)}
+                </td>
+                <td className="p-2 text-right">
+                  {formatCurrency((item.amount || 0) * (item.quantity || 0))}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
 
         <div className="flex justify-end mb-8">
-          <div className="w-1/3">
+          <div className="w-1/2">
             <table className="w-full text-right">
               <tbody>
                 <tr>
                   <td className="p-2">Sub Total</td>
-                  <td className="p-2 font-semibold">{formatCurrency(subTotal)}</td>
+                  <td className="p-2 font-semibold">
+                    {formatCurrency(subTotal)}
+                  </td>
                 </tr>
                 {tax > 0 && (
                   <tr>
                     <td className="p-2">Tax</td>
-                    <td className="p-2 font-semibold">{formatCurrency(tax.toFixed(2))}</td>
+                    <td className="p-2 font-semibold">
+                      {formatCurrency(tax.toFixed(2))}
+                    </td>
                   </tr>
                 )}
-                <tr className="bg-blue-600 text-white" style={{ paddingLeft: '1rem' }}>
+                <tr
+                  className="bg-blue-600 text-white"
+                  style={{ paddingLeft: "1rem" }}
+                >
                   <td className="p-2">Total Due Amount</td>
-                  <td className="p-2 font-semibold">{formatCurrency(totalDueAmount)}</td>
+                  <td className="p-2 font-semibold">
+                    {formatCurrency(totalDueAmount)}
+                  </td>
                 </tr>
               </tbody>
             </table>
