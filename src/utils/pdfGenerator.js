@@ -37,31 +37,31 @@ export const generatePDF = async (invoiceData, templateNumber) => {
       let fileName;
       switch (templateNumber) {
         case 1:
-          fileName = `Template1 - ${number}.pdf`;
+          fileName = `${number}.pdf`;
           break;
         case 2:
-          fileName = `Template2- ${companyName}_${number}.pdf`;
+          fileName = `${companyName}_${number}.pdf`;
           break;
         case 3:
-          fileName = `Template3- ${companyName}.pdf`;
+          fileName = `${companyName}.pdf`;
           break;
         case 4:
-          fileName = `Template4 - ${date}.pdf`;
+          fileName = `${date}.pdf`;
           break;
         case 5:
-          fileName = `Template5 - ${number}-${date}.pdf`;
+          fileName = `${number}-${date}.pdf`;
           break;
         case 6:
-          fileName = `Template6 - invoice_${timestamp}.pdf`;
+          fileName = `invoice_${timestamp}.pdf`;
           break;
         case 7:
-          fileName = `Template7 - Invoice_${number}.pdf`;
+          fileName = `Invoice_${number}.pdf`;
           break;
         case 8:
-          fileName = `Template8 - Invoice_${billToName}.pdf`;
+          fileName = `Invoice_${billToName}.pdf`;
           break;
         case 9:
-          fileName = `Template9 - IN-${date}.pdf`;
+          fileName = `IN-${date}.pdf`;
           break;
         default:
           fileName = `invoice_template_${templateNumber}.pdf`;
