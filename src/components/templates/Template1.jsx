@@ -15,7 +15,6 @@ const Template1 = ({ data }) => {
         </div>
         <div>
           <h2 className="text-xl font-semibold">Invoice</h2>
-          <p>Invoice #: {invoice.number}</p>
           <p>Date: {invoice.date}</p>
           <p>Due Date: {invoice.paymentDate}</p>
         </div>

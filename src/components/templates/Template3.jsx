@@ -63,10 +63,6 @@ const Template3 = ({ data }) => {
               <span>₹ {calculateSubTotal(items)}</span>
             </div>
             <div className="flex justify-between mb-2">
-              <span>Taxable Amount:</span>
-              <span>₹ {calculateSubTotal(items)}</span>
-            </div>
-            <div className="flex justify-between mb-2">
               <span>Tax:</span>
               <span>₹ {tax}</span>
             </div>

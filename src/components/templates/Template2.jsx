@@ -17,7 +17,6 @@ const Template2 = ({ data }) => {
           <h2 className="text-2xl font-semibold text-cyan-500">Tax invoice</h2>
           <p>INVOICE NUMBER: {invoice.number}</p>
           <p>DATE: {invoice.date}</p>
-          <p>GST NUMBER: [GST NUMBER]</p>
         </div>
       </div>
 
@@ -34,7 +33,6 @@ const Template2 = ({ data }) => {
             <tr className="bg-gray-100">
               <th className="p-2 text-left">ID</th>
               <th className="p-2 text-left">Description</th>
-              <th className="p-2 text-left">HSN code</th>
               <th className="p-2 text-right">Quantity</th>
               <th className="p-2 text-right">Rate</th>
               <th className="p-2 text-right">Amount</th>
@@ -45,7 +43,6 @@ const Template2 = ({ data }) => {
               <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
                 <td className="p-2">{index + 1}</td>
                 <td className="p-2">{item.name}</td>
-                <td className="p-2">[HSN CODE]</td>
                 <td className="p-2 text-right">{item.quantity}</td>
                 <td className="p-2 text-right">₹ {item.amount.toFixed(2)}</td>
                 <td className="p-2 text-right">₹ {(item.quantity * item.amount).toFixed(2)}</td>
@@ -55,38 +52,15 @@ const Template2 = ({ data }) => {
         </table>
       </div>
 
-      <div className="flex justify-between">
-        <div className="w-1/2">
-          <h3 className="font-semibold mb-2">Payment Details</h3>
-          <p>Account name: COMPANY NAME</p>
-          <p>Account number: 9876543210</p>
-          <p>Bank name: ABCD Bank</p>
-          <p>IFSC code: ABCD12345678</p>
-        </div>
+      <div className="flex justify-end">
         <div className="w-1/3">
           <div className="flex justify-between mb-2">
             <span>Sub total:</span>
             <span>₹ {calculateSubTotal(items)}</span>
           </div>
           <div className="flex justify-between mb-2">
-            <span>Discount:</span>
-            <span>₹ 0</span>
-          </div>
-          <div className="flex justify-between mb-2">
-            <span>Tax Rate:</span>
-            <span>18%</span>
-          </div>
-          <div className="flex justify-between mb-2">
             <span>Tax:</span>
             <span>₹ {tax}</span>
-          </div>
-          <div className="flex justify-between mb-2">
-            <span>Shipping:</span>
-            <span>₹ 0</span>
-          </div>
-          <div className="flex justify-between mb-2">
-            <span>Previous dues:</span>
-            <span>₹ 0</span>
           </div>
           <div className="flex justify-between font-bold bg-cyan-500 text-white p-2">
             <span>Total:</span>
