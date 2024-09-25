@@ -39,35 +39,31 @@ const Template3 = ({ data }) => {
         </div>
       </div>
       <div className="rounded-lg border border-gray-300 -mt-12 p-2 pt-1">
-        <table className="w-full mb-8">
-          <thead className="bg-blue-200">
-            <tr>
-              <th className="p-2"></th>
-              <th className="p-2 text-left">ITEM NAME/ITEM DESCRIPTION</th>
-              <th className="p-2 text-right">QTY.</th>
-              <th className="p-2 text-right">AMOUNT</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(items || []).map((item, index) => (
-              <tr key={index} className="border-t border-b">
-                <td className="p-2 text-center">
-                  {String(index + 1).padStart(2, "0")}
-                </td>
-                <td className="p-2">
-                  <p className="font-semibold">{item.name || "Item Name"}</p>
-                  <p className="text-sm text-gray-600">
-                    {item.description || "Item Description"}
-                  </p>
-                </td>
-                <td className="p-2 text-right">{item.quantity || 0}</td>
-                <td className="p-2 text-right">
-                  ₹{((item.quantity || 0) * (item.amount || 0)).toFixed(2)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="w-full mb-8">
+          <div className="bg-blue-200 flex">
+            <div className="p-2 flex-1"></div>
+            <div className="p-2 flex-1 text-left">ITEM NAME/ITEM DESCRIPTION</div>
+            <div className="p-2 flex-1 text-right">QTY.</div>
+            <div className="p-2 flex-1 text-right">AMOUNT</div>
+          </div>
+          {(items || []).map((item, index) => (
+            <div key={index} className="flex border-t border-b">
+              <div className="p-2 flex-1 text-center">
+                {String(index + 1).padStart(2, "0")}
+              </div>
+              <div className="p-2 flex-1">
+                <p className="font-semibold">{item.name || "Item Name"}</p>
+                <p className="text-sm text-gray-600">
+                  {item.description || "Item Description"}
+                </p>
+              </div>
+              <div className="p-2 flex-1 text-right">{item.quantity || 0}</div>
+              <div className="p-2 flex-1 text-right">
+                ₹{((item.quantity || 0) * (item.amount || 0)).toFixed(2)}
+              </div>
+            </div>
+          ))}
+        </div>
         <div className="flex justify-end">
           <div className="w-1/3">
             <div className="flex justify-between mb-2">
