@@ -35,7 +35,10 @@ const Template3 = ({ data }) => {
           </div>
           <div className="text-right">
             <p>Due Date: {invoice?.paymentDate || "N/A"}</p>
-            <p>Due Amount: {formatCurrency(calculateGrandTotal(items || [], tax || 0))}</p>
+            <p>
+              Due Amount:{" "}
+              {formatCurrency(calculateGrandTotal(items || [], tax || 0))}
+            </p>
           </div>
         </div>
       </div>
@@ -69,7 +72,7 @@ const Template3 = ({ data }) => {
         </div>
         <div className="flex justify-between">
           <div className="w-2/3 p-4">
-            <h3 className="text-lg font-semibold">Additional Notes</h3>
+            <h3 className="text-lg font-semibold">Additional Info</h3>
             <p className="text-sm text-gray-600">
               {data.notes ||
                 "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."}
@@ -88,7 +91,9 @@ const Template3 = ({ data }) => {
             )}
             <div className="flex justify-between font-bold bg-blue-500 text-white p-2 mt-4">
               <span className="text-left">Total</span>
-              <span>{formatCurrency(calculateGrandTotal(items || [], tax || 0))}</span>
+              <span>
+                {formatCurrency(calculateGrandTotal(items || [], tax || 0))}
+              </span>
             </div>
           </div>
         </div>

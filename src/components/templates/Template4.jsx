@@ -48,7 +48,9 @@ const Template4 = ({ data }) => {
             <h3 className="text-lg font-semibold text-purple-600 mb-2">
               Billed by
             </h3>
-            <p><strong>{yourCompany.name || "Company Name"}</strong></p>
+            <p>
+              <strong>{yourCompany.name || "Company Name"}</strong>
+            </p>
             <p>{yourCompany.address || "Company Address"}</p>
             <p>{yourCompany.phone || "Company Phone"}</p>
           </div>
@@ -56,7 +58,9 @@ const Template4 = ({ data }) => {
             <h3 className="text-lg font-semibold text-purple-600 mb-2">
               Billed to
             </h3>
-            <p><strong>{billTo.name || "Client Name"}</strong></p>
+            <p>
+              <strong>{billTo.name || "Client Name"}</strong>
+            </p>
             <p>{billTo.address || "Client Address"}</p>
             <p>{billTo.phone || "Client Phone"}</p>
           </div>
@@ -65,7 +69,9 @@ const Template4 = ({ data }) => {
         <table className="w-full mb-8 border border-gray-300">
           <thead className="bg-purple-600 text-white">
             <tr>
-              <th className="p-2 text-left border border-gray-300">Item #/Item Description</th>
+              <th className="p-2 text-left border border-gray-300">
+                Item #/Item Description
+              </th>
               <th className="p-2 text-right border border-gray-300">Qty.</th>
               <th className="p-2 text-right border border-gray-300">Rate</th>
               <th className="p-2 text-right border border-gray-300">Amount</th>
@@ -77,9 +83,13 @@ const Template4 = ({ data }) => {
                 <td className="p-2 border border-gray-300">
                   {`${index + 1}. ${item.name || "Item Name"}`}
                   <br />
-                  <span className="text-sm text-gray-600">{item.description || "Item Description"}</span>
+                  <span className="text-sm text-gray-600">
+                    {item.description || "Item Description"}
+                  </span>
                 </td>
-                <td className="p-2 text-right border border-gray-300">{item.quantity || 0}</td>
+                <td className="p-2 text-right border border-gray-300">
+                  {item.quantity || 0}
+                </td>
                 <td className="p-2 text-right border border-gray-300">
                   {formatCurrency(item.amount || 0)}
                 </td>
@@ -112,9 +122,7 @@ const Template4 = ({ data }) => {
 
         {notes && (
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-purple-600 mb-2">
-              Additional Notes
-            </h3>
+            <h3 className="text-lg font-semibold text-purple-600 mb-2">Note</h3>
             <p>{notes}</p>
           </div>
         )}
