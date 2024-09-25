@@ -57,8 +57,10 @@ const Template1 = ({ data }) => {
         <tbody>
           {items.map((item, index) => (
             <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
-              <td className="p-2">{item.name}</td>
-              <td className="p-2">{item.description}</td>
+              <td className="p-2">
+                {item.name}
+                <div className="text-sm text-gray-500">{item.description}</div>
+              </td>
               <td className="p-2 text-right">{item.quantity}</td>
               <td className="p-2 text-right">{formatCurrency(item.amount)}</td>
               <td className="p-2 text-right">{formatCurrency(item.quantity * item.amount)}</td>
