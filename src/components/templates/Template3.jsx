@@ -35,9 +35,9 @@ const Template3 = ({ data }) => {
         </div>
       </div>
       <div className="p-8 rounded-lg border border-gray-300">
-        <table className="w-full mb-8">
+        <table className="w-full mb-8 border-t border-b">
           <thead>
-            <tr className="bg-gray-100">
+            <tr>
               <th className="p-2 text-left">ITEM NAME/ITEM DESCRIPTION</th>
               <th className="p-2 text-right">QTY.</th>
               <th className="p-2 text-right">AMOUNT</th>
