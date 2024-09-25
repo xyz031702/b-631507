@@ -16,7 +16,7 @@ const Template6 = ({ data }) => {
       <div className="bg-white p-8 max-w-4xl mx-auto">
         <div className="flex justify-between items-start mb-8">
           <div>
-            <h2 className="text-2xl font-bold text-blue-600">
+            <h2 className="text-2xl font-bold" style={{ color: '#14A8DE' }}>
               {yourCompany.name || "Company Name"}
             </h2>
             <p>{yourCompany.address || "Company Address"}</p>
@@ -100,7 +100,8 @@ const Template6 = ({ data }) => {
                   </tr>
                 )}
                 <tr
-                  className="bg-blue-600 text-white"
+                  className="text-white"
+                  style={{ backgroundColor: '#14A8DE' }}
                   style={{ paddingLeft: "1rem" }}
                 >
                   <td className="p-2">Total Due Amount</td>
