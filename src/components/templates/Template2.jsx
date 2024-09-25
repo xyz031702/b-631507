@@ -79,7 +79,7 @@ const Template2 = ({ data }) => {
 
         {notes && (
           <div className="mt-8 text-sm">
-            <p>Thank you for your business!</p>
+            <p>{notes}</p>
           </div>
         )}
       </div>
