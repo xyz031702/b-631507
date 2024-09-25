@@ -25,7 +25,7 @@ const Template3 = ({ data }) => {
         </div>
         <div className="flex justify-between mb-8">
           <div>
-            <p>Invoice #: {invoice.number || 'REF/2020-21/017'}</p>
+            <p>Invoice #: {invoice.number}</p>
             <p>Invoice Date: {invoice.date}</p>
           </div>
           <div className="text-right">

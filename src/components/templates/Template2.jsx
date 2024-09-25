@@ -15,8 +15,8 @@ const Template2 = ({ data }) => {
         </div>
         <div className="text-right">
           <h2 className="text-2xl font-semibold text-cyan-500">Tax invoice</h2>
-          <p>INVOICE NUMBER: {invoice.date}</p>
-          <p>DATE: {new Date().toLocaleDateString()}</p>
+          <p>INVOICE NUMBER: {invoice.number}</p>
+          <p>DATE: {invoice.date}</p>
           <p>GST NUMBER: [GST NUMBER]</p>
         </div>
       </div>

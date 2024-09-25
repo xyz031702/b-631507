@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FloatingLabelInput from '../components/FloatingLabelInput';
 import BillToSection from '../components/BillToSection';
@@ -6,11 +6,31 @@ import ShipToSection from '../components/ShipToSection';
 import ItemDetails from '../components/ItemDetails';
 import { Button } from "@/components/ui/button";
 
+const generateRandomInvoiceNumber = () => {
+  const length = Math.floor(Math.random() * 6) + 3; // 3 to 8 characters
+  const alphabetCount = Math.min(Math.floor(Math.random() * 4), length); // 0 to 3 alphabets, but not more than length
+  let result = '';
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const numbers = '0123456789';
+
+  // Add alphabets
+  for (let i = 0; i < alphabetCount; i++) {
+    result += alphabet[Math.floor(Math.random() * alphabet.length)];
+  }
+
+  // Add numbers
+  for (let i = alphabetCount; i < length; i++) {
+    result += numbers[Math.floor(Math.random() * numbers.length)];
+  }
+
+  return result;
+};
+
 const Index = () => {
   const navigate = useNavigate();
   const [billTo, setBillTo] = useState({ name: '', address: '', phone: '' });
   const [shipTo, setShipTo] = useState({ name: '', address: '', phone: '' });
-  const [invoice, setInvoice] = useState({ date: '', paymentDate: '' });
+  const [invoice, setInvoice] = useState({ date: '', paymentDate: '', number: generateRandomInvoiceNumber() });
   const [from, setFrom] = useState({ name: '', address: '', phone: '' });
   const [items, setItems] = useState([{ name: '', description: '', quantity: 0, amount: 0, total: 0 }]);
   const [tax, setTax] = useState(0);
@@ -65,7 +85,14 @@ const Index = () => {
             {/* Invoice Information */}
             <div className="mb-6">
               <h2 className="text-2xl font-semibold mb-4">Invoice Information</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <FloatingLabelInput
+                  id="invoiceNumber"
+                  label="Invoice Number"
+                  value={invoice.number}
+                  onChange={handleInputChange(setInvoice)}
+                  name="number"
+                />
                 <FloatingLabelInput
                   id="invoiceDate"
                   label="Invoice Date"
