@@ -38,7 +38,6 @@ const Template2 = ({ data }) => {
               <tr>
                 <th className="p-2 text-left border border-gray-300">ID</th>
                 <th className="p-2 text-left border border-gray-300">Description</th>
-                <th className="p-2 text-left border border-gray-300">HSN code</th>
                 <th className="p-2 text-right border border-gray-300">Quantity</th>
                 <th className="p-2 text-right border border-gray-300">Rate</th>
                 <th className="p-2 text-right border border-gray-300">Amount</th>
@@ -49,7 +48,6 @@ const Template2 = ({ data }) => {
                 <tr key={index}>
                   <td className="p-2 border border-gray-300">{index + 1}</td>
                   <td className="p-2 border border-gray-300">{item.name}</td>
-                  <td className="p-2 border border-gray-300">{item.hsn || 'N/A'}</td>
                   <td className="p-2 text-right border border-gray-300">{item.quantity}</td>
                   <td className="p-2 text-right border border-gray-300">{formatCurrency(item.amount)}</td>
                   <td className="p-2 text-right border border-gray-300">{formatCurrency(item.quantity * item.amount)}</td>
