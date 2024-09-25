@@ -68,106 +68,117 @@ const Index = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8 text-center">Bill Generator</h1>
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <form onSubmit={(e) => e.preventDefault()}>
-          <BillToSection billTo={billTo} handleInputChange={handleInputChange(setBillTo)} />
-          <ShipToSection
-            shipTo={shipTo}
-            handleInputChange={handleInputChange(setShipTo)}
-            billTo={billTo}
-          />
+      <div className="flex">
+        <div className="w-2/3 pr-8">
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <form onSubmit={(e) => e.preventDefault()}>
+              <BillToSection billTo={billTo} handleInputChange={handleInputChange(setBillTo)} />
+              <ShipToSection
+                shipTo={shipTo}
+                handleInputChange={handleInputChange(setShipTo)}
+                billTo={billTo}
+              />
 
-          {/* Invoice Information */}
-          <div className="mb-6">
-            <h2 className="text-2xl font-semibold mb-4">Invoice Information</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FloatingLabelInput
-                id="invoiceDate"
-                label="Invoice Date"
-                type="date"
-                value={invoice.date}
-                onChange={handleInputChange(setInvoice)}
-                name="date"
-              />
-              <FloatingLabelInput
-                id="paymentDate"
-                label="Payment Date"
-                type="date"
-                value={invoice.paymentDate}
-                onChange={handleInputChange(setInvoice)}
-                name="paymentDate"
-              />
-            </div>
+              {/* Invoice Information */}
+              <div className="mb-6">
+                <h2 className="text-2xl font-semibold mb-4">Invoice Information</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FloatingLabelInput
+                    id="invoiceDate"
+                    label="Invoice Date"
+                    type="date"
+                    value={invoice.date}
+                    onChange={handleInputChange(setInvoice)}
+                    name="date"
+                  />
+                  <FloatingLabelInput
+                    id="paymentDate"
+                    label="Payment Date"
+                    type="date"
+                    value={invoice.paymentDate}
+                    onChange={handleInputChange(setInvoice)}
+                    name="paymentDate"
+                  />
+                </div>
+              </div>
+
+              {/* From */}
+              <div className="mb-6">
+                <h2 className="text-2xl font-semibold mb-4">From</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FloatingLabelInput
+                    id="fromName"
+                    label="Name"
+                    value={from.name}
+                    onChange={handleInputChange(setFrom)}
+                    name="name"
+                  />
+                  <FloatingLabelInput
+                    id="fromPhone"
+                    label="Phone"
+                    value={from.phone}
+                    onChange={handleInputChange(setFrom)}
+                    name="phone"
+                  />
+                </div>
+                <FloatingLabelInput
+                  id="fromAddress"
+                  label="Address"
+                  value={from.address}
+                  onChange={handleInputChange(setFrom)}
+                  name="address"
+                  className="mt-4"
+                />
+              </div>
+
+              <ItemDetails items={items} handleItemChange={handleItemChange} addItem={addItem} />
+
+              {/* Totals */}
+              <div className="mb-6">
+                <h3 className="text-lg font-medium mb-2">Totals</h3>
+                <div className="flex justify-between mb-2">
+                  <span>Sub Total:</span>
+                  <span>{calculateSubTotal()}</span>
+                </div>
+                <div className="flex justify-between mb-2">
+                  <span>Tax (Amount):</span>
+                  <input
+                    type="number"
+                    value={tax}
+                    onChange={(e) => setTax(parseFloat(e.target.value))}
+                    className="w-24 p-2 border rounded"
+                  />
+                </div>
+                <div className="flex justify-between font-bold">
+                  <span>Grand Total:</span>
+                  <span>{calculateGrandTotal()}</span>
+                </div>
+              </div>
+
+              {/* Notes */}
+              <div className="mb-6">
+                <h3 className="text-lg font-medium mb-2">Notes</h3>
+                <textarea
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  className="w-full p-2 border rounded"
+                  rows="4"
+                ></textarea>
+              </div>
+
+              <div className="flex justify-between">
+                <Button onClick={handleGenerateBill}>Generate Bill</Button>
+                <Button variant="destructive" onClick={handleClearForm}>Clear Form</Button>
+              </div>
+            </form>
           </div>
-
-          {/* From */}
-          <div className="mb-6">
-            <h2 className="text-2xl font-semibold mb-4">From</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FloatingLabelInput
-                id="fromName"
-                label="Name"
-                value={from.name}
-                onChange={handleInputChange(setFrom)}
-                name="name"
-              />
-              <FloatingLabelInput
-                id="fromPhone"
-                label="Phone"
-                value={from.phone}
-                onChange={handleInputChange(setFrom)}
-                name="phone"
-              />
-            </div>
-            <FloatingLabelInput
-              id="fromAddress"
-              label="Address"
-              value={from.address}
-              onChange={handleInputChange(setFrom)}
-              name="address"
-              className="mt-4"
-            />
-          </div>
-
-          <ItemDetails items={items} handleItemChange={handleItemChange} addItem={addItem} />
-
-          {/* Totals */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-2">Totals</h3>
-            <div className="flex justify-between mb-2">
-              <span>Sub Total:</span>
-              <span>{calculateSubTotal()}</span>
-            </div>
-            <div className="flex justify-between mb-2">
-              <span>Tax (Amount):</span>
-              <input
-                type="number"
-                value={tax}
-                onChange={(e) => setTax(parseFloat(e.target.value))}
-                className="w-24 p-2 border rounded"
-              />
-            </div>
-            <div className="flex justify-between font-bold">
-              <span>Grand Total:</span>
-              <span>{calculateGrandTotal()}</span>
-            </div>
-          </div>
-
-          {/* Notes */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-2">Notes</h3>
-            <textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              className="w-full p-2 border rounded"
-              rows="4"
-            ></textarea>
-          </div>
-
-          {/* Template Gallery */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-2">Select Template</h3>
-            <div className="grid grid-cols-3 gap-4">
+        </div>
+        
+        {/* Template Gallery */}
+        <div className="w-1/3">
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h3 className="text-lg font-medium mb-4">Select Template</h3>
+            <div className="grid grid-cols-1 gap-4">
               {templates.map((template, index) => (
                 <div
                   key={index}
@@ -182,12 +193,7 @@ const Index = () => {
               ))}
             </div>
           </div>
-
-          <div className="flex justify-between">
-            <Button onClick={handleGenerateBill}>Generate Bill</Button>
-            <Button variant="destructive" onClick={handleClearForm}>Clear Form</Button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );
