@@ -42,7 +42,7 @@ const Template7 = ({ data }) => {
         </div>
 
         <table className="w-full mb-8">
-          <thead className="bg-gray-200">
+          <thead style={{ backgroundColor: '#4B4B4B', color: 'white' }}>
             <tr>
               <th className="p-2 text-left">Item #/Item description</th>
               <th className="p-2 text-right">Qty.</th>
