@@ -40,7 +40,7 @@ const Template3 = ({ data }) => {
       </div>
       <div className="rounded-lg border border-blue-500 -mt-[42px] w-[92%] mx-auto">
         <div id="item-data" className="w-full mb-8">
-          <div className="bg-blue-200 flex">
+          <div className="bg-blue-200 flex rounded-t">
             <div className="p-2 w-12"></div>
             <div className="p-2 flex-grow text-left">
               ITEM NAME/ITEM DESCRIPTION
