@@ -48,6 +48,7 @@ const Template3 = ({ data }) => {
             {(items || []).map((item, index) => (
               <tr key={index} className="border-t border-b">
                 <td className="p-2 text-center">{index + 1}</td>
+                <td className="p-2">
                   <p className="font-semibold">{item.name || 'Item Name'}</p>
                   <p className="text-sm text-gray-600">{item.description || 'Item Description'}</p>
                 </td>
