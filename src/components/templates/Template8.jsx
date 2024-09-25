@@ -3,7 +3,7 @@ import BaseTemplate from './BaseTemplate';
 import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
 
 const Template8 = ({ data }) => {
-  const { billTo, invoice, yourCompany, items, tax } = data;
+  const { billTo, invoice, yourCompany, items, tax, notes } = data;
 
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
@@ -79,6 +79,13 @@ const Template8 = ({ data }) => {
             </div>
           </div>
         </div>
+
+        {notes && (
+          <div className="mt-8 border-t pt-4">
+            <h3 className="text-lg font-semibold mb-2">Notes:</h3>
+            <p>{notes}</p>
+          </div>
+        )}
       </div>
     </BaseTemplate>
   );
