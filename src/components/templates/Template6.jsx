@@ -23,7 +23,7 @@ const Template6 = ({ data }) => {
             <p>{yourCompany.phone || "Company Phone"}</p>
           </div>
           <div className="text-right">
-            <h1 className="text-3xl font-bold mb-4">Tax Invoice</h1>
+            <h1 className="text-3xl font-thin mb-4">Tax Invoice</h1>
             <p>
               <span className="font-semibold">Invoice No:</span>{" "}
               {invoice.number || "N/A"}
