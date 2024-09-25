@@ -34,7 +34,7 @@ const Template3 = ({ data }) => {
           </div>
         </div>
       </div>
-      <div className="p-8 rounded-lg border border-gray-300 -mt-20">
+      <div className="p-8 rounded-lg border border-gray-300 -mt-15">
         <table className="w-full mb-8 border-t border-b">
           <thead>
             <tr className="border-t border-b">
