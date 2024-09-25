@@ -70,10 +70,12 @@ const Template6 = ({ data }) => {
                   <td className="p-2">Sub Total</td>
                   <td className="p-2 font-semibold">{formatCurrency(subTotal)}</td>
                 </tr>
-                <tr>
-                  <td className="p-2">Tax</td>
-                  <td className="p-2 font-semibold">{formatCurrency(tax)}</td>
-                </tr>
+                {tax > 0 && (
+                  <tr>
+                    <td className="p-2">Tax</td>
+                    <td className="p-2 font-semibold">{formatCurrency(tax)}</td>
+                  </tr>
+                )}
                 <tr className="bg-blue-600 text-white">
                   <td className="p-2">Total Due Amount</td>
                   <td className="p-2 font-semibold">{formatCurrency(totalDueAmount)}</td>

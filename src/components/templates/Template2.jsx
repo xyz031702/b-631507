@@ -64,10 +64,12 @@ const Template2 = ({ data }) => {
               <span>Sub total:</span>
               <span>{formatCurrency(calculateSubTotal(items || []))}</span>
             </div>
-            <div className="flex justify-between mb-2">
-              <span>Tax:</span>
-              <span>{formatCurrency(tax || 0)}</span>
-            </div>
+            {tax > 0 && (
+              <div className="flex justify-between mb-2">
+                <span>Tax:</span>
+                <span>{formatCurrency(tax || 0)}</span>
+              </div>
+            )}
             <div className="flex justify-between font-bold bg-cyan-500 text-white p-2">
               <span>Total:</span>
               <span>{formatCurrency(calculateGrandTotal(items || [], tax || 0))}</span>
