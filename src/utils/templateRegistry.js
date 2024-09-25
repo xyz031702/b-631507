@@ -5,6 +5,7 @@ import Template4 from '../components/templates/Template4';
 import Template5 from '../components/templates/Template5';
 import Template6 from '../components/templates/Template6';
 import Template7 from '../components/templates/Template7';
+import Template8 from '../components/templates/Template8';
 
 const templateRegistry = {
   1: Template1,
@@ -14,6 +15,7 @@ const templateRegistry = {
   5: Template5,
   6: Template6,
   7: Template7,
+  8: Template8,
 };
 
 export const getTemplate = (templateNumber) => {
