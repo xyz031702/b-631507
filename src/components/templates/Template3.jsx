@@ -56,34 +56,15 @@ const Template3 = ({ data }) => {
             ))}
           </tbody>
         </table>
-        <div className="flex justify-between">
-          <div className="w-1/2">
-            <h3 className="font-semibold mb-2">BANK AND UPI DETAILS</h3>
-            <p>Bank Name: HDFC Bank</p>
-            <p>Account Holder Name: {from.name}</p>
-            <p>Account Number: 45366287987</p>
-            <p>IFSC: HDFC0018159</p>
-            <p>Account Type: Savings</p>
-            <p>UPI: foobarlabs@okhdfc</p>
-            <div className="mt-4">
-              <p>Scan to pay via UPI</p>
-              <div className="w-32 h-32 bg-gray-300"></div>
-              <p className="text-sm mt-2">username@vpa</p>
-              <p className="text-xs">Maximum of 1 lakh can be transferred via upi in a single day</p>
-            </div>
-          </div>
+        <div className="flex justify-end">
           <div className="w-1/3">
             <div className="flex justify-between mb-2">
               <span>Sub Total:</span>
               <span>₹ {calculateSubTotal(items)}</span>
             </div>
             <div className="flex justify-between mb-2">
-              <span>Discount(10%):</span>
-              <span>₹ {(parseFloat(calculateSubTotal(items)) * 0.1).toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between mb-2">
               <span>Taxable Amount:</span>
-              <span>₹ {(parseFloat(calculateSubTotal(items)) * 0.9).toFixed(2)}</span>
+              <span>₹ {calculateSubTotal(items)}</span>
             </div>
             <div className="flex justify-between mb-2">
               <span>Tax:</span>
