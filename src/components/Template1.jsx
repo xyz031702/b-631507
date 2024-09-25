@@ -14,11 +14,12 @@ const Template1 = ({ data }) => {
 
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
-      <div className="flex justify-between mb-8">
+      <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-2xl font-bold">{from.name}</h1>
-          <p>{from.address}</p>
-          <p>{from.phone}</p>
+          <img src="/assets/logo.png" alt="Logo" className="h-12" />
+        </div>
+        <div className="text-right">
+          <h2 className="text-3xl font-semibold">INVOICE</h2>
         </div>
         <div>
           <h2 className="text-xl font-semibold">Invoice</h2>
@@ -46,9 +47,8 @@ const Template1 = ({ data }) => {
         <thead>
           <tr className="bg-gray-100">
             <th className="p-2 text-left">Item</th>
-            <th className="p-2 text-left">Description</th>
-            <th className="p-2 text-right">Quantity</th>
-            <th className="p-2 text-right">Amount</th>
+            <th className="p-2 text-center">Quantity</th>
+            <th className="p-2 text-right">Unit Price</th>
             <th className="p-2 text-right">Total</th>
           </tr>
         </thead>
@@ -82,12 +82,18 @@ const Template1 = ({ data }) => {
         </div>
       </div>
 
-      {notes && (
-        <div className="mt-8 border-t pt-4">
-          <h3 className="font-semibold mb-2">Notes:</h3>
-          <p>{notes}</p>
-        </div>
-      )}
+      <div className="mt-8">
+        <h3 className="font-semibold mb-2">Thank you!</h3>
+        <p>We appreciate your business.</p>
+      </div>
+
+      <div className="mt-8 border-t pt-4">
+        <h3 className="font-semibold mb-2">Payment Information:</h3>
+        <p>Briard Bank</p>
+        <p>Account Name: Samira Hadid</p>
+        <p>Account No.: 123-456-7890</p>
+        <p>Pay by: 5 July 2025</p>
+      </div>
     </div>
   );
 };
