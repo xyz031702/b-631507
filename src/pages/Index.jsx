@@ -6,6 +6,7 @@ import ShipToSection from '../components/ShipToSection';
 import ItemDetails from '../components/ItemDetails';
 import { Button } from "@/components/ui/button";
 import { templates } from '../utils/templateRegistry';
+import { FiEdit } from 'react-icons/fi'; // Importing an icon from react-icons
 
 const generateRandomInvoiceNumber = () => {
   const length = Math.floor(Math.random() * 6) + 3;
@@ -124,9 +125,13 @@ const Index = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8 text-center">Bill Generator</h1>
-      <Button onClick={fillDummyData} className="mb-4">
-        Fill with Dummy Data
-      </Button>
+      <button
+        onClick={fillDummyData}
+        className="fixed top-4 left-4 bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600"
+        aria-label="Fill with Dummy Data"
+      >
+        <FiEdit size={24} />
+      </button>
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <form>
