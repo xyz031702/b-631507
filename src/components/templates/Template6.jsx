@@ -54,14 +54,14 @@ const Template6 = ({ data }) => {
         <table className="w-full mb-8 border border-gray-300">
           <thead style={{ backgroundColor: "#14A8DE" }}>
             <tr>
-              <th className="p-2 text-left border-b border-gray-300">
+              <th className="p-2 text-left border-b border-gray-300 text-white">
                 Item #/Item description
               </th>
-              <th className="p-2 text-right border-b border-gray-300">
+              <th className="p-2 text-right border-b border-gray-300 text-white">
                 Quantity
               </th>
-              <th className="p-2 text-right border-b border-gray-300">Rate</th>
-              <th className="p-2 text-right border-b border-gray-300">
+              <th className="p-2 text-right border-b border-gray-300 text-white">Rate</th>
+              <th className="p-2 text-right border-b border-gray-300 text-white">
                 Amount
               </th>
             </tr>
