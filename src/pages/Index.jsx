@@ -32,7 +32,14 @@ const Index = () => {
   const [shipTo, setShipTo] = useState({ name: '', address: '', phone: '' });
   const [invoice, setInvoice] = useState({ date: '', paymentDate: '', number: generateRandomInvoiceNumber() });
   const [yourCompany, setYourCompany] = useState({ name: '', address: '', phone: '' });
-  const [items, setItems] = useState([{ name: '', description: '', quantity: 0, amount: 0, total: 0 }]);
+  const [items, setItems] = useState([
+    { name: '', description: '', quantity: 0, amount: 0, total: 0 },
+    { name: '', description: '', quantity: 0, amount: 0, total: 0 },
+    { name: '', description: '', quantity: 0, amount: 0, total: 0 },
+    { name: '', description: '', quantity: 0, amount: 0, total: 0 },
+    { name: '', description: '', quantity: 0, amount: 0, total: 0 },
+    { name: '', description: '', quantity: 0, amount: 0, total: 0 }
+  ]);
   const [tax, setTax] = useState(0);
   const [notes, setNotes] = useState('');
 
