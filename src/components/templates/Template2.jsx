@@ -58,11 +58,7 @@ const Template2 = ({ data }) => {
           </table>
         </div>
 
-        <div className="flex justify-between">
-          <div className="w-1/2">
-            <h3 className="font-semibold mb-2">Payment Details</h3>
-            <p>Account name: {yourCompany.name || 'Your Company Name'}</p>
-          </div>
+        <div className="flex justify-end">
           <div className="w-1/3">
             <div className="flex justify-between mb-2">
               <span>Sub total:</span>

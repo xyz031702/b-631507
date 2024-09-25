@@ -64,26 +64,12 @@ const Template7 = ({ data }) => {
           </tbody>
         </table>
 
-        <div className="flex justify-between mb-8">
-          <div className="w-1/2">
-            <h3 className="text-lg font-semibold mb-2">Bank & Payment Details</h3>
-            <p><span className="font-semibold">Account Holder Name:</span> {yourCompany.name}</p>
-            <p><span className="font-semibold">Account Number:</span> [Your Account Number]</p>
-            <p><span className="font-semibold">Bank:</span> [Your Bank Name]</p>
-          </div>
+        <div className="flex justify-end mb-8">
           <div className="w-1/3">
             <p className="flex justify-between"><span>Sub Total:</span> <span>{formatCurrency(subTotal)}</span></p>
             <p className="flex justify-between"><span>Tax:</span> <span>{formatCurrency(tax)}</span></p>
             <p className="flex justify-between font-bold text-lg mt-2"><span>Total:</span> <span>{formatCurrency(total)}</span></p>
           </div>
-        </div>
-
-        <div className="mb-8">
-          <h3 className="text-lg font-semibold mb-2">Terms and Conditions</h3>
-          <ol className="list-decimal list-inside">
-            <li>Please pay within 15 days from the date of invoice, overdue interest @ 14% will be charged on delayed payments.</li>
-            <li>Please quote invoice number when remitting funds.</li>
-          </ol>
         </div>
 
         {notes && (

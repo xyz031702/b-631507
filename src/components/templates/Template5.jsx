@@ -70,42 +70,11 @@ const Template5 = ({ data = {} }) => {
           </tbody>
         </table>
 
-        <div className="flex justify-between mb-8">
-          <div className="w-1/2">
-            <h3 className="text-lg font-semibold text-green-600 mt-4 mb-2">Payments</h3>
-            <table className="w-full">
-              <thead className="bg-gray-200">
-                <tr>
-                  <th className="p-2 text-left">Date</th>
-                  <th className="p-2 text-left">Mode</th>
-                  <th className="p-2 text-left">Status</th>
-                  <th className="p-2 text-right">Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="p-2">-</td>
-                  <td className="p-2">-</td>
-                  <td className="p-2">-</td>
-                  <td className="p-2 text-right">-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div className="flex justify-end mb-8">
           <div className="w-1/3">
             <p className="flex justify-between"><span>Sub Total:</span> <span>{formatCurrency(subTotal)}</span></p>
             <p className="flex justify-between"><span>Tax:</span> <span>{formatCurrency(tax)}</span></p>
             <p className="flex justify-between font-bold text-lg mt-2"><span>Total Due:</span> <span className="text-green-600">{formatCurrency(total)}</span></p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-8 mb-8">
-          <div>
-            <h3 className="text-lg font-semibold text-green-600 mb-2">Terms and Conditions</h3>
-            <ol className="list-decimal list-inside">
-              <li>Please pay within 15 days from the date of invoice, overdue interest @ 14% will be charged on delayed payments.</li>
-              <li>Please quote invoice number when remitting funds.</li>
-            </ol>
           </div>
         </div>
 

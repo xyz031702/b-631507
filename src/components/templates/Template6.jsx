@@ -62,17 +62,7 @@ const Template6 = ({ data }) => {
           </tbody>
         </table>
 
-        <div className="flex justify-between mb-8">
-          <div className="w-1/2">
-            <h3 className="text-lg font-semibold mb-2">Terms and Conditions</h3>
-            <ol className="list-decimal list-inside text-sm">
-              <li>Please pay within 15 days from the date of invoice, overdue interest @ 14% will be charged on delayed payments.</li>
-              <li>Please quote invoice number when remitting funds.</li>
-            </ol>
-
-            <h3 className="text-lg font-semibold mt-4 mb-2">Additional Notes</h3>
-            <p className="text-sm">{notes || "Thank you for your business."}</p>
-          </div>
+        <div className="flex justify-end mb-8">
           <div className="w-1/3">
             <table className="w-full text-right">
               <tbody>
@@ -93,9 +83,11 @@ const Template6 = ({ data }) => {
           </div>
         </div>
 
-        <div className="text-center text-sm border-t pt-4">
-          <p>Thank you for your business!</p>
-        </div>
+        {notes && (
+          <div className="text-center text-sm border-t pt-4">
+            <p>{notes}</p>
+          </div>
+        )}
       </div>
     </BaseTemplate>
   );

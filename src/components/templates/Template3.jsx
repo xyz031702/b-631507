@@ -72,11 +72,6 @@ const Template3 = ({ data }) => {
             </div>
           </div>
         </div>
-        <div className="mt-8">
-          <h3 className="font-semibold mb-2">TERMS AND CONDITIONS</h3>
-          <p>Please pay within 15 days from the date of invoice, overdue interest @ 14% will be charged on delayed payments.</p>
-          <p>Please quote invoice number when remitting funds.</p>
-        </div>
       </div>
     </BaseTemplate>
   );

@@ -66,14 +66,7 @@ const Template4 = ({ data }) => {
           </tbody>
         </table>
 
-        <div className="flex justify-between mb-8">
-          <div className="w-1/2">
-            <h3 className="text-lg font-semibold text-purple-600 mb-2">Terms and Conditions</h3>
-            <ol className="list-decimal list-inside">
-              <li>Please pay within 15 days from the date of invoice, overdue interest @ 14% will be charged on delayed payments.</li>
-              <li>Please quote invoice number when remitting funds.</li>
-            </ol>
-          </div>
+        <div className="flex justify-end mb-8">
           <div className="w-1/3">
             <p className="flex justify-between"><span>Sub Total:</span> <span>{formatCurrency(subTotal)}</span></p>
             <p className="flex justify-between"><span>Tax:</span> <span>{formatCurrency(tax)}</span></p>
