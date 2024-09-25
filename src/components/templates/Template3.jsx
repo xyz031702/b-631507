@@ -40,12 +40,13 @@ const Template3 = ({ data }) => {
         <div className="mt-8">
           <h3 className="text-lg font-semibold">Additional Notes</h3>
           <p className="text-sm text-gray-600">
-            {data.notes || "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."}
+            {data.notes ||
+              "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."}
           </p>
         </div>
       </div>
       <div className="rounded-lg border border-blue-500 -mt-[42px] w-[92%] mx-auto">
-        <div className="w-full mb-8">
+        <div id="item-data" className="w-full mb-8">
           <div className="bg-blue-200 flex">
             <div className="p-2 w-12"></div>
             <div className="p-2 flex-grow text-left">
