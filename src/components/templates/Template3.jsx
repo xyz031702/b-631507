@@ -41,8 +41,8 @@ const Template3 = ({ data }) => {
       <div className="rounded-lg border border-gray-300 -mt-12">
         <div className="w-full mb-8">
           <div className="bg-blue-200 flex">
-            <div className="p-2 flex-1"></div>
-            <div className="p-2 flex-1 text-left">
+            <div className="p-2 w-12"></div>
+            <div className="p-2 flex-grow text-left">
               ITEM NAME/ITEM DESCRIPTION
             </div>
             <div className="p-2 flex-1 text-right">QTY.</div>
@@ -50,7 +50,7 @@ const Template3 = ({ data }) => {
           </div>
           {(items || []).map((item, index) => (
             <div key={index} className="flex border-t border-b">
-              <div className="p-2 flex-1 text-center">
+              <div className="p-2 w-12 text-left">
                 {String(index + 1).padStart(2, "0")}
               </div>
               <div className="p-2 flex-1">
