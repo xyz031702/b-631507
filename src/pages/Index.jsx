@@ -105,7 +105,11 @@ const Index = () => {
     setYourCompany({ name: 'Your Company', address: '789 Oak St, Businessville, USA', phone: '(555) 555-5555' });
     setItems([
       { name: 'Product A', description: 'High-quality item', quantity: 2, amount: 50, total: 100 },
-      { name: 'Service B', description: 'Professional service', quantity: 1, amount: 200, total: 200 }
+      { name: 'Service B', description: 'Professional service', quantity: 1, amount: 200, total: 200 },
+      { name: 'Product C', description: 'Another great product', quantity: 3, amount: 30, total: 90 },
+      { name: 'Service D', description: 'Another professional service', quantity: 2, amount: 150, total: 300 },
+      { name: 'Product E', description: 'Yet another product', quantity: 1, amount: 75, total: 75 },
+      { name: 'Service F', description: 'Yet another service', quantity: 4, amount: 100, total: 400 }
     ]);
     setTax(30);
     setNotes('Thank you for your business!');
