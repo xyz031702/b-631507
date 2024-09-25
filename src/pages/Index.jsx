@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import FloatingLabelInput from '../components/FloatingLabelInput';
 import BillToSection from '../components/BillToSection';
 import ShipToSection from '../components/ShipToSection';
@@ -27,7 +27,6 @@ const generateRandomInvoiceNumber = () => {
 
 const Index = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [billTo, setBillTo] = useState({ name: '', address: '', phone: '' });
   const [shipTo, setShipTo] = useState({ name: '', address: '', phone: '' });
   const [invoice, setInvoice] = useState({ date: '', paymentDate: '', number: generateRandomInvoiceNumber() });
@@ -46,7 +45,7 @@ const Index = () => {
       setInvoice(parsedData.invoice);
       setYourCompany(parsedData.yourCompany);
       setItems(parsedData.items);
-      setTax(parsedData.tax);
+      setTax(parsedData.tax || 0); // Set tax to 0 if not provided
       setNotes(parsedData.notes);
     }
   }, []);
@@ -211,7 +210,7 @@ const Index = () => {
                 <input
                   type="number"
                   value={tax}
-                  onChange={(e) => setTax(parseFloat(e.target.value))}
+                  onChange={(e) => setTax(parseFloat(e.target.value) || 0)}
                   className="w-24 p-2 border rounded"
                 />
               </div>
