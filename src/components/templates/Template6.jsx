@@ -52,7 +52,7 @@ const Template6 = ({ data }) => {
         </div>
 
         <table className="w-full mb-8 border border-gray-300">
-          <thead style={{ backgroundColor: "#E0F4FB" }}>
+          <thead style={{ backgroundColor: "#14A8DE" }}>
             <tr>
               <th className="p-2 text-left border-b border-gray-300">
                 Item #/Item description
