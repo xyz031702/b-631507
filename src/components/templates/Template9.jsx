@@ -76,7 +76,7 @@ const Template9 = ({ data }) => {
             )}
             <div className="flex justify-between font-bold text-lg mt-2 text-orange-600">
               <span>Total:</span>
-              <span className="text-green-600">{formatCurrency(total)}</span>
+              <span className="text-orange-600">{formatCurrency(total)}</span>
             </div>
           </div>
         </div>
