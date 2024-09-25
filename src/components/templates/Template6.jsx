@@ -51,29 +51,29 @@ const Template6 = ({ data }) => {
           </div>
         </div>
 
-        <table className="w-full mb-8">
-          <thead className="bg-gray-100">
+        <table className="w-full mb-8 border border-gray-300">
+          <thead style={{ backgroundColor: '#E0F4FB' }}>
             <tr>
-              <th className="p-2 text-left">Item #/Item description</th>
-              <th className="p-2 text-right">Quantity</th>
-              <th className="p-2 text-right">Rate</th>
-              <th className="p-2 text-right">Amount</th>
+              <th className="p-2 text-left border-b border-gray-300">Item #/Item description</th>
+              <th className="p-2 text-right border-b border-gray-300">Quantity</th>
+              <th className="p-2 text-right border-b border-gray-300">Rate</th>
+              <th className="p-2 text-right border-b border-gray-300">Amount</th>
             </tr>
           </thead>
           <tbody>
             {items.map((item, index) => (
-              <tr key={index} className={index % 2 === 0 ? "bg-gray-50" : ""}>
-                <td className="p-2">
+              <tr key={index}>
+                <td className="p-2 border-b border-gray-300">
                   <p className="font-semibold">{item.name || "Item Name"}</p>
                   <p className="text-sm text-gray-600">
                     {item.description || "Item Description"}
                   </p>
                 </td>
-                <td className="p-2 text-right">{item.quantity || 0}</td>
-                <td className="p-2 text-right">
+                <td className="p-2 text-right border-b border-gray-300">{item.quantity || 0}</td>
+                <td className="p-2 text-right border-b border-gray-300">
                   {formatCurrency(item.amount || 0)}
                 </td>
-                <td className="p-2 text-right">
+                <td className="p-2 text-right border-b border-gray-300">
                   {formatCurrency((item.amount || 0) * (item.quantity || 0))}
                 </td>
               </tr>
