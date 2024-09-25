@@ -91,28 +91,26 @@ const Template6 = ({ data }) => {
 
         <div className="flex justify-end">
           <table className="w-1/2 mb-8 border border-gray-300">
-          <tbody>
-            <tr>
-              <td className="p-2 text-right font-semibold">Sub Total</td>
-              <td className="p-2 text-right">{formatCurrency(subTotal)}</td>
-            </tr>
-            {tax > 0 && (
+            <tbody>
               <tr>
-                <td className="p-2 text-right font-semibold">Tax</td>
+                <td className="p-2 text-right font-semibold">Sub Total</td>
+                <td className="p-2 text-right">{formatCurrency(subTotal)}</td>
+              </tr>
+              {tax > 0 && (
+                <tr>
+                  <td className="p-2 text-right font-semibold">Tax</td>
+                  <td className="p-2 text-right">
+                    {formatCurrency(tax.toFixed(2))}
+                  </td>
+                </tr>
+              )}
+              <tr className="text-white" style={{ backgroundColor: "#14A8DE" }}>
+                <td className="p-2 text-right font-semibold">Total Due Amount</td>
                 <td className="p-2 text-right">
-                  {formatCurrency(tax.toFixed(2))}
+                  {formatCurrency(totalDueAmount)}
                 </td>
               </tr>
-            )}
-            <tr className="text-white" style={{ backgroundColor: "#14A8DE" }}>
-              <td className="p-2 text-right font-semibold">Total Due Amount</td>
-              <td className="p-2 text-right">
-                {formatCurrency(totalDueAmount)}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
+            </tbody>
           </table>
         </div>
           <div className="text-center text-sm border-t pt-4">
