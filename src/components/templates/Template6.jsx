@@ -71,19 +71,19 @@ const Template6 = ({ data }) => {
           <tbody>
             {items.map((item, index) => (
               <tr key={index}>
-                <td className="p-2 border-b border-gray-300">
+                <td className="p-2 border border-gray-300">
                   <p className="font-semibold">{item.name || "Item Name"}</p>
                   <p className="text-sm text-gray-600">
                     {item.description || "Item Description"}
                   </p>
                 </td>
-                <td className="p-2 text-right border-b border-gray-300">
+                <td className="p-2 text-right border border-gray-300">
                   {item.quantity || 0}
                 </td>
-                <td className="p-2 text-right border-b border-gray-300">
+                <td className="p-2 text-right border border-gray-300">
                   {formatCurrency(item.amount || 0)}
                 </td>
-                <td className="p-2 text-right border-b border-gray-300">
+                <td className="p-2 text-right border border-gray-300">
                   {formatCurrency((item.amount || 0) * (item.quantity || 0))}
                 </td>
               </tr>
