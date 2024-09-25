@@ -15,7 +15,7 @@ const Template8 = ({ data }) => {
       <div className="bg-gray-100 w-full h-full flex flex-col" style={{ margin: '0', padding: '16px' }}>
         <div className="flex justify-between items-start mb-8">
           <div>
-            <h1 className="text-4xl font-bold text-blue-600">Invoice</h1>
+            <h1 className="text-4xl font-bold" style={{ color: '#3C8BF6' }}>Invoice</h1>
           </div>
           <div className="text-right">
             <h2 className="text-xl font-bold">{yourCompany.name}</h2>
@@ -40,7 +40,7 @@ const Template8 = ({ data }) => {
         </div>
 
         <table className="w-full mb-8">
-          <thead className="bg-blue-500 text-white">
+          <thead style={{ backgroundColor: '#3C8BF6', color: 'white' }}>
             <tr>
               <th className="p-2 text-left">Item</th>
               <th className="p-2 text-right">Quantity</th>
@@ -74,7 +74,7 @@ const Template8 = ({ data }) => {
             )}
             <div className="flex justify-between font-bold text-lg mt-2">
               <span>Total Due:</span>
-              <span className="text-blue-600">{formatCurrency(totalDue)}</span>
+              <span style={{ color: '#3C8BF6' }}>{formatCurrency(totalDue)}</span>
             </div>
           </div>
         </div>
