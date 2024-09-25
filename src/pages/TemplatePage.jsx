@@ -17,6 +17,12 @@ const TemplatePage = () => {
     if (location.state && location.state.formData) {
       setFormData(location.state.formData);
       setCurrentTemplate(location.state.selectedTemplate || 1);
+    } else {
+      // If no form data in location state, try to load from localStorage
+      const savedFormData = localStorage.getItem('formData');
+      if (savedFormData) {
+        setFormData(JSON.parse(savedFormData));
+      }
     }
   }, [location.state]);
 
@@ -37,6 +43,10 @@ const TemplatePage = () => {
     }
   };
 
+  const handleBack = () => {
+    navigate('/');
+  };
+
   if (!formData) {
     return <div>Loading...</div>;
   }
@@ -44,7 +54,7 @@ const TemplatePage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
-        <Button variant="ghost" onClick={() => navigate(-1)}>
+        <Button variant="ghost" onClick={handleBack}>
           <ArrowLeft className="mr-2 h-4 w-4" /> Back
         </Button>
         <Button onClick={handleDownloadPDF} disabled={isDownloading}>

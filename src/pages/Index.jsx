@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import FloatingLabelInput from '../components/FloatingLabelInput';
 import BillToSection from '../components/BillToSection';
 import ShipToSection from '../components/ShipToSection';
@@ -27,6 +27,7 @@ const generateRandomInvoiceNumber = () => {
 
 const Index = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [billTo, setBillTo] = useState({ name: '', address: '', phone: '' });
   const [shipTo, setShipTo] = useState({ name: '', address: '', phone: '' });
   const [invoice, setInvoice] = useState({ date: '', paymentDate: '', number: generateRandomInvoiceNumber() });
@@ -34,6 +35,27 @@ const Index = () => {
   const [items, setItems] = useState([{ name: '', description: '', quantity: 0, amount: 0, total: 0 }]);
   const [tax, setTax] = useState(0);
   const [notes, setNotes] = useState('');
+
+  useEffect(() => {
+    // Load form data from localStorage on component mount
+    const savedFormData = localStorage.getItem('formData');
+    if (savedFormData) {
+      const parsedData = JSON.parse(savedFormData);
+      setBillTo(parsedData.billTo);
+      setShipTo(parsedData.shipTo);
+      setInvoice(parsedData.invoice);
+      setYourCompany(parsedData.yourCompany);
+      setItems(parsedData.items);
+      setTax(parsedData.tax);
+      setNotes(parsedData.notes);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save form data to localStorage whenever it changes
+    const formData = { billTo, shipTo, invoice, yourCompany, items, tax, notes };
+    localStorage.setItem('formData', JSON.stringify(formData));
+  }, [billTo, shipTo, invoice, yourCompany, items, tax, notes]);
 
   const handleInputChange = (setter) => (e) => {
     const { name, value } = e.target;
@@ -87,6 +109,17 @@ const Index = () => {
     ]);
     setTax(30);
     setNotes('Thank you for your business!');
+  };
+
+  const clearForm = () => {
+    setBillTo({ name: '', address: '', phone: '' });
+    setShipTo({ name: '', address: '', phone: '' });
+    setInvoice({ date: '', paymentDate: '', number: generateRandomInvoiceNumber() });
+    setYourCompany({ name: '', address: '', phone: '' });
+    setItems([{ name: '', description: '', quantity: 0, amount: 0, total: 0 }]);
+    setTax(0);
+    setNotes('');
+    localStorage.removeItem('formData');
   };
 
   return (
@@ -199,8 +232,7 @@ const Index = () => {
             </div>
 
             <div className="flex justify-between">
-              <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Generate Bill</button>
-              <button type="button" className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Clear Form</button>
+              <Button onClick={clearForm} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Clear Form</Button>
             </div>
           </form>
         </div>
