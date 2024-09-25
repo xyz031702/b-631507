@@ -24,7 +24,7 @@ const Template1 = ({ data }) => {
           <p>{yourCompany.phone}</p>
         </div>
         <div>
-          <h2 className="text-xl font-semibold">Invoice Number</h2>
+          <p>Invoice Number: {invoice.number}</p>
           <p>Invoice Date: {invoice.date}</p>
           <p>Due Date: {invoice.paymentDate}</p>
         </div>
