@@ -76,7 +76,7 @@ const Template6 = ({ data }) => {
                     <td className="p-2 font-semibold">{formatCurrency(tax.toFixed(2))}</td>
                   </tr>
                 )}
-                <tr className="bg-blue-600 text-white">
+                <tr className="bg-blue-600 text-white" style={{ paddingLeft: '1rem' }}>
                   <td className="p-2">Total Due Amount</td>
                   <td className="p-2 font-semibold">{formatCurrency(totalDueAmount)}</td>
                 </tr>
