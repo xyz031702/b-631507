@@ -37,41 +37,26 @@ const Template5 = ({ data = {} }) => {
               <p>{billTo.address || "Client Address"}</p>
               <p>{billTo.phone || "Client Phone"}</p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <h3 className="text-lg font-semibold text-green-600 mb-2">
-                  Invoice Details
-                </h3>
-                <p>
-                  <span className="font-semibold">Invoice #:</span>{" "}
-                  {invoice.number || "N/A"}
-                </p>
-                <p>
-                  <span className="font-semibold">Invoice Date:</span>{" "}
-                  {invoice.date
-                    ? format(new Date(invoice.date), "MMM dd, yyyy")
-                    : "N/A"}
-                </p>
-                <p>
-                  <span className="font-semibold">Due Date:</span>{" "}
-                  {invoice.paymentDate
-                    ? format(new Date(invoice.paymentDate), "MMM dd, yyyy")
-                    : "N/A"}
-                </p>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-green-600 mb-2">
-                  Payment Record
-                </h3>
-                <p>
-                  <span className="font-semibold">Paid Amount:</span>{" "}
-                  {formatCurrency(0)}
-                </p>
-                <p>
-                  <span className="font-semibold">Due Amount:</span>{" "}
-                  {formatCurrency(total)}
-                </p>
-              </div>
+            <div>
+              <h3 className="text-lg font-semibold text-green-600 mb-2">
+                Invoice Details
+              </h3>
+              <p>
+                <span className="font-semibold">Invoice #:</span>{" "}
+                {invoice.number || "N/A"}
+              </p>
+              <p>
+                <span className="font-semibold">Invoice Date:</span>{" "}
+                {invoice.date
+                  ? format(new Date(invoice.date), "MMM dd, yyyy")
+                  : "N/A"}
+              </p>
+              <p>
+                <span className="font-semibold">Due Date:</span>{" "}
+                {invoice.paymentDate
+                  ? format(new Date(invoice.paymentDate), "MMM dd, yyyy")
+                  : "N/A"}
+              </p>
             </div>
           </div>
 
