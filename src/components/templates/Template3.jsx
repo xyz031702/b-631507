@@ -38,11 +38,13 @@ const Template3 = ({ data }) => {
           </div>
         </div>
       </div>
-      <div className="rounded-lg border border-gray-300 -mt-12 p-2 pt-1">
+      <div className="rounded-lg border border-gray-300 -mt-12">
         <div className="w-full mb-8">
           <div className="bg-blue-200 flex">
             <div className="p-2 flex-1"></div>
-            <div className="p-2 flex-1 text-left">ITEM NAME/ITEM DESCRIPTION</div>
+            <div className="p-2 flex-1 text-left">
+              ITEM NAME/ITEM DESCRIPTION
+            </div>
             <div className="p-2 flex-1 text-right">QTY.</div>
             <div className="p-2 flex-1 text-right">AMOUNT</div>
           </div>
