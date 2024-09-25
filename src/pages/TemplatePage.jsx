@@ -4,6 +4,7 @@ import { ArrowLeft, Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import InvoiceTemplate from '../components/InvoiceTemplate';
 import { generatePDF } from '../utils/pdfGenerator';
+import { templates } from '../utils/templateRegistry';
 
 const TemplatePage = () => {
   const location = useLocation();
@@ -18,16 +19,6 @@ const TemplatePage = () => {
       setCurrentTemplate(location.state.selectedTemplate || 1);
     }
   }, [location.state]);
-
-  const templates = [
-    { name: 'Template 1' },
-    { name: 'Template 2' },
-    { name: 'Template 3' },
-    { name: 'Template 4' },
-    { name: 'Template 5' },
-    { name: 'Template 6' },
-    { name: 'Template 7' },
-  ];
 
   const handleTemplateChange = (templateNumber) => {
     setCurrentTemplate(templateNumber);
