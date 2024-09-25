@@ -73,7 +73,7 @@ const Template6 = ({ data }) => {
                 {tax > 0 && (
                   <tr>
                     <td className="p-2">Tax</td>
-                    <td className="p-2 font-semibold">{formatCurrency(tax)}</td>
+                    <td className="p-2 font-semibold">{formatCurrency(tax.toFixed(2))}</td>
                   </tr>
                 )}
                 <tr className="bg-blue-600 text-white">

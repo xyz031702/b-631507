@@ -71,7 +71,7 @@ const Template8 = ({ data }) => {
             {tax > 0 && (
               <div className="flex justify-between mb-2">
                 <span>Tax:</span>
-                <span>{formatCurrency(tax)}</span>
+                <span>{formatCurrency(tax.toFixed(2))}</span>
               </div>
             )}
             <div className="flex justify-between font-bold text-lg mt-2">
