@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseTemplate from './BaseTemplate';
 import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
+import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template3 = ({ data }) => {
   const { billTo, invoice, yourCompany, items, tax } = data;

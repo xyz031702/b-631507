@@ -1,13 +1,11 @@
 import React from 'react';
 import BaseTemplate from './BaseTemplate';
 import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
+import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template1 = ({ data }) => {
   const { billTo, shipTo, invoice, yourCompany, items, tax, notes } = data;
 
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 2 }).format(amount);
-  };
 
   return (
     <BaseTemplate data={data}>

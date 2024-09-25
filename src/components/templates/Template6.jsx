@@ -2,13 +2,11 @@ import React from 'react';
 import { format } from 'date-fns';
 import BaseTemplate from './BaseTemplate';
 import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
+import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template6 = ({ data }) => {
   const { billTo = {}, invoice = {}, yourCompany = {}, items = [], tax = 0, notes = '' } = data || {};
 
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
-  };
 
   const subTotal = calculateSubTotal(items);
   const totalDueAmount = calculateGrandTotal(items, tax);
