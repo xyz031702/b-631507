@@ -79,7 +79,7 @@ const Template5 = ({ data = {} }) => {
         </div>
 
         {notes && (
-          <div className="mb-8">
+          <div className="mb-8 bg-green-50 p-4">
             <h3 className="text-lg font-semibold text-green-600 mb-2">Additional Notes</h3>
             <p>{notes}</p>
           </div>
