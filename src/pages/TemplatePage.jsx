@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import InvoiceTemplate from '../components/InvoiceTemplate';
 import { generatePDF } from '../utils/pdfGenerator';
@@ -10,6 +10,7 @@ const TemplatePage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(null);
   const [currentTemplate, setCurrentTemplate] = useState(1);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     if (location.state && location.state.formData) {
@@ -27,9 +28,16 @@ const TemplatePage = () => {
     setCurrentTemplate(templateNumber);
   };
 
-  const handleDownloadPDF = () => {
-    if (formData) {
-      generatePDF(formData, currentTemplate);
+  const handleDownloadPDF = async () => {
+    if (formData && !isDownloading) {
+      setIsDownloading(true);
+      try {
+        await generatePDF(formData, currentTemplate);
+      } catch (error) {
+        console.error('Error generating PDF:', error);
+      } finally {
+        setIsDownloading(false);
+      }
     }
   };
 
@@ -43,7 +51,16 @@ const TemplatePage = () => {
         <Button variant="ghost" onClick={() => navigate(-1)}>
           <ArrowLeft className="mr-2 h-4 w-4" /> Back
         </Button>
-        <Button onClick={handleDownloadPDF}>Download PDF</Button>
+        <Button onClick={handleDownloadPDF} disabled={isDownloading}>
+          {isDownloading ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Downloading...
+            </>
+          ) : (
+            'Download PDF'
+          )}
+        </Button>
       </div>
 
       <div className="mb-8 overflow-x-auto">
