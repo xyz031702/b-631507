@@ -59,7 +59,7 @@ const Template3 = ({ data }) => {
                   {item.description || "Item Description"}
                 </p>
               </div>
-              <div className="p-2 flex-1 text-right">{item.quantity || 0}</div>
+              <div className="p-2 w-24 text-right">{item.quantity || 0}</div>
               <div className="p-2 flex-1 text-right">
                 ₹{((item.quantity || 0) * (item.amount || 0)).toFixed(2)}
               </div>
