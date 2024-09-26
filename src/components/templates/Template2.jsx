@@ -22,7 +22,7 @@ const Template2 = ({ data }) => {
           <div className="text-right">
             <h2 className="text-xl font-semibold text-cyan-700">Tax invoice</h2>
             <p>INVOICE NUMBER: {invoice?.number || "N/A"}</p>
-            <p>DATE: {new Date().toLocaleDateString()}</p>
+            <p>DATE: {invoice?.date || "N/A"}</p>
           </div>
         </div>
 
