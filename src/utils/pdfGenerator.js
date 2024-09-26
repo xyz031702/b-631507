@@ -28,7 +28,7 @@ export const generatePDF = async (invoiceData, templateNumber) => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       
-      pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
+      pdf.addImage(imgData, 'PNG', 0, 0, 210, 297, undefined, 'FAST');
       const { number, date, paymentDate } = invoiceData.invoice;
       const { name: companyName } = invoiceData.yourCompany;
       const { name: billToName } = invoiceData.billTo;
