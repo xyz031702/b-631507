@@ -12,7 +12,7 @@ const Template3 = ({ data }) => {
         <div className="flex justify-between items-start mb-8">
           <div>
             <div className="bg-white text-blue-500 p-2 inline-block rounded">
-              <h1 className="text-2xl font-bold">
+              <h1 className="text-2xl font-bold" id="company-name">
                 {yourCompany?.name || "Your Company Name"}
               </h1>
             </div>
