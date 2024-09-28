@@ -39,6 +39,7 @@ const ReceiptPage = () => {
   ]);
   const [tax, setTax] = useState(0);
   const [notes, setNotes] = useState('');
+  const [footer, setFooter] = useState('');
 
   useEffect(() => {
     // Load form data from localStorage on component mount
@@ -56,7 +57,7 @@ const ReceiptPage = () => {
 
   useEffect(() => {
     // Save form data to localStorage whenever it changes
-    const formData = { billTo, invoice, yourCompany, items, tax, notes };
+    const formData = { billTo, invoice, yourCompany, items, tax, notes, footer };
     localStorage.setItem('receiptFormData', JSON.stringify(formData));
   }, [billTo, invoice, yourCompany, items, tax, notes]);
 
@@ -227,13 +228,22 @@ const ReceiptPage = () => {
                 rows="4"
               ></textarea>
             </div>
+            <div className="mb-6">
+              <h3 className="text-lg font-medium mb-2">Footer</h3>
+              <textarea
+                value={footer}
+                onChange={(e) => setFooter(e.target.value)}
+                className="w-full p-2 border rounded"
+                rows="2"
+              ></textarea>
+            </div>
           </form>
         </div>
 
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">Receipt Preview</h2>
           <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
-            <Template10 data={{ billTo, invoice, yourCompany, items, tax, notes }} />
+            <Template10 data={{ billTo, invoice, yourCompany, items, tax, notes, footer }} />
           </div>
         </div>
       </div>
