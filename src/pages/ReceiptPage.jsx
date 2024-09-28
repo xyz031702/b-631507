@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -10,12 +10,12 @@ const ReceiptPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(null);
   const [isDownloading, setIsDownloading] = useState(false);
+  const receiptRef = useRef(null);
 
   useEffect(() => {
     if (location.state && location.state.formData) {
       setFormData(location.state.formData);
     } else {
-      // If no form data in location state, try to load from localStorage
       const savedFormData = localStorage.getItem('formData');
       if (savedFormData) {
         setFormData(JSON.parse(savedFormData));
@@ -24,22 +24,12 @@ const ReceiptPage = () => {
   }, [location.state]);
 
   const handleDownloadPDF = async () => {
-    if (formData && !isDownloading) {
+    if (formData && !isDownloading && receiptRef.current) {
       setIsDownloading(true);
       try {
-        await generateReceiptPDF(formData, 10, {
-          width: "800mm",
-          height: "auto",
-        });
+        await generateReceiptPDF(receiptRef.current);
       } catch (error) {
-        if (error.message.includes("No tab with id:")) {
-          console.warn(
-            "PDF generation completed, but encountered a non-critical error:",
-            error.message
-          );
-        } else {
-          console.error("Error generating PDF:", error);
-        }
+        console.error("Error generating PDF:", error);
       } finally {
         setIsDownloading(false);
       }
@@ -72,7 +62,7 @@ const ReceiptPage = () => {
         </Button>
       </div>
 
-      <div className="w-[380px] h-[570px] mx-auto border shadow-lg">
+      <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
         <Template10 data={formData} />
       </div>
     </div>
