@@ -243,36 +243,39 @@ const ReceiptPage = () => {
 
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">Receipt Preview</h2>
-          <div className="mb-4">
-            <h3 className="text-lg font-medium mb-2">Theme</h3>
+          <div className="mb-4 flex items-center">
+            <h3 className="text-lg font-medium mr-4">Theme</h3>
             <div className="flex gap-4">
-              <label>
+              <label className="flex items-center">
                 <input
                   type="radio"
                   name="theme"
                   value="classic"
                   checked={theme === 'classic'}
                   onChange={() => setTheme('classic')}
+                  className="mr-2"
                 />
                 Classic
               </label>
-              <label>
+              <label className="flex items-center">
                 <input
                   type="radio"
                   name="theme"
                   value="vintage"
                   checked={theme === 'vintage'}
                   onChange={() => setTheme('vintage')}
+                  className="mr-2"
                 />
                 Vintage
               </label>
-              <label>
+              <label className="flex items-center">
                 <input
                   type="radio"
                   name="theme"
                   value="modern"
                   checked={theme === 'modern'}
                   onChange={() => setTheme('modern')}
+                  className="mr-2"
                 />
                 Modern
               </label>
