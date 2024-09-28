@@ -85,7 +85,7 @@ const Receipt3 = ({ data, isPrint = false }) => {
             <div>{notes || "N/A"}</div>
           </div>
         </div>
-        <div className="text-center mt-20">{footer || ""}</div>
+        <div className="text-center mt-20 text-gray-500">{footer || ""}</div>
       </div>
     </BaseTemplate2>
   );
