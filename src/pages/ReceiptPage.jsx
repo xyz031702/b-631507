@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Loader2 } from 'lucide-react';
+import { ArrowLeft, Loader2, RefreshCw } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import Receipt1 from '../components/templates/Receipt1';
 import Receipt2 from '../components/templates/Receipt2';
@@ -28,6 +28,19 @@ const generateRandomInvoiceNumber = () => {
   return result;
 };
 
+const footerOptions = [
+  "Thank you for shopping with us!",
+  "Please visit again!",
+  "Your satisfaction is our priority.",
+  "For feedback, visit www.example.com",
+  "Follow us on social media @exampleStore",
+  "Keep this receipt for returns or exchanges.",
+  "Call us at (123) 456-7890 for support.",
+  "Have a great day!",
+  "Save 10% on your next purchase. Use code: SAVE10",
+  "Eco-friendly business. This receipt is recyclable."
+];
+
 const ReceiptPage = () => {
   const navigate = useNavigate();
   const [isDownloading, setIsDownloading] = useState(false);
@@ -44,6 +57,11 @@ const ReceiptPage = () => {
   const [theme, setTheme] = useState('Receipt1');
   const [notes, setNotes] = useState('');
   const [footer, setFooter] = useState('Thank you');
+
+  const refreshFooter = () => {
+    const randomIndex = Math.floor(Math.random() * footerOptions.length);
+    setFooter(footerOptions[randomIndex]);
+  };
 
   useEffect(() => {
     // Initialize with default values
@@ -233,7 +251,17 @@ const ReceiptPage = () => {
               ></textarea>
             </div>
             <div className="mb-6">
-              <h3 className="text-lg font-medium mb-2">Footer</h3>
+              <div className="flex items-center mb-2">
+                <h3 className="text-lg font-medium">Footer</h3>
+                <button
+                  type="button"
+                  onClick={refreshFooter}
+                  className="ml-2 p-1 rounded-full hover:bg-gray-200"
+                  title="Refresh footer"
+                >
+                  <RefreshCw size={16} />
+                </button>
+              </div>
               <textarea
                 value={footer}
                 onChange={(e) => setFooter(e.target.value)}
