@@ -63,9 +63,7 @@ const Template10 = ({ data, isPrint = false }) => {
         <div className="mt-4">
           <div>{notes || "N/A"}</div>
         </div>
-        <div className="text-center mt-auto">
-          {footer || ""}
-        </div>
+        <div className="text-center mt-auto h-fill">{footer || ""}</div>
       </div>
     </BaseTemplate2>
   );
