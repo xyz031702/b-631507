@@ -55,15 +55,15 @@ const Receipt3 = ({ data, isPrint = false }) => {
               <span>Total</span>
             </div>
             {items.map((item, index) => (
-              <div key={index} className="flex justify-between mb-2">
-                <div>
-                  <span>
-                    {item.name || "N/A"} X {item.quantity || 0}
-                  </span>
+              <div key={index} className="mb-2">
+                <div className="flex justify-between">
+                  <span>{item.name || "N/A"}</span>
                 </div>
-                <span>
-                  {formatCurrency((item.quantity || 0) * (item.amount || 0))}
-                </span>
+                <div className="flex justify-between">
+                  <span>Qty: {item.quantity || 0}</span>
+                  <span>Amt: {formatCurrency(item.amount || 0)}</span>
+                  <span>Total: {formatCurrency((item.quantity || 0) * (item.amount || 0))}</span>
+                </div>
               </div>
             ))}
           </div>
