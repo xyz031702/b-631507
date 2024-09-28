@@ -44,7 +44,7 @@ const Template10 = ({ data, isPrint = false }) => {
             <span>Total</span>
           </div>
           {items.map((item, index) => (
-            <div key={index} className="flex justify-between">
+            <div key={index} className="flex justify-between mb-2">
               <span>{item.name || "N/A"}</span>
               <span>
                 {formatCurrency((item.quantity || 0) * (item.amount || 0))}
