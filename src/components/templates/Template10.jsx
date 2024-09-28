@@ -38,7 +38,7 @@ const Template10 = ({ data, isPrint = false }) => {
                 : "N/A"}
             </div>
           </div>
-          <div className="mb-2">Customer: {billTo.name || "N/A"}</div>
+          <div className="mb-2">Customer: {billTo || "N/A"}</div>
           <div className="border-t border-b py-2 mb-2">
             <div className="flex justify-between font-bold mb-2">
               <span>Item</span>
