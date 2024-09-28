@@ -38,6 +38,11 @@ const Receipt2 = ({ data, isPrint = false }) => {
                 : "N/A"}
             </div>
           </div>
+          <div className="mb-2 text-center">
+            <div>{yourCompany.name || "N/A"}</div>
+            <div>{yourCompany.address || "N/A"}</div>
+            {yourCompany.phone && <div>{yourCompany.phone}</div>}
+          </div>
           <div className="mb-2">Customer: {billTo || "N/A"}</div>
           <div className="mb-2">Cashier: {cashier || "N/A"}</div>
           <div className="border-t border-b py-2 mb-2">
