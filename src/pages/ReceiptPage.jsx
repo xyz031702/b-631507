@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import Template10 from '../components/templates/Template10';
-import { generatePDF } from '../utils/pdfGenerator';
+import { generateReceiptPDF } from '../utils/receiptPDFGenerator';
 
 const ReceiptPage = () => {
   const location = useLocation();
@@ -27,7 +27,7 @@ const ReceiptPage = () => {
     if (formData && !isDownloading) {
       setIsDownloading(true);
       try {
-        await generatePDF(formData, 10); // Assuming 10 is the template number for Receipt
+        await generateReceiptPDF(formData, 10, { width: '80mm', height: 'auto' });
       } catch (error) {
         if (error.message.includes('No tab with id:')) {
           console.warn('PDF generation completed, but encountered a non-critical error:', error.message);

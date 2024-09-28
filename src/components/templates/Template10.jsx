@@ -12,7 +12,7 @@ const Template10 = ({ data, isPrint = false }) => {
 
   return (
     <BaseTemplate2
-      width="38mm"
+      width="80mm"
       height="auto"
       className="p-2"
       data={data}
@@ -21,7 +21,7 @@ const Template10 = ({ data, isPrint = false }) => {
       <div
         className="bg-white"
         style={{
-          fontSize: isPrint ? "6px" : "14px",
+          fontSize: isPrint ? "8px" : "14px",
           fontFamily: "'Courier New', Courier, monospace",
           whiteSpace: "pre-wrap",
           lineHeight: "1.2",
