@@ -61,10 +61,8 @@ const Template10 = ({ data, isPrint = false }) => {
           <span>{formatCurrency(total)}</span>
         </div>
         <div className="mt-4">
-          <div className="font-bold">Notes:</div>
           <div>{notes || "N/A"}</div>
         </div>
-        <div className="text-center mt-4">Thank You!</div>
         <div className="text-center mt-4 absolute bottom-0 w-full">
           {footer || ""}
         </div>
