@@ -50,7 +50,8 @@ const Receipt3 = ({ data, isPrint = false }) => {
           <div className="py-2 mb-2">
             <div className="flex justify-between font-bold mb-2">
               <span>Item</span>
-              <span>Total</span>
+              <span>Qty</span>
+              <span>Amt</span>
             </div>
             {items.map((item, index) => (
               <div key={index} className="flex justify-between mb-2">
