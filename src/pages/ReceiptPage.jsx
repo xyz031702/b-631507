@@ -29,7 +29,11 @@ const ReceiptPage = () => {
       try {
         await generatePDF(formData, 10); // Assuming 10 is the template number for Receipt
       } catch (error) {
-        console.error('Error generating PDF:', error);
+        if (error.message.includes('No tab with id:')) {
+          console.warn('PDF generation completed, but encountered a non-critical error:', error.message);
+        } else {
+          console.error('Error generating PDF:', error);
+        }
       } finally {
         setIsDownloading(false);
       }
