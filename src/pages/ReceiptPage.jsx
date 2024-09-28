@@ -41,22 +41,14 @@ const ReceiptPage = () => {
     { name: '', description: '', quantity: 0, amount: 0, total: 0 },
   ]);
   const [tax, setTax] = useState(0);
-  const [theme, setTheme] = useState('classic');
+  const [theme, setTheme] = useState('Receipt1');
   const [notes, setNotes] = useState('');
   const [footer, setFooter] = useState('Thank you');
 
   useEffect(() => {
-    // Load form data from localStorage on component mount
-    const savedFormData = localStorage.getItem('receiptFormData');
-    if (savedFormData) {
-      const parsedData = JSON.parse(savedFormData);
-      setBillTo(parsedData.billTo);
-      setInvoice(parsedData.invoice);
-      setYourCompany(parsedData.yourCompany);
-      setItems(parsedData.items);
-      setTax(parsedData.tax || 0);
-      setNotes(parsedData.notes);
-    }
+    // Initialize with default values
+    setInvoice(prev => ({ ...prev, number: generateRandomInvoiceNumber() }));
+    setItems([{ name: '', description: '', quantity: 0, amount: 0, total: 0 }]);
   }, []);
 
   useEffect(() => {
