@@ -21,7 +21,12 @@ export const generateReceiptPDF = async (receiptElement) => {
     });
 
     const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    let pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    // Check if the content height exceeds the page height and adjust accordingly
+    if (pdfHeight > pdf.internal.pageSize.getHeight()) {
+      pdfHeight = pdf.internal.pageSize.getHeight();
+    }
 
     pdf.addImage(compressedImgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
 
