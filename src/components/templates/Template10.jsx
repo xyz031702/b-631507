@@ -19,7 +19,7 @@ const Template10 = ({ data, isPrint = false }) => {
       isPrint={isPrint}
     >
       <div
-        className="bg-white flex flex-col justify-between h-full"
+        className="bg-white flex flex-col justify-between min-h-full"
         style={{
           fontSize: isPrint ? "8px" : "14px",
           fontFamily: "'Courier New', Courier, monospace",
