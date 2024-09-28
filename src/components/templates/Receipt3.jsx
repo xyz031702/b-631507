@@ -34,7 +34,7 @@ const Receipt3 = ({ data, isPrint = false }) => {
             {yourCompany.address && <div>{yourCompany.address}</div>}
             {yourCompany.phone && <div>{yourCompany.phone}</div>}
           </div>
-          <div className="mb-2">
+          <div className="mb-2 text-right">
             <div>Invoice#: {invoice.number || "N/A"}</div>
             <div>
               Date:{" "}
