@@ -57,6 +57,9 @@ const Receipt1 = ({ data, isPrint = false }) => {
             ))}
           </div>
           <div className="flex justify-between">
+            <span>Subtotal:</span>
+            <span>{formatCurrency(subTotal)}</span>
+          </div>
             <span>Tax:</span>
             <span>{formatCurrency(tax)}</span>
           </div>
