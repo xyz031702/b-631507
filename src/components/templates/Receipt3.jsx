@@ -28,8 +28,8 @@ const Receipt3 = ({ data, isPrint = false }) => {
         }}
       >
         <div className="flex-grow">
-          <div className="text-center font-bold mb-2">CASH RECEIPT</div>
-          <div className="mb-2">
+          <div className="text-center font-bold mb-2 border-b border-dashed">CASH RECEIPT</div>
+          <div className="mb-2 border-b border-dashed">
             <div>Invoice: {invoice.number || "N/A"}</div>
             <div>
               Date:{" "}
@@ -38,9 +38,9 @@ const Receipt3 = ({ data, isPrint = false }) => {
                 : "N/A"}
             </div>
           </div>
-          <div className="mb-2">Customer: {billTo || "N/A"}</div>
-          <div className="mb-2">Cashier: {cashier || "N/A"}</div>
-          <div className="border-t border-b py-2 mb-2">
+          <div className="mb-2 border-b border-dashed">Customer: {billTo || "N/A"}</div>
+          <div className="mb-2 border-b border-dashed">Cashier: {cashier || "N/A"}</div>
+          <div className="border-t border-b border-dashed py-2 mb-2">
             <div className="flex justify-between font-bold mb-2">
               <span>Item</span>
               <span>Total</span>
@@ -65,15 +65,15 @@ const Receipt3 = ({ data, isPrint = false }) => {
             <span>Tax:</span>
             <span>{formatCurrency(tax)}</span>
           </div>
-          <div className="flex justify-between font-bold mt-2">
+          <div className="flex justify-between font-bold mt-2 border-t border-dashed">
             <span>Total:</span>
             <span>{formatCurrency(total)}</span>
           </div>
-          <div className="mt-4">
+          <div className="mt-4 border-t border-dashed">
             <div>{notes || "N/A"}</div>
           </div>
         </div>
-        <div className="text-center mt-4">{footer || ""}</div>
+        <div className="text-center mt-4 border-t border-dashed">{footer || ""}</div>
       </div>
     </BaseTemplate2>
   );
