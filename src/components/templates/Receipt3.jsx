@@ -28,7 +28,7 @@ const Receipt3 = ({ data, isPrint = false }) => {
         }}
       >
         <div className="flex-grow">
-          <div className="text-center font-bold mb-2 border-b border-dashed">
+          <div className="text-center font-bold mb-2 border-b1 border-dashed">
             CASH RECEIPT
           </div>
           <div className="mb-2 border-b1 border-dashed">
@@ -40,7 +40,7 @@ const Receipt3 = ({ data, isPrint = false }) => {
                 : "N/A"}
             </div>
           </div>
-          <div className="mb-2 border-b border-dashed">
+          <div className="mb-2 border-b1 border-dashed">
             Customer: {billTo || "N/A"}
           </div>
           <div className="mb-2 border-b border-dashed">
@@ -71,15 +71,15 @@ const Receipt3 = ({ data, isPrint = false }) => {
             <span>Tax:</span>
             <span>{formatCurrency(tax)}</span>
           </div>
-          <div className="flex justify-between font-bold mt-2 border-t border-dashed">
+          <div className="flex justify-between font-bold mt-2 border-t border-b1 border-dashed">
             <span>Total:</span>
             <span>{formatCurrency(total)}</span>
           </div>
-          <div className="mt-4 border-t border-dashed">
+          <div className="mt-4 border-t border-b1 border-dashed">
             <div>{notes || "N/A"}</div>
           </div>
         </div>
-        <div className="text-center mt-4 border-t border-dashed">
+        <div className="text-center mt-4 border-t border-b1 border-dashed">
           {footer || ""}
         </div>
       </div>
