@@ -30,17 +30,10 @@ const Index = () => {
   const navigate = useNavigate();
   const [billTo, setBillTo] = useState({ name: '', address: '', phone: '' });
   const [shipTo, setShipTo] = useState({ name: '', address: '', phone: '' });
-  const [invoice, setInvoice] = useState({ date: '', paymentDate: '', number: generateRandomInvoiceNumber() });
+  const [invoice, setInvoice] = useState({ date: '', paymentDate: '', number: '' });
   const [yourCompany, setYourCompany] = useState({ name: '', address: '', phone: '' });
-  const [items, setItems] = useState([
-    { name: '', description: '', quantity: 0, amount: 0, total: 0 },
-    { name: '', description: '', quantity: 0, amount: 0, total: 0 },
-    { name: '', description: '', quantity: 0, amount: 0, total: 0 },
-    { name: '', description: '', quantity: 0, amount: 0, total: 0 },
-    { name: '', description: '', quantity: 0, amount: 0, total: 0 },
-    { name: '', description: '', quantity: 0, amount: 0, total: 0 }
-  ]);
-  const [tax, setTax] = useState(0);
+  const [items, setItems] = useState([]);
+  const [tax, setTax] = useState('');
   const [notes, setNotes] = useState('');
 
   useEffect(() => {
@@ -48,13 +41,16 @@ const Index = () => {
     const savedFormData = localStorage.getItem('formData');
     if (savedFormData) {
       const parsedData = JSON.parse(savedFormData);
-      setBillTo(parsedData.billTo);
-      setShipTo(parsedData.shipTo);
-      setInvoice(parsedData.invoice);
-      setYourCompany(parsedData.yourCompany);
-      setItems(parsedData.items);
-      setTax(parsedData.tax || 0); // Set tax to 0 if not provided
-      setNotes(parsedData.notes);
+      setBillTo(parsedData.billTo || { name: '', address: '', phone: '' });
+      setShipTo(parsedData.shipTo || { name: '', address: '', phone: '' });
+      setInvoice(parsedData.invoice || { date: '', paymentDate: '', number: '' });
+      setYourCompany(parsedData.yourCompany || { name: '', address: '', phone: '' });
+      setItems(parsedData.items || []);
+      setTax(parsedData.tax || '');
+      setNotes(parsedData.notes || '');
+    } else {
+      // If no saved data, set invoice number
+      setInvoice(prev => ({ ...prev, number: generateRandomInvoiceNumber() }));
     }
   }, []);
 
