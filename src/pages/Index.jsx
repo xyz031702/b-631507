@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import FloatingLabelInput from '../components/FloatingLabelInput';
 import BillToSection from '../components/BillToSection';
 import ShipToSection from '../components/ShipToSection';
@@ -254,6 +255,12 @@ const Index = () => {
             </div>
 
             <div className="flex justify-between">
+              <Button
+                onClick={() => navigate('/receipt', { state: { formData: { billTo, shipTo, invoice, yourCompany, items, tax, notes } } })}
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mr-2"
+              >
+                Generate Receipt
+              </Button>
               <Button
                 onClick={clearForm}
                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
