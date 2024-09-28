@@ -39,6 +39,7 @@ const Receipt2 = ({ data, isPrint = false }) => {
                 : "N/A"}
             </div>
           </div>
+          <div className="text-center mb-2">******************************</div>
           <div className="mb-2 text-center">
             <div>{yourCompany.name || "N/A"}</div>
             <div>{yourCompany.address || "N/A"}</div>
