@@ -6,7 +6,8 @@ const ShipToSection = ({ shipTo, handleInputChange, billTo }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [copyBillToShip, setCopyBillToShip] = useState(false);
 
-  const toggleExpand = () => {
+  const toggleExpand = (e) => {
+    e.preventDefault();
     setIsExpanded(!isExpanded);
   };
 
@@ -34,7 +35,7 @@ const ShipToSection = ({ shipTo, handleInputChange, billTo }) => {
             />
             <label htmlFor="copyBillToShip">Same as Bill To</label>
           </div>
-          <button onClick={toggleExpand} className="focus:outline-none">
+          <button onClick={(e) => toggleExpand(e)} className="focus:outline-none">
             {isExpanded ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
           </button>
         </div>
