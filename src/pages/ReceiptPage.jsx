@@ -130,6 +130,34 @@ const ReceiptPage = () => {
           <form>
 
             <div className="mb-6">
+              <h2 className="text-2xl font-semibold mb-4">Your Company</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FloatingLabelInput
+                  id="yourCompanyName"
+                  label="Name"
+                  value={yourCompany.name}
+                  onChange={handleInputChange(setYourCompany)}
+                  name="name"
+                />
+                <FloatingLabelInput
+                  id="yourCompanyPhone"
+                  label="Phone"
+                  value={yourCompany.phone}
+                  onChange={handleInputChange(setYourCompany)}
+                  name="phone"
+                />
+              </div>
+              <FloatingLabelInput
+                id="yourCompanyAddress"
+                label="Address"
+                value={yourCompany.address}
+                onChange={handleInputChange(setYourCompany)}
+                name="address"
+                className="mt-4"
+              />
+            </div>
+
+            <div className="mb-6">
               <h2 className="text-2xl font-semibold mb-4">Bill To</h2>
               <FloatingLabelInput
                 id="billTo"
@@ -169,33 +197,6 @@ const ReceiptPage = () => {
               </div>
             </div>
 
-            <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4">Your Company</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <FloatingLabelInput
-                  id="yourCompanyName"
-                  label="Name"
-                  value={yourCompany.name}
-                  onChange={handleInputChange(setYourCompany)}
-                  name="name"
-                />
-                <FloatingLabelInput
-                  id="yourCompanyPhone"
-                  label="Phone"
-                  value={yourCompany.phone}
-                  onChange={handleInputChange(setYourCompany)}
-                  name="phone"
-                />
-              </div>
-              <FloatingLabelInput
-                id="yourCompanyAddress"
-                label="Address"
-                value={yourCompany.address}
-                onChange={handleInputChange(setYourCompany)}
-                name="address"
-                className="mt-4"
-              />
-            </div>
 
             <ItemDetails
               items={items}
