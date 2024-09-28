@@ -72,8 +72,8 @@ const Receipt3 = ({ data, isPrint = false }) => {
             <span>{formatCurrency(tax)}</span>
           </div>
           <div className="flex justify-between font-bold mt-2 pb-2 border-t-2 pt-2 border-b-2 border-dashed">
-            <span>Total:</span>
-            <span>{formatCurrency(total)}</span>
+            <span>{`${items.length} Items`}</span>
+            <span>Total: {formatCurrency(total)}</span>
           </div>
           <div className="mt-4">
             <div>{notes || "N/A"}</div>
