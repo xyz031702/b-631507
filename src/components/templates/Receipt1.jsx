@@ -30,6 +30,10 @@ const Receipt1 = ({ data, isPrint = false }) => {
         <div className="flex-grow">
           <div className="text-center font-bold mb-2">RECEIPT</div>
           <div className="mb-2">
+            <div>Your Company: {yourCompany.name || "N/A"}</div>
+            <div>Address: {yourCompany.address || "N/A"}</div>
+            <div>Contact: {yourCompany.contact || "N/A"}</div>
+          </div>
             <div>Invoice: {invoice.number || "N/A"}</div>
             <div>
               Date:{" "}
