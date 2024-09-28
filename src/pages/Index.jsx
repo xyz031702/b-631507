@@ -6,7 +6,7 @@ import ShipToSection from '../components/ShipToSection';
 import ItemDetails from '../components/ItemDetails';
 import { Button } from "@/components/ui/button";
 import { templates } from '../utils/templateRegistry';
-import { FiEdit } from 'react-icons/fi'; // Importing an icon from react-icons
+import { FiEdit, FiFileText } from 'react-icons/fi'; // Added FiFileText icon
 
 const generateRandomInvoiceNumber = () => {
   const length = Math.floor(Math.random() * 6) + 3;
@@ -130,7 +130,7 @@ const Index = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 relative">
       <h1 className="text-3xl font-bold mb-8 text-center">Bill Generator</h1>
       <button
         onClick={fillDummyData}
@@ -138,6 +138,13 @@ const Index = () => {
         aria-label="Fill with Dummy Data"
       >
         <FiEdit size={24} />
+      </button>
+      <button
+        onClick={() => navigate('/receipt', { state: { formData: { billTo, shipTo, invoice, yourCompany, items, tax, notes } } })}
+        className="fixed top-4 right-4 bg-green-500 text-white p-2 rounded-full shadow-lg hover:bg-green-600"
+        aria-label="Switch to Receipt"
+      >
+        <FiFileText size={24} />
       </button>
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
