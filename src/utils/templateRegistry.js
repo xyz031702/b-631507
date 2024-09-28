@@ -8,6 +8,7 @@ import Template7 from '../components/templates/Template7';
 import Template8 from '../components/templates/Template8';
 import Template9 from '../components/templates/Template9';
 import Template10 from '../components/templates/Template10';
+import BaseTemplate2 from '../components/templates/BaseTemplate2';
 
 export const templates = [
   { name: 'Template 1', component: Template1 },

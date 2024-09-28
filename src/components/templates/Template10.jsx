@@ -1,6 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
-import BaseTemplate from './BaseTemplate';
+import BaseTemplate2 from './BaseTemplate2';
 import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
 import { formatCurrency } from '../../utils/formatCurrency';
 
@@ -11,8 +11,8 @@ const Template10 = ({ data }) => {
   const total = calculateGrandTotal(items, tax);
 
   return (
-    <BaseTemplate data={data}>
-      <div className="bg-white p-4" style={{ width: '57mm', height: '38mm', fontSize: '6px' }}>
+    <BaseTemplate2 width="57mm" height="38mm" className="p-1" data={data}>
+      <div className="bg-white" style={{ fontSize: '6px' }}>
         <div className="text-center font-bold mb-1">RECEIPT</div>
         <div className="flex justify-between mb-1">
           <span>Invoice: {invoice.number || 'N/A'}</span>
@@ -41,7 +41,7 @@ const Template10 = ({ data }) => {
         </div>
         <div className="text-center mt-1">Thank You!</div>
       </div>
-    </BaseTemplate>
+    </BaseTemplate2>
   );
 };
 
