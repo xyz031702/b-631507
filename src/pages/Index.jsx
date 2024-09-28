@@ -140,7 +140,21 @@ const Index = () => {
         <FiEdit size={24} />
       </button>
       <button
-        onClick={() => navigate('/receipt', { state: { formData: { billTo, shipTo, invoice, yourCompany, items, tax, notes } } })}
+        onClick={() =>
+          navigate("/receipt", {
+            state: {
+              formData: {
+                billTo,
+                shipTo,
+                invoice,
+                yourCompany,
+                items,
+                tax,
+                notes,
+              },
+            },
+          })
+        }
         className="fixed top-4 right-4 bg-green-500 text-white p-2 rounded-full shadow-lg hover:bg-green-600"
         aria-label="Switch to Receipt"
       >
@@ -258,12 +272,6 @@ const Index = () => {
 
             <div className="flex justify-between">
               <Button
-                onClick={() => navigate('/receipt', { state: { formData: { billTo, shipTo, invoice, yourCompany, items, tax, notes } } })}
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mr-2"
-              >
-                Generate Receipt
-              </Button>
-              <Button
                 onClick={clearForm}
                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
               >
@@ -288,7 +296,11 @@ const Index = () => {
                 <img
                   src={`/assets/template${index + 1}-preview.png`}
                   alt={template.name}
-                  className={`w-full ${template.name === 'Template 10' ? 'h-[38px] w-[57px]' : 'h-50'} object-cover rounded mb-2`}
+                  className={`w-full ${
+                    template.name === "Template 10"
+                      ? "h-[38px] w-[57px]"
+                      : "h-50"
+                  } object-cover rounded mb-2`}
                 />
                 <p className="text-center font-medium">{template.name}</p>
               </div>
