@@ -33,9 +33,7 @@ const Receipt1 = ({ data, isPrint = false }) => {
             <div>Invoice: {invoice.number || "N/A"}</div>
             <div>
               Date:{" "}
-              {invoice.date
-                ? format(new Date(invoice.date), "MM/dd/yyyy HH:mm")
-                : "N/A"}
+              {format(new Date(), "MM/dd/yyyy HH:mm")}
             </div>
           </div>
           <div className="mb-2">Customer: {billTo || "N/A"}</div>
