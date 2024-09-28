@@ -19,7 +19,7 @@ const Template10 = ({ data, isPrint = false }) => {
       isPrint={isPrint}
     >
       <div
-        className="bg-white"
+        className="bg-white flex flex-col justify-between h-full"
         style={{
           fontSize: isPrint ? "8px" : "14px",
           fontFamily: "'Courier New', Courier, monospace",
@@ -63,7 +63,7 @@ const Template10 = ({ data, isPrint = false }) => {
         <div className="mt-4">
           <div>{notes || "N/A"}</div>
         </div>
-        <div className="text-center mt-4 absolute bottom-0 w-full">
+        <div className="text-center mt-4">
           {footer || ""}
         </div>
       </div>
