@@ -29,9 +29,9 @@ const Receipt2 = ({ data, isPrint = false }) => {
       >
         <div className="flex-grow">
           <div className="text-center font-bold mb-2">CUSTOMER RECEIPT</div>
-          <div className="mb-2">
+          <div className="mb-2 flex justify-between">
             <div>Invoice: {invoice.number || "N/A"}</div>
-            <div>
+            <div className="text-right">
               Date:{" "}
               {invoice.date
                 ? format(new Date(invoice.date), "MM/dd/yyyy")
