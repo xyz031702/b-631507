@@ -266,7 +266,7 @@ const ReceiptPage = () => {
                   onChange={() => setTheme('Receipt1')}
                   className="mr-2"
                 />
-                Classic
+                Receipt1
               </label>
               <label className="flex items-center">
                 <input
@@ -277,7 +277,7 @@ const ReceiptPage = () => {
                   onChange={() => setTheme('Receipt2')}
                   className="mr-2"
                 />
-                Vintage
+                Receipt2
               </label>
               <label className="flex items-center">
                 <input
@@ -288,7 +288,7 @@ const ReceiptPage = () => {
                   onChange={() => setTheme('Receipt3')}
                   className="mr-2"
                 />
-                Modern
+                Receipt3
               </label>
             </div>
           </div>
