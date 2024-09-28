@@ -6,7 +6,7 @@ import ShipToSection from '../components/ShipToSection';
 import ItemDetails from '../components/ItemDetails';
 import { Button } from "@/components/ui/button";
 import { templates } from '../utils/templateRegistry';
-import { FiEdit, FiFileText } from 'react-icons/fi'; // Added FiFileText icon
+import { FiEdit, FiFileText, FiTrash2 } from 'react-icons/fi'; // Added FiTrash2 icon
 
 const generateRandomInvoiceNumber = () => {
   const length = Math.floor(Math.random() * 6) + 3;
@@ -132,13 +132,22 @@ const Index = () => {
   return (
     <div className="container mx-auto px-4 py-8 relative">
       <h1 className="text-3xl font-bold mb-8 text-center">Bill Generator</h1>
-      <button
-        onClick={fillDummyData}
-        className="fixed top-4 left-4 bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600"
-        aria-label="Fill with Dummy Data"
-      >
-        <FiEdit size={24} />
-      </button>
+      <div className="fixed top-4 left-4 flex gap-2">
+        <button
+          onClick={clearForm}
+          className="bg-red-500 text-white p-2 rounded-full shadow-lg hover:bg-red-600"
+          aria-label="Clear Form"
+        >
+          <FiTrash2 size={24} />
+        </button>
+        <button
+          onClick={fillDummyData}
+          className="bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600"
+          aria-label="Fill with Dummy Data"
+        >
+          <FiEdit size={24} />
+        </button>
+      </div>
       <button
         onClick={() =>
           navigate("/receipt", {
@@ -270,14 +279,7 @@ const Index = () => {
               ></textarea>
             </div>
 
-            <div className="flex justify-between">
-              <Button
-                onClick={clearForm}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-              >
-                Clear Form
-              </Button>
-            </div>
+            {/* Clear Form button removed */}
           </form>
         </div>
 
