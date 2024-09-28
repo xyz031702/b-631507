@@ -11,23 +11,36 @@ const Template10 = ({ data, isPrint = false }) => {
   const total = calculateGrandTotal(items, tax);
 
   return (
-    <BaseTemplate2 width="38mm" height="570mm" className="p-2" data={data} isPrint={isPrint}>
-      <div className="bg-white" style={{ fontSize: isPrint ? '6px' : '12px' }}>
+    <BaseTemplate2
+      width="38mm"
+      height="auto"
+      className="p-2"
+      data={data}
+      isPrint={isPrint}
+    >
+      <div className="bg-white" style={{ fontSize: isPrint ? "6px" : "18px" }}>
         <div className="text-center font-bold mb-2">RECEIPT</div>
         <div className="mb-2">
-          <div>Invoice: {invoice.number || 'N/A'}</div>
-          <div>Date: {invoice.date ? format(new Date(invoice.date), "MM/dd/yyyy") : 'N/A'}</div>
+          <div>Invoice: {invoice.number || "N/A"}</div>
+          <div>
+            Date:{" "}
+            {invoice.date
+              ? format(new Date(invoice.date), "MM/dd/yyyy")
+              : "N/A"}
+          </div>
         </div>
-        <div className="mb-2">Customer: {billTo.name || 'N/A'}</div>
+        <div className="mb-2">Customer: {billTo.name || "N/A"}</div>
         <div className="border-t border-b py-2 mb-2">
-          <div className="flex justify-between font-bold">
+          <div className="flex justify-between font-bold mb-2">
             <span>Item</span>
             <span>Total</span>
           </div>
           {items.map((item, index) => (
-            <div key={index} className="flex justify-between">
-              <span>{item.name || 'N/A'}</span>
-              <span>{formatCurrency((item.quantity || 0) * (item.amount || 0))}</span>
+            <div key={index} className="flex justify-between mb-2">
+              <span>{item.name || "N/A"}</span>
+              <span>
+                {formatCurrency((item.quantity || 0) * (item.amount || 0))}
+              </span>
             </div>
           ))}
         </div>
