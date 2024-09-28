@@ -41,7 +41,7 @@ const ReceiptPage = () => {
   const [tax, setTax] = useState(0);
   const [theme, setTheme] = useState('classic');
   const [notes, setNotes] = useState('');
-  const [footer, setFooter] = useState('');
+  const [footer, setFooter] = useState('Thank you');
 
   useEffect(() => {
     // Load form data from localStorage on component mount
