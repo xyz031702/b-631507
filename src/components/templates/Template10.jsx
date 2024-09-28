@@ -48,7 +48,7 @@ const Template10 = ({ data, isPrint = false }) => {
             {items.map((item, index) => (
               <div key={index} className="flex justify-between mb-2">
                 <div>
-                  <span>{item.name || "N/A"}</span>
+                  <span>{item.name || "N/A"} X {item.quantity || 0}</span>
                   <div className="text-sm text-gray-600">{item.description || ""}</div>
                 </div>
                 <span>
