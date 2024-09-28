@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Loader2, RefreshCw, FileText } from "lucide-react";
+import { Loader2, RefreshCw, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Receipt1 from "../components/templates/Receipt1";
 import Receipt2 from "../components/templates/Receipt2";
 import Receipt3 from "../components/templates/Receipt3";
 import { generateReceiptPDF } from "../utils/receiptPDFGenerator";
 import FloatingLabelInput from "../components/FloatingLabelInput";
-import BillToSection from "../components/BillToSection";
 import ItemDetails from "../components/ItemDetails";
 
 const generateRandomInvoiceNumber = () => {
