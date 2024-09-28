@@ -27,12 +27,18 @@ const ReceiptPage = () => {
     if (formData && !isDownloading) {
       setIsDownloading(true);
       try {
-        await generateReceiptPDF(formData, 10, { width: '80mm', height: 'auto' });
+        await generateReceiptPDF(formData, 10, {
+          width: "800mm",
+          height: "auto",
+        });
       } catch (error) {
-        if (error.message.includes('No tab with id:')) {
-          console.warn('PDF generation completed, but encountered a non-critical error:', error.message);
+        if (error.message.includes("No tab with id:")) {
+          console.warn(
+            "PDF generation completed, but encountered a non-critical error:",
+            error.message
+          );
         } else {
-          console.error('Error generating PDF:', error);
+          console.error("Error generating PDF:", error);
         }
       } finally {
         setIsDownloading(false);
@@ -41,7 +47,7 @@ const ReceiptPage = () => {
   };
 
   const handleBack = () => {
-    navigate('/');
+    navigate("/");
   };
 
   if (!formData) {
@@ -61,7 +67,7 @@ const ReceiptPage = () => {
               Downloading...
             </>
           ) : (
-            'Download PDF'
+            "Download Receipt PDF"
           )}
         </Button>
       </div>
