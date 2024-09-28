@@ -34,7 +34,7 @@ const Receipt1 = ({ data, isPrint = false }) => {
             <div>
               Date:{" "}
               {invoice.date
-                ? format(new Date(invoice.date), "MM/dd/yyyy")
+                ? format(new Date(invoice.date), "MM/dd/yyyy HH:mm")
                 : "N/A"}
             </div>
           </div>
@@ -49,7 +49,6 @@ const Receipt1 = ({ data, isPrint = false }) => {
               <div key={index} className="flex justify-between mb-2">
                 <div>
                   <span>{item.name || "N/A"} X {item.quantity || 0}</span>
-                  <div className="text-sm text-gray-600">{item.description || ""}</div>
                 </div>
                 <span>
                   {formatCurrency((item.quantity || 0) * (item.amount || 0))}
