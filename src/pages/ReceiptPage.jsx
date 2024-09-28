@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import Template10 from '../components/templates/Template10';
@@ -9,26 +9,62 @@ import BillToSection from '../components/BillToSection';
 import ShipToSection from '../components/ShipToSection';
 import ItemDetails from '../components/ItemDetails';
 
+const generateRandomInvoiceNumber = () => {
+  const length = Math.floor(Math.random() * 6) + 3;
+  const alphabetCount = Math.min(Math.floor(Math.random() * 4), length);
+  let result = '';
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const numbers = '0123456789';
+
+  for (let i = 0; i < alphabetCount; i++) {
+    result += alphabet[Math.floor(Math.random() * alphabet.length)];
+  }
+
+  for (let i = alphabetCount; i < length; i++) {
+    result += numbers[Math.floor(Math.random() * numbers.length)];
+  }
+
+  return result;
+};
+
 const ReceiptPage = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState(null);
   const [isDownloading, setIsDownloading] = useState(false);
   const receiptRef = useRef(null);
 
+  const [billTo, setBillTo] = useState({ name: '', address: '', phone: '' });
+  const [shipTo, setShipTo] = useState({ name: '', address: '', phone: '' });
+  const [invoice, setInvoice] = useState({ date: '', paymentDate: '', number: generateRandomInvoiceNumber() });
+  const [yourCompany, setYourCompany] = useState({ name: '', address: '', phone: '' });
+  const [items, setItems] = useState([
+    { name: '', description: '', quantity: 0, amount: 0, total: 0 },
+  ]);
+  const [tax, setTax] = useState(0);
+  const [notes, setNotes] = useState('');
+
   useEffect(() => {
-    if (location.state && location.state.formData) {
-      setFormData(location.state.formData);
-    } else {
-      const savedFormData = localStorage.getItem('formData');
-      if (savedFormData) {
-        setFormData(JSON.parse(savedFormData));
-      }
+    // Load form data from localStorage on component mount
+    const savedFormData = localStorage.getItem('receiptFormData');
+    if (savedFormData) {
+      const parsedData = JSON.parse(savedFormData);
+      setBillTo(parsedData.billTo);
+      setShipTo(parsedData.shipTo);
+      setInvoice(parsedData.invoice);
+      setYourCompany(parsedData.yourCompany);
+      setItems(parsedData.items);
+      setTax(parsedData.tax || 0);
+      setNotes(parsedData.notes);
     }
-  }, [location.state]);
+  }, []);
+
+  useEffect(() => {
+    // Save form data to localStorage whenever it changes
+    const formData = { billTo, shipTo, invoice, yourCompany, items, tax, notes };
+    localStorage.setItem('receiptFormData', JSON.stringify(formData));
+  }, [billTo, shipTo, invoice, yourCompany, items, tax, notes]);
 
   const handleDownloadPDF = async () => {
-    if (formData && !isDownloading && receiptRef.current) {
+    if (!isDownloading && receiptRef.current) {
       setIsDownloading(true);
       try {
         await generateReceiptPDF(receiptRef.current);
@@ -44,52 +80,37 @@ const ReceiptPage = () => {
     navigate("/");
   };
 
-  const handleInputChange = (section) => (e) => {
+  const handleInputChange = (setter) => (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [section]: {
-        ...prev[section],
-        [name]: value
-      }
-    }));
+    setter(prev => ({ ...prev, [name]: value }));
   };
 
   const handleItemChange = (index, field, value) => {
-    const newItems = [...formData.items];
+    const newItems = [...items];
     newItems[index][field] = value;
     if (field === 'quantity' || field === 'amount') {
       newItems[index].total = newItems[index].quantity * newItems[index].amount;
     }
-    setFormData(prev => ({ ...prev, items: newItems }));
+    setItems(newItems);
   };
 
   const addItem = () => {
-    setFormData(prev => ({
-      ...prev,
-      items: [...prev.items, { name: '', description: '', quantity: 0, amount: 0, total: 0 }]
-    }));
+    setItems([...items, { name: '', description: '', quantity: 0, amount: 0, total: 0 }]);
   };
 
   const removeItem = (index) => {
-    setFormData(prev => ({
-      ...prev,
-      items: prev.items.filter((_, i) => i !== index)
-    }));
+    const newItems = items.filter((_, i) => i !== index);
+    setItems(newItems);
   };
 
   const calculateSubTotal = () => {
-    return formData.items.reduce((sum, item) => sum + item.total, 0).toFixed(2);
+    return items.reduce((sum, item) => sum + item.total, 0).toFixed(2);
   };
 
   const calculateGrandTotal = () => {
     const subTotal = parseFloat(calculateSubTotal());
-    return (subTotal + parseFloat(formData.tax)).toFixed(2);
+    return (subTotal + parseFloat(tax)).toFixed(2);
   };
-
-  if (!formData) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -113,13 +134,13 @@ const ReceiptPage = () => {
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <form>
             <BillToSection
-              billTo={formData.billTo}
-              handleInputChange={handleInputChange('billTo')}
+              billTo={billTo}
+              handleInputChange={handleInputChange(setBillTo)}
             />
             <ShipToSection
-              shipTo={formData.shipTo}
-              handleInputChange={handleInputChange('shipTo')}
-              billTo={formData.billTo}
+              shipTo={shipTo}
+              handleInputChange={handleInputChange(setShipTo)}
+              billTo={billTo}
             />
 
             <div className="mb-6">
@@ -128,24 +149,24 @@ const ReceiptPage = () => {
                 <FloatingLabelInput
                   id="invoiceNumber"
                   label="Invoice Number"
-                  value={formData.invoice.number}
-                  onChange={handleInputChange('invoice')}
+                  value={invoice.number}
+                  onChange={handleInputChange(setInvoice)}
                   name="number"
                 />
                 <FloatingLabelInput
                   id="invoiceDate"
                   label="Invoice Date"
                   type="date"
-                  value={formData.invoice.date}
-                  onChange={handleInputChange('invoice')}
+                  value={invoice.date}
+                  onChange={handleInputChange(setInvoice)}
                   name="date"
                 />
                 <FloatingLabelInput
                   id="paymentDate"
                   label="Payment Date"
                   type="date"
-                  value={formData.invoice.paymentDate}
-                  onChange={handleInputChange('invoice')}
+                  value={invoice.paymentDate}
+                  onChange={handleInputChange(setInvoice)}
                   name="paymentDate"
                 />
               </div>
@@ -157,30 +178,30 @@ const ReceiptPage = () => {
                 <FloatingLabelInput
                   id="yourCompanyName"
                   label="Name"
-                  value={formData.yourCompany.name}
-                  onChange={handleInputChange('yourCompany')}
+                  value={yourCompany.name}
+                  onChange={handleInputChange(setYourCompany)}
                   name="name"
                 />
                 <FloatingLabelInput
                   id="yourCompanyPhone"
                   label="Phone"
-                  value={formData.yourCompany.phone}
-                  onChange={handleInputChange('yourCompany')}
+                  value={yourCompany.phone}
+                  onChange={handleInputChange(setYourCompany)}
                   name="phone"
                 />
               </div>
               <FloatingLabelInput
                 id="yourCompanyAddress"
                 label="Address"
-                value={formData.yourCompany.address}
-                onChange={handleInputChange('yourCompany')}
+                value={yourCompany.address}
+                onChange={handleInputChange(setYourCompany)}
                 name="address"
                 className="mt-4"
               />
             </div>
 
             <ItemDetails
-              items={formData.items}
+              items={items}
               handleItemChange={handleItemChange}
               addItem={addItem}
               removeItem={removeItem}
@@ -196,8 +217,8 @@ const ReceiptPage = () => {
                 <span>Tax (Amount):</span>
                 <input
                   type="number"
-                  value={formData.tax}
-                  onChange={(e) => setFormData(prev => ({ ...prev, tax: parseFloat(e.target.value) || 0 }))}
+                  value={tax}
+                  onChange={(e) => setTax(parseFloat(e.target.value) || 0)}
                   className="w-24 p-2 border rounded"
                 />
               </div>
@@ -210,8 +231,8 @@ const ReceiptPage = () => {
             <div className="mb-6">
               <h3 className="text-lg font-medium mb-2">Notes</h3>
               <textarea
-                value={formData.notes}
-                onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
                 className="w-full p-2 border rounded"
                 rows="4"
               ></textarea>
@@ -222,7 +243,7 @@ const ReceiptPage = () => {
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">Receipt Preview</h2>
           <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
-            <Template10 data={formData} />
+            <Template10 data={{ billTo, shipTo, invoice, yourCompany, items, tax, notes }} />
           </div>
         </div>
       </div>
