@@ -43,10 +43,10 @@ const Receipt3 = ({ data, isPrint = false }) => {
           <div className="mb-2 border-b1 border-dashed">
             Customer: {billTo || "N/A"}
           </div>
-          <div className="mb-2 border-b border-dashed">
+          <div className="mb-2 border-b-2 border-dashed">
             Cashier: {cashier || "N/A"}
           </div>
-          <div className="border-t border-b border-dashed py-2 mb-2">
+          <div className="border-t border-b-2 border-dashed py-2 mb-2">
             <div className="flex justify-between font-bold mb-2">
               <span>Item</span>
               <span>Total</span>
@@ -71,15 +71,15 @@ const Receipt3 = ({ data, isPrint = false }) => {
             <span>Tax:</span>
             <span>{formatCurrency(tax)}</span>
           </div>
-          <div className="flex justify-between font-bold mt-2 border-t border-b1 border-dashed">
+          <div className="flex justify-between font-bold mt-2 border-t border-b-2 border-dashed">
             <span>Total:</span>
             <span>{formatCurrency(total)}</span>
           </div>
-          <div className="mt-4 border-t border-b1 border-dashed">
+          <div className="mt-4 border-t border-b-2 border-dashed">
             <div>{notes || "N/A"}</div>
           </div>
         </div>
-        <div className="text-center mt-4 border-t border-b1 border-dashed">
+        <div className="text-center mt-4 border-t border-b-2 border-dashed">
           {footer || ""}
         </div>
       </div>
