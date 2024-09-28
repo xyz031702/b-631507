@@ -28,7 +28,7 @@ const Receipt2 = ({ data, isPrint = false }) => {
         }}
       >
         <div className="flex-grow">
-          <div className="text-center font-bold mb-2">RECEIPT</div>
+          <div className="text-center font-bold mb-2">CUSTOMER RECEIPT</div>
           <div className="mb-2">
             <div>Invoice: {invoice.number || "N/A"}</div>
             <div>
@@ -48,8 +48,12 @@ const Receipt2 = ({ data, isPrint = false }) => {
             {items.map((item, index) => (
               <div key={index} className="flex justify-between mb-2">
                 <div>
-                  <span>{item.name || "N/A"} X {item.quantity || 0}</span>
-                  <div className="text-sm text-gray-600">{item.description || ""}</div>
+                  <span>
+                    {item.name || "N/A"} X {item.quantity || 0}
+                  </span>
+                  <div className="text-sm text-gray-600">
+                    {item.description || ""}
+                  </div>
                 </div>
                 <span>
                   {formatCurrency((item.quantity || 0) * (item.amount || 0))}
