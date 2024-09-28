@@ -2,21 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import InvoiceTemplate from '../components/InvoiceTemplate';
+import Template10 from '../components/templates/Template10';
 import { generatePDF } from '../utils/pdfGenerator';
-import { templates } from '../utils/templateRegistry';
 
-const TemplatePage = () => {
+const ReceiptPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [formData, setFormData] = useState(null);
-  const [currentTemplate, setCurrentTemplate] = useState(1);
   const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     if (location.state && location.state.formData) {
       setFormData(location.state.formData);
-      setCurrentTemplate(location.state.selectedTemplate || 1);
     } else {
       // If no form data in location state, try to load from localStorage
       const savedFormData = localStorage.getItem('formData');
@@ -26,15 +23,11 @@ const TemplatePage = () => {
     }
   }, [location.state]);
 
-  const handleTemplateChange = (templateNumber) => {
-    setCurrentTemplate(templateNumber);
-  };
-
   const handleDownloadPDF = async () => {
     if (formData && !isDownloading) {
       setIsDownloading(true);
       try {
-        await generatePDF(formData, currentTemplate);
+        await generatePDF(formData, 10); // Assuming 10 is the template number for Receipt
       } catch (error) {
         console.error('Error generating PDF:', error);
       } finally {
@@ -69,27 +62,11 @@ const TemplatePage = () => {
         </Button>
       </div>
 
-      <div className="mb-8 overflow-x-auto">
-        <div className="flex space-x-4">
-          {templates.filter(template => template.name !== 'Receipt').map((template, index) => (
-            <div
-              key={index}
-              className={`cursor-pointer p-4 border rounded ${
-                currentTemplate === template.id ? 'border-blue-500' : 'border-gray-300'
-              }`}
-              onClick={() => handleTemplateChange(template.id)}
-            >
-              {template.name}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="w-[210mm] h-[297mm] mx-auto border shadow-lg">
-        <InvoiceTemplate data={formData} templateNumber={currentTemplate} />
+      <div className="w-[380px] h-[570px] mx-auto border shadow-lg">
+        <Template10 data={formData} />
       </div>
     </div>
   );
 };
 
-export default TemplatePage;
+export default ReceiptPage;
