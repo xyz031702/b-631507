@@ -57,7 +57,7 @@ const Receipt3 = ({ data, isPrint = false }) => {
             {items.map((item, index) => (
               <div key={index} className="mb-2">
                 <div className="flex justify-between">
-                  <span>{item.name || "N/A"}</span>
+                  <span>{`${index + 1}. ${item.name || "N/A"}`}</span>
                 </div>
                 <div className="grid grid-cols-3 text-right">
                   <span>{item.quantity || 0}</span>
