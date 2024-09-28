@@ -279,7 +279,7 @@ const Index = () => {
                 <img
                   src={`/assets/template${index + 1}-preview.png`}
                   alt={template.name}
-                  className="w-full h-50 object-cover rounded mb-2"
+                  className={`w-full ${template.name === 'Template 10' ? 'h-[38px] w-[57px]' : 'h-50'} object-cover rounded mb-2`}
                 />
                 <p className="text-center font-medium">{template.name}</p>
               </div>

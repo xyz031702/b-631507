@@ -14,6 +14,7 @@ document.addEventListener('alpine:init', () => {
       { name: 'Template 4', imageUrl: 'https://via.placeholder.com/200x300?text=Template+4' },
       { name: 'Template 5', imageUrl: 'https://via.placeholder.com/200x300?text=Template+5' },
       { name: 'Template 6', imageUrl: 'https://via.placeholder.com/200x300?text=Template+6' },
+      { name: 'Template 10', imageUrl: 'https://via.placeholder.com/57x38?text=Template+10' },
     ],
 
     init() {
