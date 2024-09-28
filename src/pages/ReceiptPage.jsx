@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import Template10 from '../components/templates/Template10';
+import Receipt1 from '../components/templates/Receipt1';
+import Receipt2 from '../components/templates/Receipt2';
+import Receipt3 from '../components/templates/Receipt3';
 import { generateReceiptPDF } from '../utils/receiptPDFGenerator';
 import FloatingLabelInput from '../components/FloatingLabelInput';
 import BillToSection from '../components/BillToSection';
@@ -253,15 +255,15 @@ const ReceiptPage = () => {
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">Receipt Preview</h2>
           <div className="mb-4 flex items-center">
-            <h3 className="text-lg font-medium mr-4">Theme</h3>
+            <h3 className="text-lg font-medium mr-4">Receipt Type</h3>
             <div className="flex gap-4">
               <label className="flex items-center">
                 <input
                   type="radio"
                   name="theme"
-                  value="classic"
-                  checked={theme === 'classic'}
-                  onChange={() => setTheme('classic')}
+                  value="Receipt1"
+                  checked={theme === 'Receipt1'}
+                  onChange={() => setTheme('Receipt1')}
                   className="mr-2"
                 />
                 Classic
@@ -270,9 +272,9 @@ const ReceiptPage = () => {
                 <input
                   type="radio"
                   name="theme"
-                  value="vintage"
-                  checked={theme === 'vintage'}
-                  onChange={() => setTheme('vintage')}
+                  value="Receipt2"
+                  checked={theme === 'Receipt2'}
+                  onChange={() => setTheme('Receipt2')}
                   className="mr-2"
                 />
                 Vintage
@@ -281,9 +283,9 @@ const ReceiptPage = () => {
                 <input
                   type="radio"
                   name="theme"
-                  value="modern"
-                  checked={theme === 'modern'}
-                  onChange={() => setTheme('modern')}
+                  value="Receipt3"
+                  checked={theme === 'Receipt3'}
+                  onChange={() => setTheme('Receipt3')}
                   className="mr-2"
                 />
                 Modern
@@ -291,7 +293,9 @@ const ReceiptPage = () => {
             </div>
           </div>
           <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
-            <Template10 data={{ billTo, invoice, yourCompany, cashier, items, tax, notes, footer }} />
+            {theme === 'Receipt1' && <Receipt1 data={{ billTo, invoice, yourCompany, cashier, items, tax, notes, footer }} />}
+            {theme === 'Receipt2' && <Receipt2 data={{ billTo, invoice, yourCompany, cashier, items, tax, notes, footer }} />}
+            {theme === 'Receipt3' && <Receipt3 data={{ billTo, invoice, yourCompany, cashier, items, tax, notes, footer }} />}
           </div>
         </div>
       </div>
