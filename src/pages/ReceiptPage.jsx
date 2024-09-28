@@ -6,7 +6,6 @@ import Template10 from '../components/templates/Template10';
 import { generateReceiptPDF } from '../utils/receiptPDFGenerator';
 import FloatingLabelInput from '../components/FloatingLabelInput';
 import BillToSection from '../components/BillToSection';
-import ShipToSection from '../components/ShipToSection';
 import ItemDetails from '../components/ItemDetails';
 
 const generateRandomInvoiceNumber = () => {
@@ -59,7 +58,7 @@ const ReceiptPage = () => {
     // Save form data to localStorage whenever it changes
     const formData = { billTo, invoice, yourCompany, items, tax, notes };
     localStorage.setItem('receiptFormData', JSON.stringify(formData));
-  }, [billTo, shipTo, invoice, yourCompany, items, tax, notes]);
+  }, [billTo, invoice, yourCompany, items, tax, notes]);
 
   const handleDownloadPDF = async () => {
     if (!isDownloading && receiptRef.current) {
