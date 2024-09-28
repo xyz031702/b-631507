@@ -1,21 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Loader2, RefreshCw } from 'lucide-react';
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft, Loader2, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Receipt1 from '../components/templates/Receipt1';
-import Receipt2 from '../components/templates/Receipt2';
-import Receipt3 from '../components/templates/Receipt3';
-import { generateReceiptPDF } from '../utils/receiptPDFGenerator';
-import FloatingLabelInput from '../components/FloatingLabelInput';
-import BillToSection from '../components/BillToSection';
-import ItemDetails from '../components/ItemDetails';
+import Receipt1 from "../components/templates/Receipt1";
+import Receipt2 from "../components/templates/Receipt2";
+import Receipt3 from "../components/templates/Receipt3";
+import { generateReceiptPDF } from "../utils/receiptPDFGenerator";
+import FloatingLabelInput from "../components/FloatingLabelInput";
+import BillToSection from "../components/BillToSection";
+import ItemDetails from "../components/ItemDetails";
 
 const generateRandomInvoiceNumber = () => {
   const length = Math.floor(Math.random() * 6) + 3;
   const alphabetCount = Math.min(Math.floor(Math.random() * 4), length);
-  let result = '';
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const numbers = '0123456789';
+  let result = "";
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const numbers = "0123456789";
 
   for (let i = 0; i < alphabetCount; i++) {
     result += alphabet[Math.floor(Math.random() * alphabet.length)];
@@ -27,18 +27,28 @@ const generateRandomInvoiceNumber = () => {
 
   return result;
 };
-
 const footerOptions = [
-  "Thank you for shopping with us!",
-  "Please visit again!",
-  "Your satisfaction is our priority.",
-  "For feedback, visit www.example.com",
-  "Follow us on social media @exampleStore",
+  "Thank you for choosing us today! We hope your shopping experience was pleasant and seamless. Your satisfaction matters to us, and we look forward to serving you again soon. Keep this receipt for any returns or exchanges.",
+  "Your purchase supports our community! We believe in giving back and working towards a better future. Thank you for being a part of our journey. We appreciate your trust and hope to see you again soon.",
+  "We value your feedback! Help us improve by sharing your thoughts on the text message survey link. Your opinions help us serve you better and improve your shopping experience. Thank you for shopping with us!",
+  "Did you know you can save more with our loyalty program? Ask about it on your next visit and earn points on every purchase. It’s our way of saying thank you for being a loyal customer. See you next time!",
+  "Need assistance with your purchase? We’re here to help! Reach out to our customer support, or visit our website for more information. We’re committed to providing you with the best service possible.",
   "Keep this receipt for returns or exchanges.",
-  "Call us at (123) 456-7890 for support.",
+  "Every purchase makes a difference! We are dedicated to eco-friendly practices and sustainability. Thank you for supporting a greener planet with us. Together, we can build a better tomorrow.",
   "Have a great day!",
-  "Save 10% on your next purchase. Use code: SAVE10",
-  "Eco-friendly business. This receipt is recyclable."
+  "“Thank you for shopping with us today. Did you know you can return or exchange your items within 30 days with this receipt? We want to ensure that you’re happy with your purchase, so don’t hesitate to come back if you need assistance.",
+  "Eco-friendly business. This receipt is recyclable.",
+  "We hope you enjoyed your shopping experience! Remember, for every friend you refer, you can earn exclusive rewards. Visit www.example.com/refer for more details. We look forward to welcoming you back soon!",
+  "Thank you for choosing us! We appreciate your business and look forward to serving you again. Keep this receipt for any future inquiries or returns.",
+  "Your purchase supports local businesses and helps us continue our mission. Thank you for being a valued customer. We hope to see you again soon!",
+  "We hope you had a great shopping experience today. If you have any feedback, please share it with us on our website. We are always here to assist you.",
+  "Thank you for your visit! Remember, we offer exclusive discounts to returning customers. Check your email for special offers on your next purchase.",
+  "Your satisfaction is our top priority. If you need any help or have questions about your purchase, don’t hesitate to contact us. Have a great day!",
+  "We love our customers! Thank you for supporting our business. Follow us on social media for updates on promotions and new products. See you next time!",
+  "Every purchase counts! We are committed to making a positive impact, and your support helps us achieve our goals. Thank you for shopping with us today!",
+  "We hope you found everything you needed. If not, please let us know so we can improve your experience. Your feedback helps us serve you better. Thank you!",
+  "Thank you for visiting! Did you know you can save more with our rewards program? Ask about it during your next visit and start earning points today!",
+  "We appreciate your trust in us. If you ever need assistance with your order, please visit our website or call customer service. We’re here to help!",
 ];
 
 const ReceiptPage = () => {
@@ -46,17 +56,24 @@ const ReceiptPage = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   const receiptRef = useRef(null);
 
-  const [billTo, setBillTo] = useState('');
-  const [invoice, setInvoice] = useState({ date: '', number: generateRandomInvoiceNumber() });
-  const [yourCompany, setYourCompany] = useState({ name: '', address: '', phone: '' });
-  const [cashier, setCashier] = useState('');
+  const [billTo, setBillTo] = useState("");
+  const [invoice, setInvoice] = useState({
+    date: "",
+    number: generateRandomInvoiceNumber(),
+  });
+  const [yourCompany, setYourCompany] = useState({
+    name: "",
+    address: "",
+    phone: "",
+  });
+  const [cashier, setCashier] = useState("");
   const [items, setItems] = useState([
-    { name: '', description: '', quantity: 0, amount: 0, total: 0 },
+    { name: "", description: "", quantity: 0, amount: 0, total: 0 },
   ]);
   const [tax, setTax] = useState(0);
-  const [theme, setTheme] = useState('Receipt1');
-  const [notes, setNotes] = useState('');
-  const [footer, setFooter] = useState('Thank you');
+  const [theme, setTheme] = useState("Receipt1");
+  const [notes, setNotes] = useState("");
+  const [footer, setFooter] = useState("Thank you");
 
   const refreshFooter = () => {
     const randomIndex = Math.floor(Math.random() * footerOptions.length);
@@ -65,14 +82,23 @@ const ReceiptPage = () => {
 
   useEffect(() => {
     // Initialize with default values
-    setInvoice(prev => ({ ...prev, number: generateRandomInvoiceNumber() }));
-    setItems([{ name: '', description: '', quantity: 0, amount: 0, total: 0 }]);
+    setInvoice((prev) => ({ ...prev, number: generateRandomInvoiceNumber() }));
+    setItems([{ name: "", description: "", quantity: 0, amount: 0, total: 0 }]);
   }, []);
 
   useEffect(() => {
     // Save form data to localStorage whenever it changes
-    const formData = { billTo, invoice, yourCompany, cashier, items, tax, notes, footer };
-    localStorage.setItem('receiptFormData', JSON.stringify(formData));
+    const formData = {
+      billTo,
+      invoice,
+      yourCompany,
+      cashier,
+      items,
+      tax,
+      notes,
+      footer,
+    };
+    localStorage.setItem("receiptFormData", JSON.stringify(formData));
   }, [billTo, invoice, yourCompany, items, tax, notes]);
 
   const handleDownloadPDF = async () => {
@@ -94,20 +120,23 @@ const ReceiptPage = () => {
 
   const handleInputChange = (setter) => (e) => {
     const { name, value } = e.target;
-    setter(prev => ({ ...prev, [name]: value }));
+    setter((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleItemChange = (index, field, value) => {
     const newItems = [...items];
     newItems[index][field] = value;
-    if (field === 'quantity' || field === 'amount') {
+    if (field === "quantity" || field === "amount") {
       newItems[index].total = newItems[index].quantity * newItems[index].amount;
     }
     setItems(newItems);
   };
 
   const addItem = () => {
-    setItems([...items, { name: '', description: '', quantity: 0, amount: 0, total: 0 }]);
+    setItems([
+      ...items,
+      { name: "", description: "", quantity: 0, amount: 0, total: 0 },
+    ]);
   };
 
   const removeItem = (index) => {
@@ -143,7 +172,6 @@ const ReceiptPage = () => {
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <form>
-
             <div className="mb-6">
               <h2 className="text-2xl font-semibold mb-4">Your Company</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -192,7 +220,9 @@ const ReceiptPage = () => {
             </div>
 
             <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4">Invoice Information</h2>
+              <h2 className="text-2xl font-semibold mb-4">
+                Invoice Information
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <FloatingLabelInput
                   id="invoiceNumber"
@@ -211,7 +241,6 @@ const ReceiptPage = () => {
                 />
               </div>
             </div>
-
 
             <ItemDetails
               items={items}
@@ -282,8 +311,8 @@ const ReceiptPage = () => {
                   type="radio"
                   name="theme"
                   value="Receipt1"
-                  checked={theme === 'Receipt1'}
-                  onChange={() => setTheme('Receipt1')}
+                  checked={theme === "Receipt1"}
+                  onChange={() => setTheme("Receipt1")}
                   className="mr-2"
                 />
                 Receipt1
@@ -293,8 +322,8 @@ const ReceiptPage = () => {
                   type="radio"
                   name="theme"
                   value="Receipt2"
-                  checked={theme === 'Receipt2'}
-                  onChange={() => setTheme('Receipt2')}
+                  checked={theme === "Receipt2"}
+                  onChange={() => setTheme("Receipt2")}
                   className="mr-2"
                 />
                 Receipt2
@@ -304,8 +333,8 @@ const ReceiptPage = () => {
                   type="radio"
                   name="theme"
                   value="Receipt3"
-                  checked={theme === 'Receipt3'}
-                  onChange={() => setTheme('Receipt3')}
+                  checked={theme === "Receipt3"}
+                  onChange={() => setTheme("Receipt3")}
                   className="mr-2"
                 />
                 Receipt3
@@ -313,9 +342,48 @@ const ReceiptPage = () => {
             </div>
           </div>
           <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
-            {theme === 'Receipt1' && <Receipt1 data={{ billTo, invoice, yourCompany, cashier, items, tax, notes, footer }} />}
-            {theme === 'Receipt2' && <Receipt2 data={{ billTo, invoice, yourCompany, cashier, items, tax, notes, footer }} />}
-            {theme === 'Receipt3' && <Receipt3 data={{ billTo, invoice, yourCompany, cashier, items, tax, notes, footer }} />}
+            {theme === "Receipt1" && (
+              <Receipt1
+                data={{
+                  billTo,
+                  invoice,
+                  yourCompany,
+                  cashier,
+                  items,
+                  tax,
+                  notes,
+                  footer,
+                }}
+              />
+            )}
+            {theme === "Receipt2" && (
+              <Receipt2
+                data={{
+                  billTo,
+                  invoice,
+                  yourCompany,
+                  cashier,
+                  items,
+                  tax,
+                  notes,
+                  footer,
+                }}
+              />
+            )}
+            {theme === "Receipt3" && (
+              <Receipt3
+                data={{
+                  billTo,
+                  invoice,
+                  yourCompany,
+                  cashier,
+                  items,
+                  tax,
+                  notes,
+                  footer,
+                }}
+              />
+            )}
           </div>
         </div>
       </div>
