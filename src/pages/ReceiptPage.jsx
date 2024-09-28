@@ -38,6 +38,7 @@ const ReceiptPage = () => {
     { name: '', description: '', quantity: 0, amount: 0, total: 0 },
   ]);
   const [tax, setTax] = useState(0);
+  const [theme, setTheme] = useState('classic');
   const [notes, setNotes] = useState('');
   const [footer, setFooter] = useState('');
 
@@ -242,6 +243,41 @@ const ReceiptPage = () => {
 
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">Receipt Preview</h2>
+          <div className="mb-4">
+            <h3 className="text-lg font-medium mb-2">Theme</h3>
+            <div className="flex gap-4">
+              <label>
+                <input
+                  type="radio"
+                  name="theme"
+                  value="classic"
+                  checked={theme === 'classic'}
+                  onChange={() => setTheme('classic')}
+                />
+                Classic
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="theme"
+                  value="vintage"
+                  checked={theme === 'vintage'}
+                  onChange={() => setTheme('vintage')}
+                />
+                Vintage
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="theme"
+                  value="modern"
+                  checked={theme === 'modern'}
+                  onChange={() => setTheme('modern')}
+                />
+                Modern
+              </label>
+            </div>
+          </div>
           <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
             <Template10 data={{ billTo, invoice, yourCompany, items, tax, notes, footer }} />
           </div>
