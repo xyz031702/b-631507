@@ -30,15 +30,9 @@ const Receipt3 = ({ data, isPrint = false }) => {
         <div className="flex-grow">
           <div className="text-center font-bold mb-2 pb-2 border-b-2 border-dashed">
             CASH RECEIPT
-            {yourCompany.name && (
-              <div>{yourCompany.name}</div>
-            )}
-            {yourCompany.address && (
-              <div>{yourCompany.address}</div>
-            )}
-            {yourCompany.phone && (
-              <div>{yourCompany.phone}</div>
-            )}
+            {yourCompany.name && <div className="mt-2">{yourCompany.name}</div>}
+            {yourCompany.address && <div>{yourCompany.address}</div>}
+            {yourCompany.phone && <div>{yourCompany.phone}</div>}
           </div>
           <div className="mb-2">
             <div>Invoice#: {invoice.number || "N/A"}</div>
