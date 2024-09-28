@@ -29,6 +29,7 @@ const Receipt2 = ({ data, isPrint = false }) => {
       >
         <div className="flex-grow">
           <div className="text-center font-bold mb-2">CUSTOMER RECEIPT</div>
+          <div className="text-center mb-2">******************************</div>
           <div className="mb-2 flex justify-between">
             <div>Invoice: {invoice.number || "N/A"}</div>
             <div className="text-right">
