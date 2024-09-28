@@ -63,7 +63,7 @@ const Template10 = ({ data, isPrint = false }) => {
         <div className="mt-4">
           <div>{notes || "N/A"}</div>
         </div>
-        <div className="text-center mt-4 mt-auto">
+        <div className="text-center mt-auto">
           {footer || ""}
         </div>
       </div>
