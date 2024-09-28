@@ -32,7 +32,7 @@ const ReceiptPage = () => {
   const receiptRef = useRef(null);
 
   const [billTo, setBillTo] = useState('');
-  const [invoice, setInvoice] = useState({ date: '', paymentDate: '', number: generateRandomInvoiceNumber() });
+  const [invoice, setInvoice] = useState({ date: '', number: generateRandomInvoiceNumber() });
   const [yourCompany, setYourCompany] = useState({ name: '', address: '', phone: '' });
   const [items, setItems] = useState([
     { name: '', description: '', quantity: 0, amount: 0, total: 0 },
@@ -185,14 +185,6 @@ const ReceiptPage = () => {
                   value={invoice.date}
                   onChange={handleInputChange(setInvoice)}
                   name="date"
-                />
-                <FloatingLabelInput
-                  id="paymentDate"
-                  label="Payment Date"
-                  type="date"
-                  value={invoice.paymentDate}
-                  onChange={handleInputChange(setInvoice)}
-                  name="paymentDate"
                 />
               </div>
             </div>
