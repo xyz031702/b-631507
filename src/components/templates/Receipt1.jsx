@@ -41,7 +41,6 @@ const Receipt1 = ({ data, isPrint = false }) => {
                 ? `${format(new Date(invoice.date), "MM/dd/yyyy")} ${format(new Date(), "HH:mm")}`
                 : "N/A"}
             </div>
-          </div>
           <div className="mb-2">Customer: {billTo || "N/A"}</div>
           <div className="mb-2">Cashier: {cashier || "N/A"}</div>
           <div className="border-t border-b py-2 mb-2">
