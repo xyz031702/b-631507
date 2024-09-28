@@ -1,15 +1,19 @@
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
+const compressImage = (canvas, quality = 0.7) => {
+  return canvas.toDataURL('image/jpeg', quality);
+};
+
 export const generateReceiptPDF = async (receiptElement) => {
   try {
     const canvas = await html2canvas(receiptElement, {
-      scale: 2,
+      scale: 1.5,
       useCORS: true,
       logging: false,
     });
 
-    const imgData = canvas.toDataURL('image/png');
+    const compressedImgData = compressImage(canvas, 0.7);
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'mm',
@@ -19,7 +23,7 @@ export const generateReceiptPDF = async (receiptElement) => {
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.addImage(compressedImgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
 
     const timestamp = new Date().getTime();
     const fileName = `Receipt_${timestamp}.pdf`;
