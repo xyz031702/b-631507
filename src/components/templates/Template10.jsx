@@ -18,7 +18,15 @@ const Template10 = ({ data, isPrint = false }) => {
       data={data}
       isPrint={isPrint}
     >
-      <div className="bg-white" style={{ fontSize: isPrint ? "6px" : "18px" }}>
+      <div 
+        className="bg-white" 
+        style={{ 
+          fontSize: isPrint ? "6px" : "14px",
+          fontFamily: "'Courier New', Courier, monospace",
+          whiteSpace: 'pre-wrap',
+          lineHeight: '1.2'
+        }}
+      >
         <div className="text-center font-bold mb-2">RECEIPT</div>
         <div className="mb-2">
           <div>Invoice: {invoice.number || "N/A"}</div>
