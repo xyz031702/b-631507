@@ -31,6 +31,9 @@ const Receipt3 = ({ data, isPrint = false }) => {
           <div className="text-center font-bold mb-2 pb-2 border-b-2 border-dashed">
             CASH RECEIPT
           </div>
+          <div className="text-center mb-2">
+            {yourCompany.name || "Your Company Name"}
+          </div>
           <div className="mb-2">
             <div>Invoice#: {invoice.number || "N/A"}</div>
             <div>
