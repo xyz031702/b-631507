@@ -64,20 +64,22 @@ const TemplatePage = () => {
               Downloading...
             </>
           ) : (
-            'Download PDF'
+            "Download PDF"
           )}
         </Button>
       </div>
 
       <div className="mb-8 overflow-x-auto">
         <div className="flex space-x-4">
-          {templates.filter(template => template.name !== 'Receipt').map((template, index) => (
+          {templates.map((template, index) => (
             <div
               key={index}
               className={`cursor-pointer p-4 border rounded ${
-                currentTemplate === template.id ? 'border-blue-500' : 'border-gray-300'
+                currentTemplate === index + 1
+                  ? "border-blue-500"
+                  : "border-gray-300"
               }`}
-              onClick={() => handleTemplateChange(template.id)}
+              onClick={() => handleTemplateChange(index + 1)}
             >
               {template.name}
             </div>
