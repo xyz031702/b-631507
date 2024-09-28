@@ -60,9 +60,6 @@ const Receipt3 = ({ data, isPrint = false }) => {
                   <span>
                     {item.name || "N/A"} X {item.quantity || 0}
                   </span>
-                  <div className="text-sm text-gray-600">
-                    {item.description || ""}
-                  </div>
                 </div>
                 <span>
                   {formatCurrency((item.quantity || 0) * (item.amount || 0))}
