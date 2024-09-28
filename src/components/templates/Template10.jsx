@@ -18,13 +18,13 @@ const Template10 = ({ data, isPrint = false }) => {
       data={data}
       isPrint={isPrint}
     >
-      <div 
-        className="bg-white" 
-        style={{ 
+      <div
+        className="bg-white"
+        style={{
           fontSize: isPrint ? "6px" : "14px",
           fontFamily: "'Courier New', Courier, monospace",
-          whiteSpace: 'pre-wrap',
-          lineHeight: '1.2'
+          whiteSpace: "pre-wrap",
+          lineHeight: "1.2",
         }}
       >
         <div className="text-center font-bold mb-2">RECEIPT</div>
@@ -44,7 +44,7 @@ const Template10 = ({ data, isPrint = false }) => {
             <span>Total</span>
           </div>
           {items.map((item, index) => (
-            <div key={index} className="flex justify-between mb-2">
+            <div key={index} className="flex justify-between">
               <span>{item.name || "N/A"}</span>
               <span>
                 {formatCurrency((item.quantity || 0) * (item.amount || 0))}
