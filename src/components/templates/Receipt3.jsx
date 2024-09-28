@@ -35,17 +35,17 @@ const Receipt3 = ({ data, isPrint = false }) => {
             {yourCompany.phone && <div>{yourCompany.phone}</div>}
           </div>
           <div className="mb-2 text-right">
-            <div>Invoice#: {invoice.number || "N/A"}</div>
+            <div><strong>Invoice#:</strong> {invoice.number || "N/A"}</div>
             <div>
-              Date:{" "}
+              <strong>Date:</strong>{" "}
               {invoice.date
                 ? format(new Date(invoice.date), "MM/dd/yyyy")
                 : "N/A"}
             </div>
           </div>
-          <div className="mb-2">Customer: {billTo || "N/A"}</div>
+          <div className="mb-2"><strong>Customer:</strong> {billTo || "N/A"}</div>
           <div className="mb-2 pb-2 border-b-2 border-dashed">
-            Cashier: {cashier || "N/A"}
+            <strong>Cashier:</strong> {cashier || "N/A"}
           </div>
           <div className="py-2 mb-2">
             <div className="flex justify-between font-extrabold mb-2">
