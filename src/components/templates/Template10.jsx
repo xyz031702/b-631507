@@ -4,14 +4,14 @@ import BaseTemplate2 from './BaseTemplate2';
 import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
 import { formatCurrency } from '../../utils/formatCurrency';
 
-const Template10 = ({ data }) => {
+const Template10 = ({ data, isPrint = false }) => {
   const { billTo = {}, invoice = {}, yourCompany = {}, items = [], tax = 0 } = data || {};
 
   const subTotal = calculateSubTotal(items);
   const total = calculateGrandTotal(items, tax);
 
   return (
-    <BaseTemplate2 width="57mm" height="38mm" className="p-1" data={data}>
+    <BaseTemplate2 width="57mm" height="38mm" className="p-1" data={data} isPrint={isPrint}>
       <div className="bg-white" style={{ fontSize: '6px' }}>
         <div className="text-center font-bold mb-1">RECEIPT</div>
         <div className="flex justify-between mb-1">
