@@ -5,7 +5,7 @@ import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalcu
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template10 = ({ data, isPrint = false }) => {
-  const { billTo = {}, invoice = {}, yourCompany = {}, items = [], tax = 0, notes = '', footer = '' } = data || {};
+  const { billTo = {}, invoice = {}, yourCompany = {}, cashier = '', items = [], tax = 0, notes = '', footer = '' } = data || {};
 
   const subTotal = calculateSubTotal(items);
   const total = calculateGrandTotal(items, tax);
@@ -39,6 +39,7 @@ const Template10 = ({ data, isPrint = false }) => {
             </div>
           </div>
           <div className="mb-2">Customer: {billTo || "N/A"}</div>
+          <div className="mb-2">Cashier: {cashier || "N/A"}</div>
           <div className="border-t border-b py-2 mb-2">
             <div className="flex justify-between font-bold mb-2">
               <span>Item</span>

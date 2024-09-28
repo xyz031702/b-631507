@@ -34,6 +34,7 @@ const ReceiptPage = () => {
   const [billTo, setBillTo] = useState('');
   const [invoice, setInvoice] = useState({ date: '', number: generateRandomInvoiceNumber() });
   const [yourCompany, setYourCompany] = useState({ name: '', address: '', phone: '' });
+  const [cashier, setCashier] = useState('');
   const [items, setItems] = useState([
     { name: '', description: '', quantity: 0, amount: 0, total: 0 },
   ]);
@@ -58,7 +59,7 @@ const ReceiptPage = () => {
 
   useEffect(() => {
     // Save form data to localStorage whenever it changes
-    const formData = { billTo, invoice, yourCompany, items, tax, notes, footer };
+    const formData = { billTo, invoice, yourCompany, cashier, items, tax, notes, footer };
     localStorage.setItem('receiptFormData', JSON.stringify(formData));
   }, [billTo, invoice, yourCompany, items, tax, notes]);
 
@@ -155,6 +156,14 @@ const ReceiptPage = () => {
                 value={yourCompany.address}
                 onChange={handleInputChange(setYourCompany)}
                 name="address"
+                className="mt-4"
+              />
+              <FloatingLabelInput
+                id="cashier"
+                label="Cashier"
+                value={cashier}
+                onChange={(e) => setCashier(e.target.value)}
+                name="cashier"
                 className="mt-4"
               />
             </div>
@@ -282,7 +291,7 @@ const ReceiptPage = () => {
             </div>
           </div>
           <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
-            <Template10 data={{ billTo, invoice, yourCompany, items, tax, notes, footer }} />
+            <Template10 data={{ billTo, invoice, yourCompany, cashier, items, tax, notes, footer }} />
           </div>
         </div>
       </div>
