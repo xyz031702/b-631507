@@ -22,7 +22,7 @@ const Receipt3 = ({ data, isPrint = false }) => {
         className="bg-white flex flex-col min-h-full"
         style={{
           fontSize: isPrint ? "8px" : "14px",
-          fontFamily: "'Courier New', Courier, monospace",
+          fontFamily: "'Monaco', monospace",
           whiteSpace: "pre-wrap",
           lineHeight: "1.2",
         }}
