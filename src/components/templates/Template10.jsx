@@ -11,16 +11,16 @@ const Template10 = ({ data, isPrint = false }) => {
   const total = calculateGrandTotal(items, tax);
 
   return (
-    <BaseTemplate2 width="57mm" height="38mm" className="p-1" data={data} isPrint={isPrint}>
-      <div className="bg-white" style={{ fontSize: '6px' }}>
-        <div className="text-center font-bold mb-1">RECEIPT</div>
-        <div className="flex justify-between mb-1">
-          <span>Invoice: {invoice.number || 'N/A'}</span>
-          <span>Date: {invoice.date ? format(new Date(invoice.date), "MM/dd/yyyy") : 'N/A'}</span>
+    <BaseTemplate2 width="38mm" height="570mm" className="p-2" data={data} isPrint={isPrint}>
+      <div className="bg-white" style={{ fontSize: isPrint ? '6px' : '12px' }}>
+        <div className="text-center font-bold mb-2">RECEIPT</div>
+        <div className="mb-2">
+          <div>Invoice: {invoice.number || 'N/A'}</div>
+          <div>Date: {invoice.date ? format(new Date(invoice.date), "MM/dd/yyyy") : 'N/A'}</div>
         </div>
-        <div className="mb-1">Customer: {billTo.name || 'N/A'}</div>
-        <div className="border-t border-b py-1 mb-1">
-          <div className="flex justify-between">
+        <div className="mb-2">Customer: {billTo.name || 'N/A'}</div>
+        <div className="border-t border-b py-2 mb-2">
+          <div className="flex justify-between font-bold">
             <span>Item</span>
             <span>Total</span>
           </div>
@@ -35,11 +35,11 @@ const Template10 = ({ data, isPrint = false }) => {
           <span>Tax:</span>
           <span>{formatCurrency(tax)}</span>
         </div>
-        <div className="flex justify-between font-bold">
+        <div className="flex justify-between font-bold mt-2">
           <span>Total:</span>
           <span>{formatCurrency(total)}</span>
         </div>
-        <div className="text-center mt-1">Thank You!</div>
+        <div className="text-center mt-4">Thank You!</div>
       </div>
     </BaseTemplate2>
   );
