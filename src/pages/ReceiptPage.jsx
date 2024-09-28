@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Loader2, RefreshCw } from "lucide-react";
+import { ArrowLeft, Loader2, RefreshCw, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Receipt1 from "../components/templates/Receipt1";
 import Receipt2 from "../components/templates/Receipt2";
@@ -154,19 +154,28 @@ const ReceiptPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 relative">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Receipt Generator</h1>
-        <Button onClick={handleDownloadPDF} disabled={isDownloading}>
-          {isDownloading ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Downloading...
-            </>
-          ) : (
-            "Download Receipt PDF"
-          )}
-        </Button>
+        <div className="flex items-center">
+          <Button onClick={handleDownloadPDF} disabled={isDownloading} className="mr-4">
+            {isDownloading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Downloading...
+              </>
+            ) : (
+              "Download Receipt PDF"
+            )}
+          </Button>
+          <button
+            onClick={() => navigate('/')}
+            className="bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600"
+            aria-label="Switch to Bill Generator"
+          >
+            <FileText size={24} />
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-col md:flex-row gap-8">
