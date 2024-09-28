@@ -59,10 +59,10 @@ const Receipt3 = ({ data, isPrint = false }) => {
                 <div className="flex justify-between">
                   <span>{item.name || "N/A"}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Qty: {item.quantity || 0}</span>
-                  <span>Amt: {formatCurrency(item.amount || 0)}</span>
-                  <span>Total: {formatCurrency((item.quantity || 0) * (item.amount || 0))}</span>
+                <div className="flex justify-between text-right">
+                  <span>{item.quantity || 0}</span>
+                  <span>{formatCurrency(item.amount || 0)}</span>
+                  <span>{formatCurrency((item.quantity || 0) * (item.amount || 0))}</span>
                 </div>
               </div>
             ))}
