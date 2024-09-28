@@ -32,8 +32,7 @@ const ReceiptPage = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   const receiptRef = useRef(null);
 
-  const [billTo, setBillTo] = useState({ name: '', address: '', phone: '' });
-  const [shipTo, setShipTo] = useState({ name: '', address: '', phone: '' });
+  const [billTo, setBillTo] = useState('');
   const [invoice, setInvoice] = useState({ date: '', paymentDate: '', number: generateRandomInvoiceNumber() });
   const [yourCompany, setYourCompany] = useState({ name: '', address: '', phone: '' });
   const [items, setItems] = useState([
@@ -48,7 +47,6 @@ const ReceiptPage = () => {
     if (savedFormData) {
       const parsedData = JSON.parse(savedFormData);
       setBillTo(parsedData.billTo);
-      setShipTo(parsedData.shipTo);
       setInvoice(parsedData.invoice);
       setYourCompany(parsedData.yourCompany);
       setItems(parsedData.items);
@@ -59,7 +57,7 @@ const ReceiptPage = () => {
 
   useEffect(() => {
     // Save form data to localStorage whenever it changes
-    const formData = { billTo, shipTo, invoice, yourCompany, items, tax, notes };
+    const formData = { billTo, invoice, yourCompany, items, tax, notes };
     localStorage.setItem('receiptFormData', JSON.stringify(formData));
   }, [billTo, shipTo, invoice, yourCompany, items, tax, notes]);
 
@@ -131,15 +129,17 @@ const ReceiptPage = () => {
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <form>
-            <BillToSection
-              billTo={billTo}
-              handleInputChange={handleInputChange(setBillTo)}
-            />
-            <ShipToSection
-              shipTo={shipTo}
-              handleInputChange={handleInputChange(setShipTo)}
-              billTo={billTo}
-            />
+
+            <div className="mb-6">
+              <h2 className="text-2xl font-semibold mb-4">Bill To</h2>
+              <FloatingLabelInput
+                id="billTo"
+                label="Bill To"
+                value={billTo}
+                onChange={(e) => setBillTo(e.target.value)}
+                name="billTo"
+              />
+            </div>
 
             <div className="mb-6">
               <h2 className="text-2xl font-semibold mb-4">Invoice Information</h2>
@@ -241,7 +241,7 @@ const ReceiptPage = () => {
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">Receipt Preview</h2>
           <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
-            <Template10 data={{ billTo, shipTo, invoice, yourCompany, items, tax, notes }} />
+            <Template10 data={{ billTo, invoice, yourCompany, items, tax, notes }} />
           </div>
         </div>
       </div>
