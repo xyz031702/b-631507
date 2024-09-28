@@ -73,9 +73,11 @@ const Receipt1 = ({ data, isPrint = false }) => {
             <span>Total:</span>
             <span>{formatCurrency(total)}</span>
           </div>
-          <div className="mt-4">
-            <div>{notes || "N/A"}</div>
-          </div>
+          {notes && (
+            <div className="mt-4">
+              <div>{notes}</div>
+            </div>
+          )}
         </div>
         <div className="text-center mt-4">{footer || ""}</div>
       </div>
