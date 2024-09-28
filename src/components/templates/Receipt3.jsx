@@ -48,7 +48,7 @@ const Receipt3 = ({ data, isPrint = false }) => {
             Cashier: {cashier || "N/A"}
           </div>
           <div className="py-2 mb-2">
-            <div className="flex justify-between font-bold mb-2">
+            <div className="flex justify-between font-extrabold mb-2">
               <span>Item</span>
               <span>Qty</span>
               <span>Amt</span>
