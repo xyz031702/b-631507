@@ -12,14 +12,17 @@ const Receipt4 = ({ data }) => {
       <p className="text-center">GST No: {yourCompany.gst}</p>
       <hr className="my-4" />
       <div>
-        <p>Order Number: {invoice.number}</p>
+        <p>Invoice Number: {invoice.number}</p>
         <p>Created By: {data.cashier}</p>
-        <p>Date & Time: {invoice.date} {currentTime}</p>
+        <p>
+          Date & Time: {invoice.date} {currentTime}
+        </p>
       </div>
       <hr className="my-4" />
       <div>
-        <h3>Bill to address:</h3>
+        <h3>Bill to:</h3>
         <p>{billTo}</p>
+        <span>Place of supply: Chhattisgarh-22</span>
       </div>
       <hr className="my-4" />
       <table className="w-full">
