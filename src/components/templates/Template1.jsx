@@ -1,11 +1,9 @@
 import React from 'react';
 import BaseTemplate from './BaseTemplate';
-import { calculateSubTotal, calculateGrandTotal, calculateTaxAmount } from '../../utils/invoiceCalculations';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template1 = ({ data }) => {
-  const { billTo, shipTo, invoice, yourCompany, items, taxPercentage, notes } = data;
-
+  const { billTo, shipTo, invoice, yourCompany, items, taxPercentage, taxAmount, subTotal, grandTotal, notes } = data;
 
   return (
     <BaseTemplate data={data}>
@@ -67,7 +65,7 @@ const Template1 = ({ data }) => {
                   {formatCurrency(item.amount)}
                 </td>
                 <td className="p-2 text-right">
-                  {formatCurrency(item.quantity * item.amount)}
+                  {formatCurrency(item.total)}
                 </td>
               </tr>
             ))}
@@ -78,17 +76,17 @@ const Template1 = ({ data }) => {
           <div className="w-1/3">
             <div className="flex justify-between mb-2">
               <span>Subtotal:</span>
-              <span>{formatCurrency(calculateSubTotal(items))}</span>
+              <span>{formatCurrency(subTotal)}</span>
             </div>
             {taxPercentage > 0 && (
               <div className="flex justify-between mb-2">
                 <span>Tax ({taxPercentage}%):</span>
-                <span>{formatCurrency(calculateTaxAmount(items, taxPercentage))}</span>
+                <span>{formatCurrency(taxAmount)}</span>
               </div>
             )}
             <div className="flex justify-between font-bold">
               <span>Total:</span>
-              <span>{formatCurrency(calculateGrandTotal(items, taxPercentage))}</span>
+              <span>{formatCurrency(grandTotal)}</span>
             </div>
           </div>
         </div>

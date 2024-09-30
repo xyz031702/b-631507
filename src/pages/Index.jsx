@@ -79,7 +79,6 @@ const Index = () => {
 
   useEffect(() => {
     // Load form data from localStorage on component mount
-    console.log("Load form data from localStorage on component mount");
     const savedFormData = localStorage.getItem("formData");
     if (savedFormData) {
       const parsedData = JSON.parse(savedFormData);
