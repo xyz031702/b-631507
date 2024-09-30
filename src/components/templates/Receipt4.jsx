@@ -9,7 +9,7 @@ const Receipt4 = ({ data }) => {
       <h2 className="text-center font-bold">{yourCompany.name}</h2>
       <p className="text-center">{yourCompany.address}</p>
       <p className="text-center">Phone Number: {yourCompany.phone}</p>
-      <p className="text-center">GST No: {yourCompany.gst.toUpperCase()}</p>
+      {yourCompany.gst && <p className="text-center">GST No: {yourCompany.gst.toUpperCase()}</p>}
       <hr className="my-4" />
       <div>
         <p>Invoice Number: {invoice.number}</p>

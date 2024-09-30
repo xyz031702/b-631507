@@ -216,9 +216,15 @@ const ReceiptPage = () => {
                 id="yourCompanyGST"
                 label="GST No."
                 value={yourCompany.gst}
-                onChange={handleInputChange(setYourCompany)}
+                onChange={(e) => {
+                  const value = e.target.value.slice(0, 15);
+                  handleInputChange(setYourCompany)({
+                    target: { name: 'gst', value }
+                  });
+                }}
                 name="gst"
                 className="mt-4"
+                maxLength={15}
               />
               <FloatingLabelInput
                 id="cashier"
