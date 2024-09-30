@@ -38,11 +38,13 @@ const Receipt4 = ({ data }) => {
             <React.Fragment key={index}>
               <tr>
                 <td>{item.name}</td>
-                <td className="text-right">{item.quantity}</td>
-                <td className="text-right">{item.amount}</td>
+                <td className="text-right text-sm">{item.quantity}</td>
+                <td className="text-right text-sm">{item.amount}</td>
               </tr>
               <tr>
-                <td colSpan="2" className="text-left text-sm italic">{item.description}</td>
+                <td colSpan="2" className="text-left text-sm">
+                  HSN Code: {item.description}
+                </td>
                 <td className="text-right">Total: {item.total}</td>
               </tr>
             </React.Fragment>
