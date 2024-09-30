@@ -1,14 +1,15 @@
 import React from 'react';
 import { format } from 'date-fns';
 import BaseTemplate2 from './BaseTemplate2';
-import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
+import { calculateSubTotal, calculateTaxAmount, calculateGrandTotal } from '../../utils/invoiceCalculations';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Receipt2 = ({ data, isPrint = false }) => {
-  const { billTo = {}, invoice = {}, yourCompany = {}, cashier = '', items = [], tax = 0, notes = '', footer = '' } = data || {};
+  const { billTo = {}, invoice = {}, yourCompany = {}, cashier = '', items = [], taxPercentage = 0, notes = '', footer = '' } = data || {};
 
   const subTotal = calculateSubTotal(items);
-  const total = calculateGrandTotal(items, tax);
+  const taxAmount = calculateTaxAmount(subTotal, taxPercentage);
+  const total = calculateGrandTotal(subTotal, taxAmount);
 
   return (
     <BaseTemplate2
@@ -74,10 +75,10 @@ const Receipt2 = ({ data, isPrint = false }) => {
             <span>Subtotal:</span>
             <span>{formatCurrency(subTotal)}</span>
           </div>
-          {tax > 0 && (
+          {taxPercentage > 0 && (
             <div className="flex justify-between">
-              <span>Tax:</span>
-              <span>{formatCurrency(tax)}</span>
+              <span>Tax ({taxPercentage}%):</span>
+              <span>{formatCurrency(taxAmount)}</span>
             </div>
           )}
           <div className="flex justify-between font-bold mt-2">
