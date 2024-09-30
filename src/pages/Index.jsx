@@ -170,16 +170,22 @@ const Index = () => {
 
   const calculateGrandTotal = () => {
     console.log("calculateGrandTotal", subTotal, taxAmount);
-    const grandTotal = (subTotal + taxAmount).toFixed(2);
-    setGrandTotal(grandTotal);
+    const calculatedGrandTotal = (parseFloat(subTotal) + parseFloat(taxAmount)).toFixed(2);
+    console.log("calculatedGrandTotal", calculatedGrandTotal);
+    setGrandTotal(calculatedGrandTotal);
   };
 
   const handleTaxPercentageChange = (e) => {
     const taxRate = parseFloat(e.target.value) || 0;
     settaxPercentage(taxRate);
-    setTaxAmount((subTotal || 0 * taxRate) / 100);
-    calculateSubTotal();
+    const calculatedTaxAmount = ((parseFloat(subTotal) * taxRate) / 100).toFixed(2);
+    setTaxAmount(calculatedTaxAmount);
+    calculateGrandTotal();
   };
+
+  useEffect(() => {
+    calculateGrandTotal();
+  }, [subTotal, taxAmount]);
 
   const handleTemplateClick = (templateNumber) => {
     const formData = {
