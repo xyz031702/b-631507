@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Loader2, RefreshCw, FileText } from "lucide-react";
+import { Loader2, RefreshCw, FileText, RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Receipt1 from "../components/templates/Receipt1";
 import Receipt2 from "../components/templates/Receipt2";
 import Receipt3 from "../components/templates/Receipt3";
 import Receipt4 from "../components/templates/Receipt4";
 import { generateReceiptPDF } from "../utils/receiptPDFGenerator";
+import { generateGSTNumber } from "../utils/invoiceCalculations";
 import FloatingLabelInput from "../components/FloatingLabelInput";
 import ItemDetails from "../components/ItemDetails";
 
@@ -218,20 +219,32 @@ const ReceiptPage = () => {
                 name="address"
                 className="mt-4"
               />
-              <FloatingLabelInput
-                id="yourCompanyGST"
-                label="GST No."
-                value={yourCompany.gst}
-                onChange={(e) => {
-                  const value = e.target.value.slice(0, 15);
-                  handleInputChange(setYourCompany)({
-                    target: { name: "gst", value },
-                  });
-                }}
-                name="gst"
-                className="mt-4"
-                maxLength={15}
-              />
+              <div className="relative mt-4">
+                <FloatingLabelInput
+                  id="yourCompanyGST"
+                  label="GST No."
+                  value={yourCompany.gst}
+                  onChange={(e) => {
+                    const value = e.target.value.slice(0, 15);
+                    handleInputChange(setYourCompany)({
+                      target: { name: "gst", value },
+                    });
+                  }}
+                  name="gst"
+                  maxLength={15}
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newGST = generateGSTNumber();
+                    setYourCompany(prev => ({ ...prev, gst: newGST }));
+                  }}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 rounded-full hover:bg-gray-200"
+                  title="Generate new GST number"
+                >
+                  <RotateCw size={16} />
+                </button>
+              </div>
               <FloatingLabelInput
                 id="cashier"
                 label="Cashier"
