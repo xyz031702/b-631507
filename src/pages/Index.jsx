@@ -143,7 +143,7 @@ const Index = () => {
       newItems[index].total = newItems[index].quantity * newItems[index].amount;
     }
     setItems(newItems);
-    calculateSubTotal();
+    updateTotals();
   };
 
   const addItem = () => {
@@ -159,33 +159,37 @@ const Index = () => {
   };
 
   const calculateSubTotal = () => {
-    console.log(`items`, items);
-    const subTotal = items
-      .reduce((sum, item) => sum + item.total, 0)
-      .toFixed(2);
-    console.log("subTotal", subTotal);
-    setSubTotal(subTotal);
-    calculateGrandTotal();
+    const calculatedSubTotal = items.reduce((sum, item) => sum + (item.quantity * item.amount), 0);
+    setSubTotal(calculatedSubTotal.toFixed(2));
+    return calculatedSubTotal;
   };
 
-  const calculateGrandTotal = () => {
-    console.log("calculateGrandTotal", subTotal, taxAmount);
-    const calculatedGrandTotal = (parseFloat(subTotal) + parseFloat(taxAmount)).toFixed(2);
-    console.log("calculatedGrandTotal", calculatedGrandTotal);
-    setGrandTotal(calculatedGrandTotal);
+  const calculateTaxAmount = (subTotal) => {
+    return ((subTotal * taxPercentage) / 100).toFixed(2);
+  };
+
+  const calculateGrandTotal = (subTotal, taxAmount) => {
+    return (parseFloat(subTotal) + parseFloat(taxAmount)).toFixed(2);
+  };
+
+  const updateTotals = () => {
+    const subTotal = calculateSubTotal();
+    const taxAmount = calculateTaxAmount(subTotal);
+    const grandTotal = calculateGrandTotal(subTotal, taxAmount);
+
+    setTaxAmount(taxAmount);
+    setGrandTotal(grandTotal);
   };
 
   const handleTaxPercentageChange = (e) => {
     const taxRate = parseFloat(e.target.value) || 0;
     settaxPercentage(taxRate);
-    const calculatedTaxAmount = ((parseFloat(subTotal) * taxRate) / 100).toFixed(2);
-    setTaxAmount(calculatedTaxAmount);
-    calculateGrandTotal();
+    updateTotals();
   };
 
   useEffect(() => {
-    calculateGrandTotal();
-  }, [subTotal, taxAmount]);
+    updateTotals();
+  }, [items, taxPercentage]);
 
   const handleTemplateClick = (templateNumber) => {
     const formData = {
