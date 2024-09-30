@@ -71,7 +71,7 @@ const ReceiptPage = () => {
   const [items, setItems] = useState([
     { name: "", description: "", quantity: 0, amount: 0, total: 0 },
   ]);
-  const [tax, setTax] = useState(0);
+  const [taxPercentage, setTaxPercentage] = useState(0);
   const [theme, setTheme] = useState("Receipt1");
   const [notes, setNotes] = useState("");
   const [footer, setFooter] = useState("Thank you");
@@ -95,12 +95,12 @@ const ReceiptPage = () => {
       yourCompany,
       cashier,
       items,
-      tax,
+      taxPercentage,
       notes,
       footer,
     };
     localStorage.setItem("receiptFormData", JSON.stringify(formData));
-  }, [billTo, invoice, yourCompany, items, tax, notes]);
+  }, [billTo, invoice, yourCompany, items, taxPercentage, notes]);
 
   const handleDownloadPDF = async () => {
     if (!isDownloading && receiptRef.current) {
@@ -149,9 +149,15 @@ const ReceiptPage = () => {
     return items.reduce((sum, item) => sum + item.total, 0).toFixed(2);
   };
 
+  const calculateTaxAmount = () => {
+    const subTotal = parseFloat(calculateSubTotal());
+    return (subTotal * (taxPercentage / 100)).toFixed(2);
+  };
+
   const calculateGrandTotal = () => {
     const subTotal = parseFloat(calculateSubTotal());
-    return (subTotal + parseFloat(tax)).toFixed(2);
+    const taxAmount = parseFloat(calculateTaxAmount());
+    return (subTotal + taxAmount).toFixed(2);
   };
 
   return (
@@ -284,13 +290,20 @@ const ReceiptPage = () => {
                 <span>₹ {calculateSubTotal()}</span>
               </div>
               <div className="flex justify-between mb-2">
-                <span>Tax (Amount):</span>
+                <span>Tax (%):</span>
                 <input
                   type="number"
-                  value={tax}
-                  onChange={(e) => setTax(parseFloat(e.target.value) || 0)}
+                  value={taxPercentage}
+                  onChange={(e) => setTaxPercentage(parseFloat(e.target.value) || 0)}
                   className="w-24 p-2 border rounded"
+                  min="0"
+                  max="100"
+                  step="0.01"
                 />
+              </div>
+              <div className="flex justify-between mb-2">
+                <span>Tax Amount:</span>
+                <span>₹ {calculateTaxAmount()}</span>
               </div>
               <div className="flex justify-between font-bold">
                 <span>Grand Total:</span>
@@ -389,7 +402,7 @@ const ReceiptPage = () => {
                   yourCompany,
                   cashier,
                   items,
-                  tax,
+                  taxPercentage,
                   notes,
                   footer,
                 }}
