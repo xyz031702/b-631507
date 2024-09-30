@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Receipt1 from "../components/templates/Receipt1";
 import Receipt2 from "../components/templates/Receipt2";
 import Receipt3 from "../components/templates/Receipt3";
+import Receipt4 from "../components/templates/Receipt4";
 import { generateReceiptPDF } from "../utils/receiptPDFGenerator";
 import FloatingLabelInput from "../components/FloatingLabelInput";
 import ItemDetails from "../components/ItemDetails";
@@ -214,6 +215,17 @@ const ReceiptPage = () => {
                 name="cashier"
                 className="mt-4"
               />
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="theme"
+                  value="Receipt4"
+                  checked={theme === "Receipt4"}
+                  onChange={() => setTheme("Receipt4")}
+                  className="mr-2"
+                />
+                Receipt4
+              </label>
             </div>
 
             <div className="mb-6">
@@ -348,6 +360,18 @@ const ReceiptPage = () => {
                 Receipt3
               </label>
             </div>
+            {theme === "Receipt4" && (
+              <Receipt4
+                data={{
+                  billTo,
+                  invoice,
+                  yourCompany,
+                  items,
+                  tax,
+                  footer,
+                }}
+              />
+            )}
           </div>
           <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
             {theme === "Receipt1" && (
