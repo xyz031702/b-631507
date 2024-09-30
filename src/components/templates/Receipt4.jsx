@@ -71,6 +71,32 @@ const Receipt4 = ({ data }) => {
         </span>
       </div>
       <hr className="my-4" />
+      <div>
+        <h3 className="font-bold mb-2">Tax Summary</h3>
+        <table className="w-full">
+          <thead>
+            <tr>
+              <th className="text-left">Type</th>
+              <th className="text-right">Rate</th>
+              <th className="text-right">Total Amt</th>
+              <th className="text-right">Tax Amt</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CGST</td>
+              <td className="text-right">{(taxPercentage / 2).toFixed(2)}%</td>
+              <td className="text-right">
+                INR {items.reduce((sum, item) => sum + item.total, 0).toFixed(2)}
+              </td>
+              <td className="text-right">
+                INR {(items.reduce((sum, item) => sum + item.total, 0) * (taxPercentage / 200)).toFixed(2)}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr className="my-4" />
       <p className="text-center">{footer}</p>
     </div>
   );
