@@ -416,7 +416,7 @@ const ReceiptPage = () => {
                   yourCompany,
                   cashier,
                   items,
-                  tax,
+                  taxPercentage,
                   notes,
                   footer,
                 }}
@@ -430,7 +430,7 @@ const ReceiptPage = () => {
                   yourCompany,
                   cashier,
                   items,
-                  tax,
+                  taxPercentage,
                   notes,
                   footer,
                 }}
@@ -443,7 +443,7 @@ const ReceiptPage = () => {
                   invoice,
                   yourCompany,
                   items,
-                  tax,
+                  taxPercentage,
                   footer,
                   cashier,
                 }}
