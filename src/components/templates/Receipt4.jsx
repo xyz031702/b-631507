@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Receipt4 = ({ data }) => {
-  const { billTo, invoice, yourCompany, items, tax, footer } = data;
+  const { billTo, invoice, yourCompany, items, tax, footer, cashier } = data;
 
   return (
     <div className="p-4">
@@ -11,9 +11,8 @@ const Receipt4 = ({ data }) => {
       <p className="text-center">GST No: {yourCompany.gst}</p>
       <hr className="my-4" />
       <div>
-        <p>Till No: {invoice.tillNo}</p>
         <p>Order Number: {invoice.number}</p>
-        <p>Created By: {invoice.createdBy}</p>
+        <p>Created By: {data.cashier}</p>
         <p>Date & Time: {invoice.date}</p>
       </div>
       <hr className="my-4" />
