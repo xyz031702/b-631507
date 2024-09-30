@@ -159,7 +159,11 @@ const ReceiptPage = () => {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Receipt Generator</h1>
         <div className="flex items-center">
-          <Button onClick={handleDownloadPDF} disabled={isDownloading} className="mr-4">
+          <Button
+            onClick={handleDownloadPDF}
+            disabled={isDownloading}
+            className="mr-4"
+          >
             {isDownloading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -170,7 +174,7 @@ const ReceiptPage = () => {
             )}
           </Button>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/")}
             className="bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600"
             aria-label="Switch to Bill Generator"
           >
@@ -224,17 +228,6 @@ const ReceiptPage = () => {
                 name="cashier"
                 className="mt-4"
               />
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="theme"
-                  value="Receipt4"
-                  checked={theme === "Receipt4"}
-                  onChange={() => setTheme("Receipt4")}
-                  className="mr-2"
-                />
-                Receipt4
-              </label>
             </div>
 
             <div className="mb-6">

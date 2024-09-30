@@ -12,7 +12,7 @@ const Receipt4 = ({ data }) => {
       <hr className="my-4" />
       <div>
         <p>Order Number: {invoice.number}</p>
-        <p>Created By: {data.cashier}</p>
+        <p>Created By: {cashier}</p>
         <p>Date & Time: {invoice.date}</p>
       </div>
       <hr className="my-4" />
@@ -44,7 +44,9 @@ const Receipt4 = ({ data }) => {
       <hr className="my-4" />
       <div className="flex justify-between">
         <span>TOTAL:</span>
-        <span>INR {items.reduce((sum, item) => sum + item.total, 0).toFixed(2)}</span>
+        <span>
+          INR {items.reduce((sum, item) => sum + item.total, 0).toFixed(2)}
+        </span>
       </div>
       <hr className="my-4" />
       <p className="text-center">{footer}</p>
