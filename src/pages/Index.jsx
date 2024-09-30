@@ -65,7 +65,7 @@ const Index = () => {
     phone: "",
   });
   const [items, setItems] = useState([]);
-  const [tax, setTax] = useState("");
+  const [taxRate, setTaxRate] = useState(0);
   const [notes, setNotes] = useState("");
 
   const refreshNotes = () => {
@@ -87,7 +87,7 @@ const Index = () => {
         parsedData.yourCompany || { name: "", address: "", phone: "" }
       );
       setItems(parsedData.items || []);
-      setTax(parsedData.tax || "");
+      setTaxRate(parsedData.taxRate || 0);
       setNotes(parsedData.notes || "");
     } else {
       // If no saved data, set invoice number
@@ -106,11 +106,11 @@ const Index = () => {
       invoice,
       yourCompany,
       items,
-      tax,
+      taxRate,
       notes,
     };
     localStorage.setItem("formData", JSON.stringify(formData));
-  }, [billTo, shipTo, invoice, yourCompany, items, tax, notes]);
+  }, [billTo, shipTo, invoice, yourCompany, items, taxRate, notes]);
 
   const handleInputChange = (setter) => (e) => {
     const { name, value } = e.target;
@@ -144,7 +144,8 @@ const Index = () => {
 
   const calculateGrandTotal = () => {
     const subTotal = parseFloat(calculateSubTotal());
-    return (subTotal + parseFloat(tax)).toFixed(2);
+    const taxAmount = (subTotal * taxRate) / 100;
+    return (subTotal + taxAmount).toFixed(2);
   };
 
   const handleTemplateClick = (templateNumber) => {
@@ -229,7 +230,7 @@ const Index = () => {
         total: 400,
       },
     ]);
-    setTax(30);
+    setTaxRate(10);
     setNotes("Thank you for your business!");
   };
 
@@ -243,7 +244,7 @@ const Index = () => {
     });
     setYourCompany({ name: "", address: "", phone: "" });
     setItems([{ name: "", description: "", quantity: 0, amount: 0, total: 0 }]);
-    setTax(0);
+    setTaxRate(0);
     setNotes("");
     localStorage.removeItem("formData");
   };
@@ -277,7 +278,7 @@ const Index = () => {
                 invoice,
                 yourCompany,
                 items,
-                tax,
+                taxRate,
                 notes,
               },
             },
@@ -374,13 +375,20 @@ const Index = () => {
                 <span>₹ {calculateSubTotal()}</span>
               </div>
               <div className="flex justify-between mb-2">
-                <span>Tax (Amount):</span>
+                <span>Tax Rate (%):</span>
                 <input
                   type="number"
-                  value={tax}
-                  onChange={(e) => setTax(parseFloat(e.target.value) || 0)}
+                  value={taxRate}
+                  onChange={(e) => setTaxRate(parseFloat(e.target.value) || 0)}
                   className="w-24 p-2 border rounded"
+                  min="0"
+                  max="100"
+                  step="0.1"
                 />
+              </div>
+              <div className="flex justify-between mb-2">
+                <span>Tax Amount:</span>
+                <span>₹ {((parseFloat(calculateSubTotal()) * taxRate) / 100).toFixed(2)}</span>
               </div>
               <div className="flex justify-between font-bold">
                 <span>Grand Total:</span>
