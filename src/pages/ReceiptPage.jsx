@@ -225,7 +225,7 @@ const ReceiptPage = () => {
                 onChange={(e) => {
                   const value = e.target.value.slice(0, 15);
                   handleInputChange(setYourCompany)({
-                    target: { name: 'gst', value }
+                    target: { name: "gst", value },
                   });
                 }}
                 name="gst"
@@ -294,11 +294,13 @@ const ReceiptPage = () => {
                 <input
                   type="number"
                   value={taxPercentage}
-                  onChange={(e) => setTaxPercentage(parseFloat(e.target.value) || 0)}
+                  onChange={(e) =>
+                    setTaxPercentage(parseFloat(e.target.value) || 0)
+                  }
                   className="w-24 p-2 border rounded"
                   min="0"
-                  max="100"
-                  step="0.01"
+                  max="28"
+                  step="1"
                 />
               </div>
               <div className="flex justify-between mb-2">
@@ -446,50 +448,6 @@ const ReceiptPage = () => {
                   taxPercentage,
                   footer,
                   cashier,
-                }}
-              />
-            )}
-          </div>
-          <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
-            {theme === "Receipt1" && (
-              <Receipt1
-                data={{
-                  billTo,
-                  invoice,
-                  yourCompany,
-                  cashier,
-                  items,
-                  tax,
-                  notes,
-                  footer,
-                }}
-              />
-            )}
-            {theme === "Receipt2" && (
-              <Receipt2
-                data={{
-                  billTo,
-                  invoice,
-                  yourCompany,
-                  cashier,
-                  items,
-                  tax,
-                  notes,
-                  footer,
-                }}
-              />
-            )}
-            {theme === "Receipt3" && (
-              <Receipt3
-                data={{
-                  billTo,
-                  invoice,
-                  yourCompany,
-                  cashier,
-                  items,
-                  tax,
-                  notes,
-                  footer,
                 }}
               />
             )}
