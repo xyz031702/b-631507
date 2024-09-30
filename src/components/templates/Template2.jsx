@@ -1,10 +1,10 @@
 import React from 'react';
 import BaseTemplate from './BaseTemplate';
-import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
+import { calculateSubTotal, calculateGrandTotal, calculateTaxAmount } from '../../utils/invoiceCalculations';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template2 = ({ data }) => {
-  const { billTo, invoice, items, tax, notes } = data;
+  const { billTo, invoice, items, taxPercentage, notes } = data;
   const yourCompany = data.yourCompany || {}; // Use an empty object as fallback
 
 
@@ -80,19 +80,19 @@ const Template2 = ({ data }) => {
                   {formatCurrency(calculateSubTotal(items || []))}
                 </td>
               </tr>
-              {tax > 0 && (
+              {taxPercentage > 0 && (
                 <tr>
                   <td
                     colSpan="4"
                     className="p-2 text-right border border-gray-300"
                   >
-                    Tax:
+                    Tax ({taxPercentage}%):
                   </td>
                   <td
                     colSpan="2"
                     className="p-2 text-right border border-gray-300"
                   >
-                    {formatCurrency(tax || 0)}
+                    {formatCurrency(calculateTaxAmount(items || [], taxPercentage))}
                   </td>
                 </tr>
               )}
@@ -107,7 +107,7 @@ const Template2 = ({ data }) => {
                   colSpan="2"
                   className="p-2 text-right border border-gray-300"
                 >
-                  {formatCurrency(calculateGrandTotal(items || [], tax || 0))}
+                  {formatCurrency(calculateGrandTotal(items || [], taxPercentage))}
                 </td>
               </tr>
             </tbody>

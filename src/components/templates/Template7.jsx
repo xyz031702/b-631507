@@ -1,15 +1,15 @@
 import React from 'react';
 import { format } from 'date-fns';
 import BaseTemplate from './BaseTemplate';
-import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
+import { calculateSubTotal, calculateGrandTotal, calculateTaxAmount } from '../../utils/invoiceCalculations';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template7 = ({ data }) => {
-  const { billTo = {}, invoice = {}, yourCompany = {}, items = [], tax = 0, notes = '' } = data || {};
+  const { billTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, notes = '' } = data || {};
 
 
   const subTotal = calculateSubTotal(items);
-  const total = calculateGrandTotal(items, tax);
+  const total = calculateGrandTotal(items, taxPercentage);
 
   return (
     <BaseTemplate data={data}>
@@ -86,9 +86,9 @@ const Template7 = ({ data }) => {
             <p className="flex justify-between">
               <span>Sub Total:</span> <span>{formatCurrency(subTotal)}</span>
             </p>
-            {tax > 0 && (
+            {taxPercentage > 0 && (
               <p className="flex justify-between">
-                <span>Tax:</span> <span>{formatCurrency(tax)}</span>
+                <span>Tax ({taxPercentage}%):</span> <span>{formatCurrency(calculateTaxAmount(items, taxPercentage))}</span>
               </p>
             )}
             <p className="flex justify-between font-bold text-lg mt-2">

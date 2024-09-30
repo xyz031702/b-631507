@@ -1,15 +1,15 @@
 import React from 'react';
 import { format } from 'date-fns';
 import BaseTemplate from './BaseTemplate';
-import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
+import { calculateSubTotal, calculateGrandTotal, calculateTaxAmount } from '../../utils/invoiceCalculations';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template6 = ({ data }) => {
-  const { billTo = {}, invoice = {}, yourCompany = {}, items = [], tax = 0, notes = '' } = data || {};
+  const { billTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, notes = '' } = data || {};
 
 
   const subTotal = calculateSubTotal(items);
-  const totalDueAmount = calculateGrandTotal(items, tax);
+  const totalDueAmount = calculateGrandTotal(items, taxPercentage);
 
   return (
     <BaseTemplate data={data}>
@@ -102,13 +102,13 @@ const Template6 = ({ data }) => {
                   {formatCurrency(subTotal)}
                 </td>
               </tr>
-              {tax > 0 && (
+              {taxPercentage > 0 && (
                 <tr>
                   <td className="p-2 text-right font-semibold border border-gray-300">
-                    Tax
+                    Tax ({taxPercentage}%)
                   </td>
                   <td className="p-2 text-right border border-gray-300">
-                    {formatCurrency(tax.toFixed(2))}
+                    {formatCurrency(calculateTaxAmount(items, taxPercentage))}
                   </td>
                 </tr>
               )}

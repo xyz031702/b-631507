@@ -1,10 +1,10 @@
 import React from 'react';
 import BaseTemplate from './BaseTemplate';
-import { calculateSubTotal, calculateGrandTotal } from '../../utils/invoiceCalculations';
+import { calculateSubTotal, calculateGrandTotal, calculateTaxAmount } from '../../utils/invoiceCalculations';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template1 = ({ data }) => {
-  const { billTo, shipTo, invoice, yourCompany, items, tax, notes } = data;
+  const { billTo, shipTo, invoice, yourCompany, items, taxPercentage, notes } = data;
 
 
   return (
@@ -80,15 +80,15 @@ const Template1 = ({ data }) => {
               <span>Subtotal:</span>
               <span>{formatCurrency(calculateSubTotal(items))}</span>
             </div>
-            {tax > 0 && (
+            {taxPercentage > 0 && (
               <div className="flex justify-between mb-2">
-                <span>Tax:</span>
-                <span>{formatCurrency(tax)}</span>
+                <span>Tax ({taxPercentage}%):</span>
+                <span>{formatCurrency(calculateTaxAmount(items, taxPercentage))}</span>
               </div>
             )}
             <div className="flex justify-between font-bold">
               <span>Total:</span>
-              <span>{formatCurrency(calculateGrandTotal(items, tax))}</span>
+              <span>{formatCurrency(calculateGrandTotal(items, taxPercentage))}</span>
             </div>
           </div>
         </div>
