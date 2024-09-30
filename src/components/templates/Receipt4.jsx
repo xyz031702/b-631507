@@ -28,20 +28,24 @@ const Receipt4 = ({ data }) => {
       <table className="w-full">
         <thead>
           <tr>
-            <th className="text-left">Item Description</th>
+            <th className="text-left">Item</th>
             <th className="text-right">Qty</th>
             <th className="text-right">Price</th>
-            <th className="text-right">Total Amt</th>
           </tr>
         </thead>
         <tbody>
           {items.map((item, index) => (
-            <tr key={index}>
-              <td>{item.name}</td>
-              <td className="text-right">{item.quantity}</td>
-              <td className="text-right">{item.amount}</td>
-              <td className="text-right">{item.total}</td>
-            </tr>
+            <React.Fragment key={index}>
+              <tr>
+                <td>{item.name}</td>
+                <td className="text-right">{item.quantity}</td>
+                <td className="text-right">{item.amount}</td>
+              </tr>
+              <tr>
+                <td colSpan="2" className="text-left text-sm italic">{item.description}</td>
+                <td className="text-right">Total: {item.total}</td>
+              </tr>
+            </React.Fragment>
           ))}
         </tbody>
       </table>
