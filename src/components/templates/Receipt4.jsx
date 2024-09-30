@@ -2,6 +2,7 @@ import React from 'react';
 
 const Receipt4 = ({ data }) => {
   const { billTo, invoice, yourCompany, items, tax, footer, cashier } = data;
+  const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
 
   return (
     <div className="p-4">
@@ -13,7 +14,7 @@ const Receipt4 = ({ data }) => {
       <div>
         <p>Order Number: {invoice.number}</p>
         <p>Created By: {data.cashier}</p>
-        <p>Date & Time: {invoice.date}</p>
+        <p>Date & Time: {invoice.date} {currentTime}</p>
       </div>
       <hr className="my-4" />
       <div>
