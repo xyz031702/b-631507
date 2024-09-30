@@ -36,16 +36,16 @@ const Receipt4 = ({ data }) => {
         <tbody>
           {items.map((item, index) => (
             <React.Fragment key={index}>
-              <tr>
+              <tr className="align-bottom">
                 <td>{item.name}</td>
                 <td className="text-right text-sm">{item.quantity}</td>
                 <td className="text-right text-sm">{item.amount}</td>
               </tr>
-              <tr>
-                <td colSpan="2" className="text-left text-sm">
+              <tr className="align-top border-b">
+                <td colSpan="2" className="text-left text-sm pb-2">
                   HSN Code: {item.description}
                 </td>
-                <td className="text-right">Total: {item.total}</td>
+                <td className="text-right pb-2">Total: {item.total}</td>
               </tr>
             </React.Fragment>
           ))}
