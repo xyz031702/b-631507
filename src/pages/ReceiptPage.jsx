@@ -65,6 +65,7 @@ const ReceiptPage = () => {
     name: "",
     address: "",
     phone: "",
+    gst: "",
   });
   const [cashier, setCashier] = useState("");
   const [items, setItems] = useState([
@@ -205,6 +206,14 @@ const ReceiptPage = () => {
                 value={yourCompany.address}
                 onChange={handleInputChange(setYourCompany)}
                 name="address"
+                className="mt-4"
+              />
+              <FloatingLabelInput
+                id="yourCompanyGST"
+                label="GST No."
+                value={yourCompany.gst}
+                onChange={handleInputChange(setYourCompany)}
+                name="gst"
                 className="mt-4"
               />
               <FloatingLabelInput
