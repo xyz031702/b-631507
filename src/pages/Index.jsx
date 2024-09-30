@@ -7,6 +7,7 @@ import ItemDetails from "../components/ItemDetails";
 import { templates } from "../utils/templateRegistry";
 import { FiEdit, FiFileText, FiTrash2 } from "react-icons/fi"; // Added FiTrash2 icon
 import { RefreshCw } from "lucide-react";
+import { set, sub } from "date-fns";
 
 const generateRandomInvoiceNumber = () => {
   const length = Math.floor(Math.random() * 6) + 3;
@@ -65,7 +66,10 @@ const Index = () => {
     phone: "",
   });
   const [items, setItems] = useState([]);
-  const [taxRate, setTaxRate] = useState(0);
+  const [taxPercentage, settaxPercentage] = useState(0);
+  const [taxAmount, setTaxAmount] = useState(0);
+  const [subTotal, setSubTotal] = useState(0);
+  const [grandTotal, setGrandTotal] = useState(0);
   const [notes, setNotes] = useState("");
 
   const refreshNotes = () => {
@@ -75,6 +79,7 @@ const Index = () => {
 
   useEffect(() => {
     // Load form data from localStorage on component mount
+    console.log("Load form data from localStorage on component mount");
     const savedFormData = localStorage.getItem("formData");
     if (savedFormData) {
       const parsedData = JSON.parse(savedFormData);
@@ -87,7 +92,7 @@ const Index = () => {
         parsedData.yourCompany || { name: "", address: "", phone: "" }
       );
       setItems(parsedData.items || []);
-      setTaxRate(parsedData.taxRate || 0);
+      settaxPercentage(parsedData.taxPercentage || 0);
       setNotes(parsedData.notes || "");
     } else {
       // If no saved data, set invoice number
@@ -106,11 +111,25 @@ const Index = () => {
       invoice,
       yourCompany,
       items,
-      taxRate,
+      taxPercentage,
+      taxAmount,
+      subTotal,
+      grandTotal,
       notes,
     };
     localStorage.setItem("formData", JSON.stringify(formData));
-  }, [billTo, shipTo, invoice, yourCompany, items, taxRate, notes]);
+  }, [
+    billTo,
+    shipTo,
+    invoice,
+    yourCompany,
+    items,
+    taxPercentage,
+    notes,
+    taxAmount,
+    subTotal,
+    grandTotal,
+  ]);
 
   const handleInputChange = (setter) => (e) => {
     const { name, value } = e.target;
@@ -124,6 +143,7 @@ const Index = () => {
       newItems[index].total = newItems[index].quantity * newItems[index].amount;
     }
     setItems(newItems);
+    calculateSubTotal();
   };
 
   const addItem = () => {
@@ -139,13 +159,26 @@ const Index = () => {
   };
 
   const calculateSubTotal = () => {
-    return items.reduce((sum, item) => sum + item.total, 0).toFixed(2);
+    console.log(`items`, items);
+    const subTotal = items
+      .reduce((sum, item) => sum + item.total, 0)
+      .toFixed(2);
+    console.log("subTotal", subTotal);
+    setSubTotal(subTotal);
+    calculateGrandTotal();
   };
 
   const calculateGrandTotal = () => {
-    const subTotal = parseFloat(calculateSubTotal());
-    const taxAmount = (subTotal * taxRate) / 100;
-    return (subTotal + taxAmount).toFixed(2);
+    console.log("calculateGrandTotal", subTotal, taxAmount);
+    const grandTotal = (subTotal + taxAmount).toFixed(2);
+    setGrandTotal(grandTotal);
+  };
+
+  const handleTaxPercentageChange = (e) => {
+    const taxRate = parseFloat(e.target.value) || 0;
+    settaxPercentage(taxRate);
+    setTaxAmount((subTotal || 0 * taxRate) / 100);
+    calculateSubTotal();
   };
 
   const handleTemplateClick = (templateNumber) => {
@@ -155,7 +188,9 @@ const Index = () => {
       invoice,
       yourCompany,
       items,
-      tax,
+      taxPercentage,
+      taxAmount,
+      grandTotal,
       notes,
     };
     navigate("/template", {
@@ -230,7 +265,8 @@ const Index = () => {
         total: 400,
       },
     ]);
-    setTaxRate(10);
+    settaxPercentage(10);
+    calculateSubTotal();
     setNotes("Thank you for your business!");
   };
 
@@ -244,7 +280,7 @@ const Index = () => {
     });
     setYourCompany({ name: "", address: "", phone: "" });
     setItems([{ name: "", description: "", quantity: 0, amount: 0, total: 0 }]);
-    setTaxRate(0);
+    settaxPercentage(0);
     setNotes("");
     localStorage.removeItem("formData");
   };
@@ -278,7 +314,7 @@ const Index = () => {
                 invoice,
                 yourCompany,
                 items,
-                taxRate,
+                taxPercentage,
                 notes,
               },
             },
@@ -372,27 +408,27 @@ const Index = () => {
               <h3 className="text-lg font-medium mb-2">Totals</h3>
               <div className="flex justify-between mb-2">
                 <span>Sub Total:</span>
-                <span>₹ {calculateSubTotal()}</span>
+                <span>₹ {subTotal}</span>
               </div>
               <div className="flex justify-between mb-2">
                 <span>Tax Rate (%):</span>
                 <input
                   type="number"
-                  value={taxRate}
-                  onChange={(e) => setTaxRate(parseFloat(e.target.value) || 0)}
+                  value={taxPercentage}
+                  onChange={(e) => handleTaxPercentageChange(e)}
                   className="w-24 p-2 border rounded"
                   min="0"
-                  max="100"
-                  step="0.1"
+                  max="28"
+                  step="1"
                 />
               </div>
               <div className="flex justify-between mb-2">
                 <span>Tax Amount:</span>
-                <span>₹ {((parseFloat(calculateSubTotal()) * taxRate) / 100).toFixed(2)}</span>
+                <span>₹ {taxAmount}</span>
               </div>
               <div className="flex justify-between font-bold">
                 <span>Grand Total:</span>
-                <span>₹ {calculateGrandTotal()}</span>
+                <span>₹ {grandTotal}</span>
               </div>
             </div>
 
