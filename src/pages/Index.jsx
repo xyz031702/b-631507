@@ -200,6 +200,7 @@ const Index = () => {
       items,
       taxPercentage,
       taxAmount,
+      subTotal,
       grandTotal,
       notes,
     };
