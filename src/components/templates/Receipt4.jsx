@@ -12,7 +12,7 @@ const Receipt4 = ({ data }) => {
       <hr className="my-4" />
       <div>
         <p>Order Number: {invoice.number}</p>
-        <p>Created By: {cashier}</p>
+        <p>Created By: {data.cashier}</p>
         <p>Date & Time: {invoice.date}</p>
       </div>
       <hr className="my-4" />

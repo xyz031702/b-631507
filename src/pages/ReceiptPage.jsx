@@ -426,6 +426,7 @@ const ReceiptPage = () => {
                   items,
                   tax,
                   footer,
+                  cashier,
                 }}
               />
             )}
