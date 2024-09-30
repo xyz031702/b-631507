@@ -359,7 +359,62 @@ const ReceiptPage = () => {
                 />
                 Receipt3
               </label>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="theme"
+                  value="Receipt4"
+                  checked={theme === "Receipt4"}
+                  onChange={() => setTheme("Receipt4")}
+                  className="mr-2"
+                />
+                Receipt4
+              </label>
             </div>
+          </div>
+          <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
+            {theme === "Receipt1" && (
+              <Receipt1
+                data={{
+                  billTo,
+                  invoice,
+                  yourCompany,
+                  cashier,
+                  items,
+                  tax,
+                  notes,
+                  footer,
+                }}
+              />
+            )}
+            {theme === "Receipt2" && (
+              <Receipt2
+                data={{
+                  billTo,
+                  invoice,
+                  yourCompany,
+                  cashier,
+                  items,
+                  tax,
+                  notes,
+                  footer,
+                }}
+              />
+            )}
+            {theme === "Receipt3" && (
+              <Receipt3
+                data={{
+                  billTo,
+                  invoice,
+                  yourCompany,
+                  cashier,
+                  items,
+                  tax,
+                  notes,
+                  footer,
+                }}
+              />
+            )}
             {theme === "Receipt4" && (
               <Receipt4
                 data={{
