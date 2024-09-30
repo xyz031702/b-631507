@@ -1,15 +1,10 @@
 import React from 'react';
 import { format } from 'date-fns';
 import BaseTemplate from './BaseTemplate';
-import { calculateSubTotal, calculateGrandTotal, calculateTaxAmount } from '../../utils/invoiceCalculations';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template7 = ({ data }) => {
-  const { billTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, notes = '' } = data || {};
-
-
-  const subTotal = calculateSubTotal(items);
-  const total = calculateGrandTotal(items, taxPercentage);
+  const { billTo = {}, shipTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, taxAmount = 0, subTotal = 0, grandTotal = 0, notes = '' } = data || {};
 
   return (
     <BaseTemplate data={data}>
