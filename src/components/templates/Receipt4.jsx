@@ -41,7 +41,7 @@ const Receipt4 = ({ data }) => {
                 <td className="text-right text-sm">{item.quantity}</td>
                 <td className="text-right text-sm">{item.amount}</td>
               </tr>
-              <tr className="align-top border-b">
+              <tr className="align-top">
                 <td colSpan="2" className="text-left text-sm pb-2">
                   HSN Code: {item.description}
                 </td>
