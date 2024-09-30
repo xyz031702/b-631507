@@ -1,10 +1,9 @@
 import React from 'react';
 import BaseTemplate from './BaseTemplate';
-import { calculateSubTotal, calculateGrandTotal, calculateTaxAmount } from '../../utils/invoiceCalculations';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template3 = ({ data }) => {
-  const { billTo, invoice, yourCompany, items, taxPercentage } = data;
+  const { billTo, shipTo, invoice, yourCompany, items, taxPercentage, taxAmount, subTotal, grandTotal, notes } = data;
 
   return (
     <BaseTemplate data={data}>
@@ -21,24 +20,25 @@ const Template3 = ({ data }) => {
             </p>
             <p>{yourCompany?.phone || "Your Company Phone"}</p>
           </div>
-          <div className="text-right">
-            <h2 className="text-xl font-semibold">BILLED TO</h2>
-            <p>{billTo?.name || "Client Name"}</p>
-            <p>{billTo?.address || "Client Address"}</p>
-            <p>{billTo?.phone || "Client Phone"}</p>
+          <div>
+            <h2 className="text-xl font-semibold mb-2">BILLED TO</h2>
+            <p>{billTo.name}</p>
+            <p>{billTo.address}</p>
+            <p>{billTo.phone}</p>
           </div>
         </div>
         <div className="flex justify-between mb-8">
           <div>
-            <p>Invoice #: {invoice?.number || "N/A"}</p>
-            <p>Invoice Date: {invoice?.date || "N/A"}</p>
+            <h2 className="text-xl font-semibold mb-2">SHIP TO</h2>
+            <p>{shipTo.name}</p>
+            <p>{shipTo.address}</p>
+            <p>{shipTo.phone}</p>
           </div>
           <div className="text-right">
-            <p>Due Date: {invoice?.paymentDate || "N/A"}</p>
-            <p>
-              Due Amount:{" "}
-              {formatCurrency(calculateGrandTotal(items || [], taxPercentage))}
-            </p>
+            <p>Invoice #: {invoice.number}</p>
+            <p>Invoice Date: {invoice.date}</p>
+            <p>Due Date: {invoice.paymentDate}</p>
+            <p>Due Amount: {formatCurrency(grandTotal)}</p>
           </div>
         </div>
       </div>
@@ -52,48 +52,41 @@ const Template3 = ({ data }) => {
             <div className="p-2 flex-1 text-right">QTY.</div>
             <div className="p-2 flex-1 text-right">AMOUNT</div>
           </div>
-          {(items || []).map((item, index) => (
+          {items.map((item, index) => (
             <div key={index} className="flex border-t border-b">
               <div className="p-2 w-12 text-left">
                 {String(index + 1).padStart(2, "0")}
               </div>
               <div className="p-2 flex-1">
-                <p className="font-semibold">{item.name || "Item Name"}</p>
-                <p className="text-sm text-gray-600">
-                  {item.description || "Item Description"}
-                </p>
+                <p className="font-semibold">{item.name}</p>
+                <p className="text-sm text-gray-600">{item.description}</p>
               </div>
-              <div className="p-2 w-24 text-right">{item.quantity || 0}</div>
+              <div className="p-2 w-24 text-right">{item.quantity}</div>
               <div className="p-2 flex-1 text-right">
-                {formatCurrency((item.quantity || 0) * (item.amount || 0))}
+                {formatCurrency(item.total)}
               </div>
             </div>
           ))}
         </div>
         <div className="flex justify-between">
           <div className="w-2/3 p-4">
-            <h3 className="text-lg font-semibold">Additional Info</h3>
-            <p className="text-sm text-gray-600">
-              {data.notes ||
-                "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."}
-            </p>
+            <h3 className="text-lg font-semibold">Notes</h3>
+            <p className="text-sm text-gray-600">{notes}</p>
           </div>
           <div className="w-1/3">
             <div className="flex justify-between mb-2 p-2">
               <span>Sub Total:</span>
-              <span>{formatCurrency(calculateSubTotal(items || []))}</span>
+              <span>{formatCurrency(subTotal)}</span>
             </div>
             {taxPercentage > 0 && (
               <div className="flex justify-between mb-2 p-2">
                 <span>Tax ({taxPercentage}%):</span>
-                <span>{formatCurrency(calculateTaxAmount(items || [], taxPercentage))}</span>
+                <span>{formatCurrency(taxAmount)}</span>
               </div>
             )}
             <div className="flex justify-between font-bold bg-blue-500 text-white p-2 mt-4">
               <span className="text-left">Total</span>
-              <span>
-                {formatCurrency(calculateGrandTotal(items || [], taxPercentage))}
-              </span>
+              <span>{formatCurrency(grandTotal)}</span>
             </div>
           </div>
         </div>
