@@ -1,12 +1,9 @@
 import React from 'react';
 import BaseTemplate from './BaseTemplate';
-import { calculateSubTotal, calculateGrandTotal, calculateTaxAmount } from '../../utils/invoiceCalculations';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template2 = ({ data }) => {
-  const { billTo, invoice, items, taxPercentage, notes } = data;
-  const yourCompany = data.yourCompany || {}; // Use an empty object as fallback
-
+  const { billTo, shipTo, invoice, yourCompany, items, taxPercentage, taxAmount, subTotal, grandTotal, notes } = data;
 
   return (
     <BaseTemplate data={data}>
@@ -14,23 +11,32 @@ const Template2 = ({ data }) => {
         <div className="flex justify-between mb-4 border-b-2 pb-4">
           <div>
             <h1 className="text-2xl font-bold text-cyan-700">
-              {yourCompany.name || "Your Company Name"}
+              {yourCompany.name}
             </h1>
-            <p>{yourCompany.address || "Your Company Address"}</p>
-            <p>{yourCompany.phone || "Your Company Phone"}</p>
+            <p>{yourCompany.address}</p>
+            <p>{yourCompany.phone}</p>
           </div>
           <div className="text-right">
             <h2 className="text-xl font-semibold text-cyan-700">Tax invoice</h2>
-            <p>INVOICE NUMBER: {invoice?.number || "N/A"}</p>
-            <p>DATE: {invoice?.date || "N/A"}</p>
+            <p>INVOICE NUMBER: {invoice.number}</p>
+            <p>DATE: {invoice.date}</p>
+            <p>DUE DATE: {invoice.paymentDate}</p>
           </div>
         </div>
 
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2 text-cyan-700">Bill To</h3>
-          <p>{billTo?.name || "Client Name"}</p>
-          <p>{billTo?.address || "Client Address"}</p>
-          <p>{billTo?.phone || "Client Phone"}</p>
+        <div className="flex justify-between mb-8">
+          <div>
+            <h3 className="font-semibold text-lg mb-2 text-cyan-700">Bill To</h3>
+            <p>{billTo.name}</p>
+            <p>{billTo.address}</p>
+            <p>{billTo.phone}</p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-lg mb-2 text-cyan-700">Ship To</h3>
+            <p>{shipTo.name}</p>
+            <p>{shipTo.address}</p>
+            <p>{shipTo.phone}</p>
+          </div>
         </div>
 
         <div className="mb-8">
@@ -51,10 +57,15 @@ const Template2 = ({ data }) => {
               </tr>
             </thead>
             <tbody>
-              {items?.map((item, index) => (
+              {items.map((item, index) => (
                 <tr key={index}>
                   <td className="p-2 border border-gray-300">{index + 1}</td>
-                  <td className="p-2 border border-gray-300">{item.name}</td>
+                  <td className="p-2 border border-gray-300">
+                    {item.name}
+                    <div className="text-sm text-gray-500">
+                      {item.description}
+                    </div>
+                  </td>
                   <td className="p-2 text-right border border-gray-300">
                     {item.quantity}
                   </td>
@@ -62,60 +73,36 @@ const Template2 = ({ data }) => {
                     {formatCurrency(item.amount)}
                   </td>
                   <td className="p-2 text-right border border-gray-300">
-                    {formatCurrency(item.quantity * item.amount)}
+                    {formatCurrency(item.total)}
                   </td>
                 </tr>
               ))}
-              <tr>
-                <td
-                  colSpan="4"
-                  className="p-2 text-right border border-gray-300"
-                >
-                  Sub total:
-                </td>
-                <td
-                  colSpan="2"
-                  className="p-2 text-right border border-gray-300"
-                >
-                  {formatCurrency(calculateSubTotal(items || []))}
-                </td>
-              </tr>
-              {taxPercentage > 0 && (
-                <tr>
-                  <td
-                    colSpan="4"
-                    className="p-2 text-right border border-gray-300"
-                  >
-                    Tax ({taxPercentage}%):
-                  </td>
-                  <td
-                    colSpan="2"
-                    className="p-2 text-right border border-gray-300"
-                  >
-                    {formatCurrency(calculateTaxAmount(items || [], taxPercentage))}
-                  </td>
-                </tr>
-              )}
-              <tr className="font-bold bg-cyan-700 text-white">
-                <td
-                  colSpan="4"
-                  className="p-2 text-right border border-gray-300"
-                >
-                  Total:
-                </td>
-                <td
-                  colSpan="2"
-                  className="p-2 text-right border border-gray-300"
-                >
-                  {formatCurrency(calculateGrandTotal(items || [], taxPercentage))}
-                </td>
-              </tr>
             </tbody>
           </table>
         </div>
 
+        <div className="flex justify-end">
+          <div className="w-1/3">
+            <div className="flex justify-between mb-2">
+              <span>Subtotal:</span>
+              <span>{formatCurrency(subTotal)}</span>
+            </div>
+            {taxPercentage > 0 && (
+              <div className="flex justify-between mb-2">
+                <span>Tax ({taxPercentage}%):</span>
+                <span>{formatCurrency(taxAmount)}</span>
+              </div>
+            )}
+            <div className="flex justify-between font-bold">
+              <span>Total:</span>
+              <span>{formatCurrency(grandTotal)}</span>
+            </div>
+          </div>
+        </div>
+
         {notes && (
           <div className="mt-8 text-sm">
+            <h3 className="font-semibold mb-2">Notes:</h3>
             <p>{notes}</p>
           </div>
         )}
