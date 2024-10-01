@@ -103,7 +103,7 @@ const Template6 = ({ data }) => {
                     Tax ({taxPercentage}%)
                   </td>
                   <td className="p-2 text-right border border-gray-300">
-                    {formatCurrency(calculateTaxAmount(items, taxPercentage))}
+                    {formatCurrency(taxAmount)}
                   </td>
                 </tr>
               )}
@@ -112,7 +112,7 @@ const Template6 = ({ data }) => {
                   Total Due Amount
                 </td>
                 <td className="p-2 text-right border border-gray-300">
-                  {formatCurrency(totalDueAmount)}
+                  {formatCurrency(grandTotal)}
                 </td>
               </tr>
             </tbody>

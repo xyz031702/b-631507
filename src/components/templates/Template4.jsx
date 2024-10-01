@@ -104,13 +104,13 @@ const Template4 = ({ data }) => {
             {taxPercentage > 0 && (
               <>
                 <p className="flex justify-between">
-                  <span>Tax:</span> <span>{taxPercentage}%</span>
+                  <span>Tax({taxPercentage}%):</span> <span>{taxAmount}</span>
                 </p>
               </>
             )}
             <hr className="my-2" />
             <p className="flex justify-between font-bold text-lg mt-2">
-              <span>Total:</span> <span>{formatCurrency(total)}</span>
+              <span>Total:</span> <span>{formatCurrency(grandTotal)}</span>
             </p>
           </div>
         </div>

@@ -9,7 +9,9 @@ const Receipt4 = ({ data }) => {
       <h2 className="text-center font-bold">{yourCompany.name}</h2>
       <p className="text-center">{yourCompany.address}</p>
       <p className="text-center">Phone Number: {yourCompany.phone}</p>
-      {yourCompany.gst && <p className="text-center">GST No: {yourCompany.gst.toUpperCase()}</p>}
+      {yourCompany.gst && (
+        <p className="text-center">GST No: {yourCompany.gst.toUpperCase()}</p>
+      )}
       <hr className="my-4" />
       <div>
         <p>Invoice Number: {invoice.number}</p>
@@ -61,25 +63,33 @@ const Receipt4 = ({ data }) => {
       <div className="flex justify-between">
         <span>Tax ({taxPercentage}%):</span>
         <span>
-          INR {(items.reduce((sum, item) => sum + item.total, 0) * (taxPercentage / 100)).toFixed(2)}
+          INR{" "}
+          {(
+            items.reduce((sum, item) => sum + item.total, 0) *
+            (taxPercentage / 100)
+          ).toFixed(2)}
         </span>
       </div>
       <div className="flex justify-between font-bold">
         <span>TOTAL:</span>
         <span>
-          INR {(items.reduce((sum, item) => sum + item.total, 0) * (1 + taxPercentage / 100)).toFixed(2)}
+          INR{" "}
+          {(
+            items.reduce((sum, item) => sum + item.total, 0) *
+            (1 + taxPercentage / 100)
+          ).toFixed(2)}
         </span>
       </div>
       <hr className="my-4" />
       <div>
-        <h3 className="font-bold mb-2">Tax Summary</h3>
+        <h3 className="mb-2">Tax Summary</h3>
         <table className="w-full">
           <thead>
             <tr>
-              <th className="text-left">Type</th>
-              <th className="text-right">Rate</th>
-              <th className="text-right">Total Amt</th>
-              <th className="text-right">Tax Amt</th>
+              <th className="text-left font-normal">Type</th>
+              <th className="text-right font-normal">Rate</th>
+              <th className="text-right font-normal">Total Amt</th>
+              <th className="text-right font-normal">Tax Amt</th>
             </tr>
           </thead>
           <tbody>
@@ -87,10 +97,26 @@ const Receipt4 = ({ data }) => {
               <td>CGST</td>
               <td className="text-right">{(taxPercentage / 2).toFixed(2)}%</td>
               <td className="text-right">
-                INR {items.reduce((sum, item) => sum + item.total, 0).toFixed(2)}
+                {items.reduce((sum, item) => sum + item.total, 0).toFixed(2)}
               </td>
               <td className="text-right">
-                INR {(items.reduce((sum, item) => sum + item.total, 0) * (taxPercentage / 200)).toFixed(2)}
+                {(
+                  items.reduce((sum, item) => sum + item.total, 0) *
+                  (taxPercentage / 200)
+                ).toFixed(2)}
+              </td>
+            </tr>
+            <tr>
+              <td>SGST</td>
+              <td className="text-right">{(taxPercentage / 2).toFixed(2)}%</td>
+              <td className="text-right">
+                {items.reduce((sum, item) => sum + item.total, 0).toFixed(2)}
+              </td>
+              <td className="text-right">
+                {(
+                  items.reduce((sum, item) => sum + item.total, 0) *
+                  (taxPercentage / 200)
+                ).toFixed(2)}
               </td>
             </tr>
           </tbody>
