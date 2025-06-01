@@ -1,3 +1,4 @@
-export const formatCurrency = (amount, minimumFractionDigits = 2) => {
-  return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits }).format(amount);
+export const formatCurrency = (amount, currencyCode = 'INR', minimumFractionDigits = 2) => {
+  const locale = currencyCode === 'USD' ? 'en-US' : 'en-IN';
+  return new Intl.NumberFormat(locale, { style: 'currency', currency: currencyCode, minimumFractionDigits }).format(amount);
 };

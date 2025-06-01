@@ -5,7 +5,7 @@ import { calculateSubTotal, calculateTaxAmount, calculateGrandTotal } from '../.
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Receipt1 = ({ data, isPrint = false }) => {
-  const { billTo = {}, invoice = {}, yourCompany = {}, cashier = '', items = [], taxPercentage = 0, notes = '', footer = '' } = data || {};
+  const { billTo = {}, invoice = {}, yourCompany = {}, cashier = '', items = [], taxPercentage = 0, notes = '', footer = '', selectedCurrency } = data || {};
 
   const subTotal = calculateSubTotal(items);
   const taxAmount = calculateTaxAmount(subTotal, taxPercentage);
@@ -55,24 +55,24 @@ const Receipt1 = ({ data, isPrint = false }) => {
                   <span>{item.name || "N/A"} X {item.quantity || 0} qty</span>
                 </div>
                 <span>
-                  {formatCurrency((item.quantity || 0) * (item.amount || 0))}
+                  {formatCurrency((item.quantity || 0) * (item.amount || 0), selectedCurrency)}
                 </span>
               </div>
             ))}
           </div>
           <div className="flex justify-between">
             <span>Subtotal:</span>
-            <span>{formatCurrency(subTotal)}</span>
+            <span>{formatCurrency(subTotal, selectedCurrency)}</span>
           </div>
           {taxPercentage > 0 && (
             <div className="flex justify-between">
               <span>Tax ({taxPercentage}%):</span>
-              <span>{formatCurrency(taxAmount)}</span>
+              <span>{formatCurrency(taxAmount, selectedCurrency)}</span>
             </div>
           )}
           <div className="flex justify-between font-bold mt-2">
             <span>Total:</span>
-            <span>{formatCurrency(total)}</span>
+            <span>{formatCurrency(total, selectedCurrency)}</span>
           </div>
           {notes && (
             <div className="mt-4">

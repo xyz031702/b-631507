@@ -6,6 +6,7 @@ import Receipt1 from "../components/templates/Receipt1";
 import Receipt2 from "../components/templates/Receipt2";
 import Receipt3 from "../components/templates/Receipt3";
 import Receipt4 from "../components/templates/Receipt4";
+import { formatCurrency } from "../utils/formatCurrency";
 import { generateReceiptPDF } from "../utils/receiptPDFGenerator";
 import { generateGSTNumber } from "../utils/invoiceCalculations";
 import FloatingLabelInput from "../components/FloatingLabelInput";
@@ -76,6 +77,7 @@ const ReceiptPage = () => {
   const [theme, setTheme] = useState("Receipt1");
   const [notes, setNotes] = useState("");
   const [footer, setFooter] = useState("Thank you");
+  const [selectedCurrency, setSelectedCurrency] = useState("INR");
 
   const refreshFooter = () => {
     const randomIndex = Math.floor(Math.random() * footerOptions.length);
@@ -83,9 +85,24 @@ const ReceiptPage = () => {
   };
 
   useEffect(() => {
-    // Initialize with default values
-    setInvoice((prev) => ({ ...prev, number: generateRandomInvoiceNumber() }));
-    setItems([{ name: "", description: "", quantity: 0, amount: 0, total: 0 }]);
+    // Load form data from localStorage on component mount
+    const savedFormData = localStorage.getItem("receiptFormData");
+    if (savedFormData) {
+      const parsedData = JSON.parse(savedFormData);
+      setBillTo(parsedData.billTo || "");
+      setInvoice(parsedData.invoice || { date: "", number: generateRandomInvoiceNumber() });
+      setYourCompany(parsedData.yourCompany || { name: "", address: "", phone: "", gst: "" });
+      setCashier(parsedData.cashier || "");
+      setItems(parsedData.items || [{ name: "", description: "", quantity: 0, amount: 0, total: 0 }]);
+      setTaxPercentage(parsedData.taxPercentage || 0);
+      setNotes(parsedData.notes || "");
+      setFooter(parsedData.footer || "Thank you");
+      setSelectedCurrency(parsedData.selectedCurrency || "INR");
+    } else {
+      // Initialize with default values if nothing in localStorage
+      setInvoice((prev) => ({ ...prev, number: generateRandomInvoiceNumber() }));
+      setItems([{ name: "", description: "", quantity: 0, amount: 0, total: 0 }]);
+    }
   }, []);
 
   useEffect(() => {
@@ -99,15 +116,27 @@ const ReceiptPage = () => {
       taxPercentage,
       notes,
       footer,
+      selectedCurrency,
     };
     localStorage.setItem("receiptFormData", JSON.stringify(formData));
-  }, [billTo, invoice, yourCompany, items, taxPercentage, notes]);
+  }, [billTo, invoice, yourCompany, cashier, items, taxPercentage, notes, footer, selectedCurrency]);
 
   const handleDownloadPDF = async () => {
     if (!isDownloading && receiptRef.current) {
       setIsDownloading(true);
+      const receiptData = { // Prepare receiptData object
+        billTo,
+        invoice,
+        yourCompany,
+        cashier,
+        items,
+        taxPercentage,
+        notes,
+        footer,
+        selectedCurrency,
+      };
       try {
-        await generateReceiptPDF(receiptRef.current);
+        await generateReceiptPDF(receiptRef.current, theme, receiptData);
       } catch (error) {
         console.error("Error generating PDF:", error);
       } finally {
@@ -300,7 +329,7 @@ const ReceiptPage = () => {
               <h3 className="text-lg font-medium mb-2">Totals</h3>
               <div className="flex justify-between mb-2">
                 <span>Sub Total:</span>
-                <span>₹ {calculateSubTotal()}</span>
+                <span>{formatCurrency(parseFloat(calculateSubTotal()), selectedCurrency)}</span>
               </div>
               <div className="flex justify-between mb-2">
                 <span>Tax (%):</span>
@@ -318,11 +347,11 @@ const ReceiptPage = () => {
               </div>
               <div className="flex justify-between mb-2">
                 <span>Tax Amount:</span>
-                <span>₹ {calculateTaxAmount()}</span>
+                <span>{formatCurrency(parseFloat(calculateTaxAmount()), selectedCurrency)}</span>
               </div>
               <div className="flex justify-between font-bold">
                 <span>Grand Total:</span>
-                <span>₹ {calculateGrandTotal()}</span>
+                <span>{formatCurrency(parseFloat(calculateGrandTotal()), selectedCurrency)}</span>
               </div>
             </div>
 
@@ -420,6 +449,7 @@ const ReceiptPage = () => {
                   taxPercentage,
                   notes,
                   footer,
+                  selectedCurrency,
                 }}
               />
             )}
@@ -434,6 +464,7 @@ const ReceiptPage = () => {
                   taxPercentage,
                   notes,
                   footer,
+                  selectedCurrency,
                 }}
               />
             )}
@@ -448,6 +479,7 @@ const ReceiptPage = () => {
                   taxPercentage,
                   notes,
                   footer,
+                  selectedCurrency,
                 }}
               />
             )}
@@ -461,6 +493,7 @@ const ReceiptPage = () => {
                   taxPercentage,
                   footer,
                   cashier,
+                  selectedCurrency,
                 }}
               />
             )}

@@ -1,8 +1,9 @@
 import React from 'react';
 
 const Receipt4 = ({ data }) => {
-  const { billTo, invoice, yourCompany, items, taxPercentage, footer, cashier } = data;
+  const { billTo, invoice, yourCompany, items, taxPercentage, footer, cashier, selectedCurrency } = data;
   const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+  const currencySymbol = selectedCurrency === 'USD' ? '$' : '₹';
 
   return (
     <div className="p-4 font-['Courier_New',_monospace]">
@@ -57,13 +58,13 @@ const Receipt4 = ({ data }) => {
       <div className="flex justify-between">
         <span>Sub Total:</span>
         <span>
-          INR {items.reduce((sum, item) => sum + item.total, 0).toFixed(2)}
+          {currencySymbol} {items.reduce((sum, item) => sum + item.total, 0).toFixed(2)}
         </span>
       </div>
       <div className="flex justify-between">
         <span>Tax ({taxPercentage}%):</span>
         <span>
-          INR{" "}
+          {currencySymbol}{" "}
           {(
             items.reduce((sum, item) => sum + item.total, 0) *
             (taxPercentage / 100)
@@ -73,7 +74,7 @@ const Receipt4 = ({ data }) => {
       <div className="flex justify-between font-bold">
         <span>TOTAL:</span>
         <span>
-          INR{" "}
+          {currencySymbol}{" "}
           {(
             items.reduce((sum, item) => sum + item.total, 0) *
             (1 + taxPercentage / 100)

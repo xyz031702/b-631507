@@ -4,7 +4,7 @@ import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template9 = ({ data }) => {
-  const { billTo = {}, shipTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, taxAmount = 0, subTotal = 0, grandTotal = 0, notes = '' } = data || {};
+  const { billTo = {}, shipTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, taxAmount = 0, subTotal = 0, grandTotal = 0, notes = '', selectedCurrency } = data || {};
 
   return (
     <BaseTemplate data={data}>
@@ -72,11 +72,12 @@ const Template9 = ({ data }) => {
                     <td className="p-2">{item.name || "Item Name"}</td>
                     <td className="p-2 text-right">{item.quantity || 0}</td>
                     <td className="p-2 text-right">
-                      {formatCurrency(item.amount || 0)}
+                      {formatCurrency(item.amount || 0, selectedCurrency)}
                     </td>
                     <td className="p-2 text-right">
                       {formatCurrency(
-                        (item.quantity || 0) * (item.amount || 0)
+                        (item.quantity || 0) * (item.amount || 0),
+                        selectedCurrency
                       )}
                     </td>
                   </tr>
@@ -89,18 +90,18 @@ const Template9 = ({ data }) => {
           <div className="w-1/2 bg-orange-50 p-3 rounded-lg">
             <div className="flex justify-between mb-2">
               <span>Sub Total:</span>
-              <span>{formatCurrency(subTotal)}</span>
+              <span>{formatCurrency(subTotal, selectedCurrency)}</span>
             </div>
             {taxPercentage > 0 && (
               <div className="flex justify-between mb-2">
                 <span>Tax ({taxPercentage}%):</span>
-                <span>{formatCurrency(taxAmount)}</span>
+                <span>{formatCurrency(taxAmount, selectedCurrency)}</span>
               </div>
             )}
             <div className="flex justify-between font-bold text-lg mt-2 text-orange-600">
               <span>Total:</span>
               <span className="text-orange-600">
-                {formatCurrency(grandTotal)}
+                {formatCurrency(grandTotal, selectedCurrency)}
               </span>
             </div>
           </div>
