@@ -4,7 +4,7 @@ import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template4 = ({ data }) => {
-  const { billTo = {}, shipTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, taxAmount = 0, subTotal = 0, grandTotal = 0, notes = '' } = data || {};
+  const { billTo = {}, shipTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, taxAmount = 0, subTotal = 0, grandTotal = 0, notes = '', selectedCurrency } = data || {};
 
   return (
     <BaseTemplate data={data}>
@@ -86,10 +86,10 @@ const Template4 = ({ data }) => {
                   {item.quantity || 0}
                 </td>
                 <td className="p-2 text-right border border-gray-300">
-                  {formatCurrency(item.amount || 0)}
+                  {formatCurrency(item.amount || 0, selectedCurrency)}
                 </td>
                 <td className="p-2 text-right border border-gray-300">
-                  {formatCurrency((item.quantity || 0) * (item.amount || 0))}
+                  {formatCurrency((item.quantity || 0) * (item.amount || 0), selectedCurrency)}
                 </td>
               </tr>
             ))}
@@ -99,18 +99,18 @@ const Template4 = ({ data }) => {
         <div className="flex justify-end mb-8">
           <div className="w-1/3">
             <p className="flex justify-between">
-              <span>Sub Total:</span> <span>{formatCurrency(subTotal)}</span>
+              <span>Sub Total:</span> <span>{formatCurrency(subTotal, selectedCurrency)}</span>
             </p>
             {taxPercentage > 0 && (
               <>
                 <p className="flex justify-between">
-                  <span>Tax({taxPercentage}%):</span> <span>{taxAmount}</span>
+                  <span>Tax({taxPercentage}%):</span> <span>{formatCurrency(taxAmount, selectedCurrency)}</span>
                 </p>
               </>
             )}
             <hr className="my-2" />
             <p className="flex justify-between font-bold text-lg mt-2">
-              <span>Total:</span> <span>{formatCurrency(grandTotal)}</span>
+              <span>Total:</span> <span>{formatCurrency(grandTotal, selectedCurrency)}</span>
             </p>
           </div>
         </div>

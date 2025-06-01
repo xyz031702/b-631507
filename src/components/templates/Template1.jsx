@@ -3,7 +3,7 @@ import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template1 = ({ data }) => {
-  const { billTo, shipTo, invoice, yourCompany, items, taxPercentage, taxAmount, subTotal, grandTotal, notes } = data;
+  const { billTo, shipTo, invoice, yourCompany, items, taxPercentage, taxAmount, subTotal, grandTotal, notes, selectedCurrency } = data;
 
   return (
     <BaseTemplate data={data}>
@@ -62,10 +62,10 @@ const Template1 = ({ data }) => {
                 </td>
                 <td className="p-2 text-right">{item.quantity}</td>
                 <td className="p-2 text-right">
-                  {formatCurrency(item.amount)}
+                  {formatCurrency(item.amount, selectedCurrency)}
                 </td>
                 <td className="p-2 text-right">
-                  {formatCurrency(item.total)}
+                  {formatCurrency(item.total, selectedCurrency)}
                 </td>
               </tr>
             ))}
@@ -76,17 +76,17 @@ const Template1 = ({ data }) => {
           <div className="w-1/3">
             <div className="flex justify-between mb-2">
               <span>Subtotal:</span>
-              <span>{formatCurrency(subTotal)}</span>
+              <span>{formatCurrency(subTotal, selectedCurrency)}</span>
             </div>
             {taxPercentage > 0 && (
               <div className="flex justify-between mb-2">
                 <span>Tax ({taxPercentage}%):</span>
-                <span>{formatCurrency(taxAmount)}</span>
+                <span>{formatCurrency(taxAmount, selectedCurrency)}</span>
               </div>
             )}
             <div className="flex justify-between font-bold">
               <span>Total:</span>
-              <span>{formatCurrency(grandTotal)}</span>
+              <span>{formatCurrency(grandTotal, selectedCurrency)}</span>
             </div>
           </div>
         </div>

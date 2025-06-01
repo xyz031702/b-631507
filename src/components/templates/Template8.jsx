@@ -3,7 +3,7 @@ import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template8 = ({ data }) => {
-  const { billTo, shipTo, invoice, yourCompany, items, taxPercentage, taxAmount, subTotal, grandTotal, notes } = data;
+  const { billTo, shipTo, invoice, yourCompany, items, taxPercentage, taxAmount, subTotal, grandTotal, notes, selectedCurrency } = data;
 
   return (
     <BaseTemplate data={data}>
@@ -52,10 +52,10 @@ const Template8 = ({ data }) => {
                 <td className="p-2">{item.name}</td>
                 <td className="p-2 text-right">{item.quantity}</td>
                 <td className="p-2 text-right">
-                  {formatCurrency(item.amount)}
+                  {formatCurrency(item.amount, selectedCurrency)}
                 </td>
                 <td className="p-2 text-right">
-                  {formatCurrency(item.quantity * item.amount)}
+                  {formatCurrency(item.quantity * item.amount, selectedCurrency)}
                 </td>
               </tr>
             ))}
@@ -66,18 +66,18 @@ const Template8 = ({ data }) => {
           <div className="w-1/2">
             <div className="flex justify-between mb-2">
               <span>Sub Total:</span>
-              <span>{formatCurrency(subTotal)}</span>
+              <span>{formatCurrency(subTotal, selectedCurrency)}</span>
             </div>
             {taxPercentage > 0 && (
               <div className="flex justify-between mb-2">
                 <span>Tax ({taxPercentage}%):</span>
-                <span>{formatCurrency(taxAmount)}</span>
+                <span>{formatCurrency(taxAmount, selectedCurrency)}</span>
               </div>
             )}
             <div className="flex justify-between font-bold text-lg mt-2">
               <span>Total Due:</span>
               <span style={{ color: "#3C8BF6" }}>
-                {formatCurrency(grandTotal)}
+                {formatCurrency(grandTotal, selectedCurrency)}
               </span>
             </div>
           </div>

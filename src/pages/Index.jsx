@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { formatCurrency } from '../utils/formatCurrency'; // Corrected import path
 import FloatingLabelInput from '../components/FloatingLabelInput';
 import BillToSection from '../components/BillToSection';
 import ShipToSection from '../components/ShipToSection';
@@ -53,6 +54,7 @@ const noteOptions = [
 
 const Index = () => {
   const navigate = useNavigate();
+  const [selectedCurrency, setSelectedCurrency] = useState("INR");
   const [billTo, setBillTo] = useState({ name: "", address: "", phone: "" });
   const [shipTo, setShipTo] = useState({ name: "", address: "", phone: "" });
   const [invoice, setInvoice] = useState({
@@ -93,6 +95,7 @@ const Index = () => {
       setItems(parsedData.items || []);
       settaxPercentage(parsedData.taxPercentage || 0);
       setNotes(parsedData.notes || "");
+      setSelectedCurrency(parsedData.selectedCurrency || "INR"); // Load selectedCurrency from localStorage
     } else {
       // If no saved data, set invoice number
       setInvoice((prev) => ({
@@ -115,6 +118,7 @@ const Index = () => {
       subTotal,
       grandTotal,
       notes,
+      selectedCurrency, // Add selectedCurrency to localStorage
     };
     localStorage.setItem("formData", JSON.stringify(formData));
   }, [
@@ -128,6 +132,7 @@ const Index = () => {
     taxAmount,
     subTotal,
     grandTotal,
+    selectedCurrency, // Add selectedCurrency to localStorage dependency array
   ]);
 
   const handleInputChange = (setter) => (e) => {
@@ -159,36 +164,41 @@ const Index = () => {
 
   const calculateSubTotal = () => {
     const calculatedSubTotal = items.reduce((sum, item) => sum + (item.quantity * item.amount), 0);
-    setSubTotal(calculatedSubTotal.toFixed(2));
+    setSubTotal(calculatedSubTotal); // Store as number
     return calculatedSubTotal;
   };
 
-  const calculateTaxAmount = (subTotal) => {
-    return ((subTotal * taxPercentage) / 100).toFixed(2);
+  const calculateTaxAmount = (subTotalValue) => { // Renamed param to avoid conflict with state
+    const tax = (subTotalValue * taxPercentage) / 100;
+    setTaxAmount(tax); // Store as number
+    return tax;
   };
 
-  const calculateGrandTotal = (subTotal, taxAmount) => {
-    return (parseFloat(subTotal) + parseFloat(taxAmount)).toFixed(2);
+  const calculateGrandTotal = (subTotalValue, taxAmountValue) => { // Renamed params to avoid conflict with state
+    const total = parseFloat(subTotalValue) + parseFloat(taxAmountValue);
+    setGrandTotal(total); // Store as number
+    return total;
   };
 
   const updateTotals = () => {
-    const subTotal = calculateSubTotal();
-    const taxAmount = calculateTaxAmount(subTotal);
-    const grandTotal = calculateGrandTotal(subTotal, taxAmount);
-
-    setTaxAmount(taxAmount);
-    setGrandTotal(grandTotal);
+    const currentSubTotal = calculateSubTotal();
+    const currentTaxAmount = calculateTaxAmount(currentSubTotal);
+    // setGrandTotal will be called by calculateGrandTotal via currentTaxAmount's setter,
+    // or directly if we prefer explicit calls.
+    // For clarity and directness, let's call it explicitly here.
+    calculateGrandTotal(currentSubTotal, currentTaxAmount);
+    // Note: setSubTotal and setTaxAmount are called within their respective calculate functions.
   };
 
   const handleTaxPercentageChange = (e) => {
     const taxRate = parseFloat(e.target.value) || 0;
     settaxPercentage(taxRate);
-    updateTotals();
+    // updateTotals will be called by the useEffect listening to taxPercentage change
   };
 
   useEffect(() => {
     updateTotals();
-  }, [items, taxPercentage]);
+  }, [items, taxPercentage]); // subTotal, taxAmount, grandTotal removed from deps as they are set by updateTotals & its chain
 
   const handleTemplateClick = (templateNumber) => {
     const formData = {
@@ -202,6 +212,7 @@ const Index = () => {
       subTotal,
       grandTotal,
       notes,
+      selectedCurrency, // Add this
     };
     navigate("/template", {
       state: { formData, selectedTemplate: templateNumber },
@@ -326,6 +337,7 @@ const Index = () => {
                 items,
                 taxPercentage,
                 notes,
+                selectedCurrency, // Ensure this is passed
               },
             },
           })
@@ -341,6 +353,8 @@ const Index = () => {
             <BillToSection
               billTo={billTo}
               handleInputChange={handleInputChange(setBillTo)}
+              selectedCurrency={selectedCurrency}
+              setSelectedCurrency={setSelectedCurrency}
             />
             <ShipToSection
               shipTo={shipTo}
@@ -418,7 +432,7 @@ const Index = () => {
               <h3 className="text-lg font-medium mb-2">Totals</h3>
               <div className="flex justify-between mb-2">
                 <span>Sub Total:</span>
-                <span>₹ {subTotal}</span>
+                <span>{formatCurrency(subTotal, selectedCurrency)}</span>
               </div>
               <div className="flex justify-between mb-2">
                 <span>Tax Rate (%):</span>
@@ -434,11 +448,11 @@ const Index = () => {
               </div>
               <div className="flex justify-between mb-2">
                 <span>Tax Amount:</span>
-                <span>₹ {taxAmount}</span>
+                <span>{formatCurrency(taxAmount, selectedCurrency)}</span>
               </div>
               <div className="flex justify-between font-bold">
                 <span>Grand Total:</span>
-                <span>₹ {grandTotal}</span>
+                <span>{formatCurrency(grandTotal, selectedCurrency)}</span>
               </div>
             </div>
 

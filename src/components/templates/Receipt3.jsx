@@ -5,7 +5,7 @@ import { calculateSubTotal, calculateTaxAmount, calculateGrandTotal } from '../.
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Receipt3 = ({ data, isPrint = false }) => {
-  const { billTo = {}, invoice = {}, yourCompany = {}, cashier = '', items = [], taxPercentage = 0, notes = '', footer = '' } = data || {};
+  const { billTo = {}, invoice = {}, yourCompany = {}, cashier = '', items = [], taxPercentage = 0, notes = '', footer = '', selectedCurrency } = data || {};
 
   const subTotal = calculateSubTotal(items);
   const taxAmount = calculateTaxAmount(subTotal, taxPercentage);
@@ -62,25 +62,25 @@ const Receipt3 = ({ data, isPrint = false }) => {
                 </div>
                 <div className="grid grid-cols-3 text-right">
                   <span>{item.quantity || 0}</span>
-                  <span>{formatCurrency(item.amount || 0)}</span>
-                  <span>{formatCurrency((item.quantity || 0) * (item.amount || 0))}</span>
+                  <span>{formatCurrency(item.amount || 0, selectedCurrency)}</span>
+                  <span>{formatCurrency((item.quantity || 0) * (item.amount || 0), selectedCurrency)}</span>
                 </div>
               </div>
             ))}
           </div>
           <div className="flex justify-between">
             <span>SubTotal:</span>
-            <span>{formatCurrency(subTotal)}</span>
+            <span>{formatCurrency(subTotal, selectedCurrency)}</span>
           </div>
           {taxPercentage > 0 && (
             <div className="flex justify-between">
               <span>Tax ({taxPercentage}%):</span>
-              <span>{formatCurrency(taxAmount)}</span>
+              <span>{formatCurrency(taxAmount, selectedCurrency)}</span>
             </div>
           )}
           <div className="flex justify-between font-bold mt-2 pb-2 border-t-2 pt-2 border-b-2 border-dashed">
             <span>{`${items.length} Items`}</span>
-            <span>Total: {formatCurrency(total)}</span>
+            <span>Total: {formatCurrency(total, selectedCurrency)}</span>
           </div>
           {notes && (
             <div className="mt-4">

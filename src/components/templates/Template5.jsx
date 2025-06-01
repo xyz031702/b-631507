@@ -4,7 +4,7 @@ import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template5 = ({ data = {} }) => {
-  const { billTo = {}, shipTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, taxAmount = 0, subTotal = 0, grandTotal = 0, notes = '' } = data;
+  const { billTo = {}, shipTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, taxAmount = 0, subTotal = 0, grandTotal = 0, notes = '', selectedCurrency } = data;
 
   return (
     <BaseTemplate data={data}>
@@ -77,10 +77,10 @@ const Template5 = ({ data = {} }) => {
                   <td className="p-2">{item.name || "Item Name"}</td>
                   <td className="p-2 text-right">{item.quantity || 0}</td>
                   <td className="p-2 text-right">
-                    {formatCurrency(item.amount || 0)}
+                    {formatCurrency(item.amount || 0, selectedCurrency)}
                   </td>
                   <td className="p-2 text-right">
-                    {formatCurrency((item.quantity || 0) * (item.amount || 0))}
+                    {formatCurrency((item.quantity || 0) * (item.amount || 0), selectedCurrency)}
                   </td>
                 </tr>
               ))}
@@ -90,18 +90,18 @@ const Template5 = ({ data = {} }) => {
           <div className="flex justify-end mb-8">
             <div className="w-1/3">
               <p className="flex justify-between">
-                <span>Sub Total:</span> <span>{formatCurrency(subTotal)}</span>
+                <span>Sub Total:</span> <span>{formatCurrency(subTotal, selectedCurrency)}</span>
               </p>
               {taxPercentage > 0 && (
                 <p className="flex justify-between">
                   <span>Tax ({taxPercentage}%):</span>{" "}
-                  <span>{formatCurrency(taxAmount)}</span>
+                  <span>{formatCurrency(taxAmount, selectedCurrency)}</span>
                 </p>
               )}
               <p className="flex justify-between font-bold text-lg mt-2">
                 <span>Total Due:</span>{" "}
                 <span className="text-green-600">
-                  {formatCurrency(grandTotal)}
+                  {formatCurrency(grandTotal, selectedCurrency)}
                 </span>
               </p>
             </div>

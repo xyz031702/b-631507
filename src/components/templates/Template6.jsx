@@ -4,7 +4,7 @@ import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template6 = ({ data }) => {
-  const { billTo = {}, shipTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, taxAmount = 0, subTotal = 0, grandTotal = 0, notes = '' } = data || {};
+  const { billTo = {}, shipTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, taxAmount = 0, subTotal = 0, grandTotal = 0, notes = '', selectedCurrency } = data || {};
 
   return (
     <BaseTemplate data={data}>
@@ -76,10 +76,10 @@ const Template6 = ({ data }) => {
                   {item.quantity || 0}
                 </td>
                 <td className="p-2 text-right border border-gray-300">
-                  {formatCurrency(item.amount || 0)}
+                  {formatCurrency(item.amount || 0, selectedCurrency)}
                 </td>
                 <td className="p-2 text-right border border-gray-300">
-                  {formatCurrency((item.amount || 0) * (item.quantity || 0))}
+                  {formatCurrency((item.amount || 0) * (item.quantity || 0), selectedCurrency)}
                 </td>
               </tr>
             ))}
@@ -94,7 +94,7 @@ const Template6 = ({ data }) => {
                   Sub Total
                 </td>
                 <td className="p-2 text-right border border-gray-300">
-                  {formatCurrency(subTotal)}
+                  {formatCurrency(subTotal, selectedCurrency)}
                 </td>
               </tr>
               {taxPercentage > 0 && (
@@ -103,7 +103,7 @@ const Template6 = ({ data }) => {
                     Tax ({taxPercentage}%)
                   </td>
                   <td className="p-2 text-right border border-gray-300">
-                    {formatCurrency(taxAmount)}
+                    {formatCurrency(taxAmount, selectedCurrency)}
                   </td>
                 </tr>
               )}
@@ -112,7 +112,7 @@ const Template6 = ({ data }) => {
                   Total Due Amount
                 </td>
                 <td className="p-2 text-right border border-gray-300">
-                  {formatCurrency(grandTotal)}
+                  {formatCurrency(grandTotal, selectedCurrency)}
                 </td>
               </tr>
             </tbody>
